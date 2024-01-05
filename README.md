@@ -1,1 +1,0 @@
-# fisa_infraStudy
