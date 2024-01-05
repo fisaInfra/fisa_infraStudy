@@ -2,7 +2,32 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.buildship.core" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.core.resources/.history" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.core.resources/.projects/infra" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.debug.core" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.debug.ui" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.jdt.apt.core" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.jdt.launching" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.jdt.ui" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.linuxtools.docker.core" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.linuxtools.docker.ui" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.ltk.core.refactoring" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.m2e.jdt" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.pde.core" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.tips.ide" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.tm.terminal.view.ui" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.ui.editors" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.ui.ide" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.eclipse.wst.sse.core" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.springframework.ide.eclipse.boot" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.springframework.ide.eclipse.boot.dash" />
+      <excludeFolder url="file://$MODULE_DIR$/.metadata/.plugins/org.springframework.tooling.boot.ls" />
+      <excludeFolder url="file://$MODULE_DIR$/infra/.settings" />
+      <excludeFolder url="file://$MODULE_DIR$/infra/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/infra/target" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
