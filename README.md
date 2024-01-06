@@ -25,7 +25,10 @@
 ### 📌 ERD
 ![infra](https://github.com/MJLee39/fisa_infraStudy/assets/115640392/8893c63c-dd57-4e94-8835-a90e72948e55)
 
+
 ### ⚙️ 개발 환경
+![image](https://github.com/MJLee39/fisa_infraStudy/assets/81970382/a58c4594-5d02-4d25-b919-a2d8403c335c)
+https://for-it-study.tistory.com/66
 Language : Java 17
 
 IDE : eclipse, intellij
