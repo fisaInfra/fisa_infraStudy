@@ -32,15 +32,15 @@ IDE : eclipse, intellij
 
 Framework : Spring boot3, spring security, spring data jpa
 
-Database : oracle, Mysql
+Database : oracle(운영), Mysql(개발)
 
-Test tool : jmeter, jacoco, coveralls
+Test tool : jmeter, jacoco, coveralls, junit4
 
 ## 계획
 ### 📌 목표
 1. 설계와 관련된 작업을 모두 문서화하여 가시성을 확보하고자 합니다.
 2. 테스트 커버리지 80%를 목표로 테스트 작업을 진행하고자 합니다.
-3. 이슈나 에러가 난 상황을 트러블 슈팅을 통해 다음에 발생할 버그를 발생하고자 합니다.
+3. 이슈나 에러가 난 상황을 트러블 슈팅을 통해 다음에 발생할 버그를 예방하고자 합니다.
 4. 안정적인 운영과 개발을 위한 데이터베이스 환경 분리를 진행해 작업하고자 합니다.
 
 ### 💻 협업
