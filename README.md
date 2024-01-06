@@ -27,7 +27,7 @@
 
 
 ### ⚙️ 개발 환경
-![image](https://github.com/MJLee39/fisa_infraStudy/assets/81970382/a58c4594-5d02-4d25-b919-a2d8403c335c)
+![image](https://github.com/MJLee39/fisa_infraStudy/assets/81970382/80ed99b4-f0b1-47dc-aa85-5c2e13a99c99)
 https://for-it-study.tistory.com/66
 Language : Java 17
 
