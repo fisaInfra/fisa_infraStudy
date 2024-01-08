@@ -1,8 +1,8 @@
-package com.fisa.infra.model.dto;
+package com.fisa.infra.domain.dto;
 
 import java.time.LocalDateTime;
 
-import com.fisa.infra.model.entity.Comment;
+import com.fisa.infra.domain.entity.Comment;
 
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -51,7 +51,5 @@ public class CommentDTO {
 		//순서
 		private int seqIndex;
 		
-		public Comment toEntity() {
-			return Comment.builder().commentId(commentId).boardId(boardId).accountId(accountId).content(content).createdAt(createdAt).updatedAt(updatedAt).deleteYN(deleteYN).groupIndex(groupIndex).hierarchyIndex(hierarchyIndex).seqIndex(seqIndex).build();
-		}
+
 }

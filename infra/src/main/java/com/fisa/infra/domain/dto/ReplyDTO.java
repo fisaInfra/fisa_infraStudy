@@ -1,8 +1,8 @@
-package com.fisa.infra.model.dto;
+package com.fisa.infra.domain.dto;
 
 import java.time.LocalDateTime;
 
-import com.fisa.infra.model.entity.Board;
+import com.fisa.infra.domain.entity.Reply;
 
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -19,22 +19,23 @@ import lombok.ToString;
 @ToString
 
 @Builder
-public class BoardDTO {
-	//게시글아이디
+public class ReplyDTO {
+
+	//대댓글아이디
 		@Id
-		private String boardId;
+		private String replyId;
+		
+		//댓글아이디
+		private String commentId;
+		
+		//게시글아이디
+		private String boardId; 
 		
 		//회원아이디
 		private String accountId;
 		
 		//내용
 		private String content;
-
-		//등록일자
-		private LocalDateTime uploadAt;
-		
-		//제목
-		private String title;
 		
 		//생성날짜
 		private LocalDateTime createdAt;
@@ -42,7 +43,18 @@ public class BoardDTO {
 		//수정날짜
 		private LocalDateTime updatedAt;
 		
-		public Board toEntity() {
-			return Board.builder().boardId(boardId).accountId(accountId).content(content).uploadAt(uploadAt).title(title).createdAt(createdAt).updatedAt(updatedAt).build();
-		}
+		//그릅
+		private int groupIndex;
+		
+		//계층
+		private int hierarchyIndex;
+		
+		//순서
+		private int seqIndex;
+		
+		//삭제여부
+		private boolean deleteYN;
+		
+
+		
 }

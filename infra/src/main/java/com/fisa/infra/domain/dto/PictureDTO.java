@@ -1,8 +1,8 @@
-package com.fisa.infra.model.dto;
+package com.fisa.infra.domain.dto;
 
 import java.time.LocalDateTime;
 
-import com.fisa.infra.model.entity.Picture;
+import com.fisa.infra.domain.entity.Picture;
 
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -37,7 +37,5 @@ public class PictureDTO {
 		//사진주소
 		private String pictureUrl;
 		
-		public Picture toEntity() {
-			return Picture.builder().pictureId(pictureId).boardId(boardId).pictureFileUrl(pictureFileUrl).uploadAt(uploadAt).pictureUrl(pictureUrl).build();
-		}
+
 }

@@ -1,8 +1,8 @@
-package com.fisa.infra.model.dto;
+package com.fisa.infra.domain.dto;
 
 import java.time.LocalDateTime;
 
-import com.fisa.infra.model.entity.Account;
+import com.fisa.infra.domain.entity.Account;
 
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -55,9 +55,7 @@ public class AccountDTO {
 		//직군
 		private String job;
 		
-		public Account toEntity() {
-			return Account.builder().accountId(accountId).name(name).belong(belong).gender(gender).image(image).stack(stack).portfolio(portfolio).createdAt(createdAt).updatedAt(updatedAt).role(role).job(job).build();
-		}
+
 		
 }
 
