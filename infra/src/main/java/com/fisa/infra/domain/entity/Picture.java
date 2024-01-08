@@ -23,7 +23,7 @@ public class Picture {
 	@Id
 	@Column(name = "picture_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String pictureId;
+	private Long pictureId;
 	
 	//게시글아이디
 	@OneToMany(fetch=FetchType.LAZY)
