@@ -1,5 +1,6 @@
 package com.fisa.infra.repository.basic;
 
+import com.fisa.infra.repository.common.CommonCommentRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.fisa.infra.domain.entity.Comment;
@@ -11,6 +12,6 @@ import org.springframework.data.repository.Repository;
 * 이는 문제가될 수 있기 때문에 메서드를 명시했을 때만 사용이 가능한 Repository 를 상속 받아 사용합니다.
 * 즉, 다른 말로 이곳에 인터페이스 메서드를 명시한 인터페이스를 또 하나 더 작성해서 상속 받아야한다는 말입니다.
 * */
-public interface CommentRepository extends Repository<Comment,Long> {
+public interface CommentRepository extends Repository<Comment,Long>, CommonCommentRepository {
 
 }
