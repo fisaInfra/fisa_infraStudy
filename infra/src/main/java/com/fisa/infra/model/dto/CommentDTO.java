@@ -21,7 +21,7 @@ import lombok.ToString;
 @Builder
 public class CommentDTO {
 	//댓글아이디
-		@Id
+
 		private String commentId;
 		
 		//게시글아이디
@@ -52,6 +52,17 @@ public class CommentDTO {
 		private int seqIndex;
 		
 		public Comment toEntity() {
-			return Comment.builder().commentId(commentId).boardId(boardId).accountId(accountId).content(content).createdAt(createdAt).updatedAt(updatedAt).deleteYN(deleteYN).groupIndex(groupIndex).hierarchyIndex(hierarchyIndex).seqIndex(seqIndex).build();
+			return Comment.builder()
+					.commentId(commentId)
+					.boardId(boardId)
+					.accountId(accountId)
+					.content(content)
+					.createdAt(createdAt)
+					.updatedAt(updatedAt)
+					.deleteYN(deleteYN)
+					.groupIndex(groupIndex)
+					.hierarchyIndex(hierarchyIndex)
+					.seqIndex(seqIndex)
+					.build();
 		}
 }

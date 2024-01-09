@@ -43,6 +43,14 @@ public class BoardDTO {
 		private LocalDateTime updatedAt;
 		
 		public Board toEntity() {
-			return Board.builder().boardId(boardId).accountId(accountId).content(content).uploadAt(uploadAt).title(title).createdAt(createdAt).updatedAt(updatedAt).build();
+			return Board.builder()
+					.boardId(boardId)
+					.accountId(accountId)
+					.content(content)
+					.uploadAt(uploadAt)
+					.title(title)
+					.createdAt(createdAt)
+					.updatedAt(updatedAt)
+					.build();
 		}
 }
