@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>응모 사이트 로그인 페이지</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+
+	<body>
+		<script>
+		function loginInsert(){
+			let insertQueryString = `id=${document.getElementById("id").value}&password=${document.getElementById("name").value}&password=${document.getElementById("password").value}&major=${document.getElementById("major").value}`;
+			alert("테스트");
+			const xhttp = new XMLHttpRequest();		
+			xhttp.onload = function() {		//정상 응답(4, 200)인 경우에만 인지하는 속성	
+				alert(this.responseText);
+			};
+			
+			xhttp.open("POST", "activistInsert");
+		
+			//post방식으로 서버에 데이터 전송시 필수 설정
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			//post 방식으로 서버에 전송시에는 send() parameter 로 데이터 전송
+			xhttp.send(insertQueryString);
+			}
+		</script>
+		
+		<div class="wrapper" style="background-image: url('images/backgroud_coloer.jpg');">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="images/brand_logo.jpg" alt="">
+				</div>
+				<form action="customer" method="post">
+					<h3>welcome</h3>
+					<div class="form-wrapper">
+						<input type="text" placeholder="name" class="form-control" name="name">
+						<i class="zmdi zmdi-account"></i>
+					</div>
+					<div class="form-wrapper">
+						<input type="password" placeholder="Password" class="form-control" name="password">
+						<i class="zmdi zmdi-lock"></i>
+					</div>
+					<a href=index.html target="_blank">
+						<button>Login
+							<i class="zmdi zmdi-arrow-right"></i>
+						</button>
+					</a>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
