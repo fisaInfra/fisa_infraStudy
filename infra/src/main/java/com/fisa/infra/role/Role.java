@@ -1,4 +1,4 @@
-package com.fisa.infra.common.entity;
+package com.fisa.infra.role;
 
 
 import jakarta.persistence.*;

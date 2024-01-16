@@ -3,7 +3,7 @@ package com.fisa.infra.account.domain.entity;
 import java.util.List;
 
 import com.fisa.infra.common.domain.entity.BaseEntity;
-import com.fisa.infra.common.entity.Role;
+import com.fisa.infra.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
