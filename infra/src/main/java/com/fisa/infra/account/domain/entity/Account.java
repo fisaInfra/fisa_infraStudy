@@ -1,9 +1,6 @@
 package com.fisa.infra.account.domain.entity;
 
-import java.util.List;
-
 import com.fisa.infra.common.domain.entity.BaseEntity;
-import com.fisa.infra.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
@@ -56,15 +53,6 @@ public class Account extends BaseEntity {
 
 	//포트폴리오
 	private String portfolio;
-
-
-	/**
-	 *조인 컬럼할 때는 entity의 필드명이 아닌 데이터베이스 내의 컬럼명으로 작성해주셔야 합니다!
-	 * 이때 저희는 mysql에서 사용하고 있는 스네이크 문법을 사용해 컬럼을 집어넣고 있습니다!>
-	 * */
-	@JoinColumn(name = "role_id")
-	@OneToMany(fetch = FetchType.LAZY)
-	private List<Role> role;
 
 	//직군
 	private String job;
