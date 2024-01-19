@@ -36,6 +36,13 @@ public class Account extends BaseEntity {
 	@Column(name = "account_id")
 	private Long accountId;
 
+
+	@Column(nullable = false, unique = true)
+	private String loginId;
+
+	@Column(nullable = false)
+	private String pwd;
+
 	//이름
 	private String name;
 
