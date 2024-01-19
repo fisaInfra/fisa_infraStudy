@@ -57,6 +57,10 @@ public class Account extends BaseEntity {
 	//직군
 	private String job;
 
+	@Column(columnDefinition = "boolean default false")
+	private boolean isDeleted;
+
+
 }
 
 
