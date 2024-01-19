@@ -24,10 +24,16 @@ public class Picture {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long pictureId;
 	
+	//연관관계 확인 부탁드려요. 뭐가 맞을까요?
 	//게시글아이디
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="board_id")
-	private List<Board> boardId;
+//	@OneToMany(fetch=FetchType.LAZY)
+//	@JoinColumn(name="board_id")
+//	private List<Board> boardId;
+	
+	//게시글아이디
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "board_id")
+	private Board boardId;
 
 	//사진파일주소
 	private String pictureFileUrl;
