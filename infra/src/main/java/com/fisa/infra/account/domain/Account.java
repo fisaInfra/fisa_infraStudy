@@ -44,8 +44,17 @@ public class Account extends BaseEntity {
 	@Column(name = "account_id")
 	private Long accountId;
 
+<<<<<<< HEAD:infra/src/main/java/com/fisa/infra/account/domain/entity/Account.java
+
+	@Column(nullable = false, unique = true)
+	private String loginId;
+
+	@Column(nullable = false)
+	private String pwd;
+=======
 	private String loginId;
 	private String password;
+>>>>>>> 55882ed3d287d8e763829d5c9345754a4d592a87:infra/src/main/java/com/fisa/infra/account/domain/Account.java
 
 	//이름
 	private String name;
@@ -67,6 +76,10 @@ public class Account extends BaseEntity {
 
 	//직군
 	private String job;
+
+	@Column(columnDefinition = "boolean default false")
+	private boolean isDeleted;
+
 
 }
 
