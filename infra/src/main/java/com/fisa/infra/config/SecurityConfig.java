@@ -48,7 +48,6 @@ public class SecurityConfig {
                 frameOptionsConfig -> frameOptionsConfig.disable()));
 
 
-
         //우리가 만들어 사용할 form login 설정
         http.formLogin(httpSecurityFormLoginConfigurer -> {
             httpSecurityFormLoginConfigurer.loginPage("/account/login");

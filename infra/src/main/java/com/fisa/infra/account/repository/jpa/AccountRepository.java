@@ -2,7 +2,7 @@ package com.fisa.infra.account.repository.jpa;
 
 
 import com.fisa.infra.account.repository.basic.CommonAccountRepository;
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
 import org.springframework.data.repository.Repository;
 
 

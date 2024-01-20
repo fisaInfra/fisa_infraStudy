@@ -1,4 +1,4 @@
-package com.fisa.infra.account.domain.entity;
+package com.fisa.infra.account.domain;
 
 import com.fisa.infra.common.domain.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -30,6 +30,9 @@ public class Account extends BaseEntity {
 	* pk 값은 String 타입으로 선언하게 되면 검색 시 성능 저하의 이슈가 있을 수 있어요! 그래서 간단하게 다들 숫자 타입을 사용합니다.
 	*
 	* pk 생성 시 @GeneratedValue를 사용해서 선택해주셔야 하는데 이때는 데이터베이스 종류에 따라 달라요!
+	*
+	* --김어진
+	* 면접에서 Long vs int pk를 질문하는 곳도 있으니 시간날 때 정리 ㄱㄱ
 	* */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
