@@ -1,7 +1,7 @@
 package com.fisa.infra.account.repository.basic;
 
 
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
 
 import java.util.Optional;
 
