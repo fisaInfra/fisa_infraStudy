@@ -35,14 +35,4 @@ public class CommentDTO {
     //삭제여부
     private boolean deleteYN;
 
-    //그릅
-    private int groupIndex;
-
-    //계층
-    private int hierarchyIndex;
-
-    //순서
-    private int seqIndex;
-
-
 }

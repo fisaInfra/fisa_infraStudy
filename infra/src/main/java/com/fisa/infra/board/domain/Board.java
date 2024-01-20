@@ -3,19 +3,20 @@ package com.fisa.infra.board.domain;
 import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.common.domain.entity.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
+@AllArgsConstructor
+
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @DynamicUpdate
 @DynamicInsert
 
+@Builder
 @Entity
 @Table(name = "boards")
 public class Board extends BaseEntity {

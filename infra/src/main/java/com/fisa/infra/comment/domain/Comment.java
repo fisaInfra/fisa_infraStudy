@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@Builder
+
 @DynamicInsert
 @DynamicUpdate
 
@@ -66,5 +66,10 @@ public class Comment extends BaseEntity {
 		parent.getChildren().add(this);
 	}
 
+	//===생성 메서드 ===//
 
+	@Builder
+	public Comment(String content) {
+		this.content = content;
+	}
 }

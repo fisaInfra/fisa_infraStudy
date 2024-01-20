@@ -13,14 +13,19 @@ import org.hibernate.annotations.SQLRestriction;
 * 해당 엔티티에 여러 과정에 있어서 setter 때문에 데이터 손실, 변경이될 위험이 있기 때문입니다!
 * */
 
+@RequiredArgsConstructor
+@AllArgsConstructor
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@AllArgsConstructor(access = AccessLevel.PRIVATE)
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @DynamicInsert
 @DynamicUpdate
+@SQLRestriction("IS_DELETED =false")
+
 @Getter
 @Builder
-@SQLRestriction("IS_DELETED =false")
+
+
 @Table(name = "accounts") // 데이터베이스내 예약어가 겹치지 않게 하기 위해 복수 형태로 작성합니다.
 @Entity
 public class Account extends BaseEntity {
@@ -38,6 +43,9 @@ public class Account extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "account_id")
 	private Long accountId;
+
+	private String loginId;
+	private String password;
 
 	//이름
 	private String name;
