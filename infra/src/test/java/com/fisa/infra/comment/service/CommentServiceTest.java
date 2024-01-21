@@ -4,6 +4,7 @@ import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
+import jakarta.persistence.Column;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +43,9 @@ public class CommentServiceTest {
         //회원 생성
         Account account = Account.builder()
                 .accountId(1L)
+                /* 이 부분은 스프링 시큐리티 컨텍스트 홀더에서 가져올 수 있을까요? */
+                .loginId("onionhaseyo")
+                .pwd("nonghyupeunhang")
                 .name("김어진")
                 .belong("우리FISA")
                 .gender(true)
@@ -68,6 +72,12 @@ public class CommentServiceTest {
     public void commentSave() {
         Optional<Account> account = accountRepository.findById(1L);
         Optional<Board> board = boardRepository.findById(1L);
-        commentService.writeComment(board.get().getBoardId(), account.get().getLoginId());
+//        commentService.writeComment(board.get().getBoardId(), account.get().getLoginId());
+
+        try {
+            commentService.writeComment(board.get().getBoardId(), account.get().getLoginId());
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
     }
 }

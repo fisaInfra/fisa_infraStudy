@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -31,6 +32,10 @@ public class CommentService {
         Optional<Account> account = accountRepository.findAccountByLoginId(loginId);
         Optional<Board> board = boardRepository.findById(boardId);
 
+//        Account account = accountRepository.findAccountByLoginId(loginId)
+//                .orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
+//        Board board = boardRepository.findById(boardId)
+//                .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
 
 //        if (op.isEmpty()){ // 벌써 예외처리하려고???
 //            throw new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다.");
@@ -46,8 +51,9 @@ public class CommentService {
         comment.setAccount(account.get());
         comment.setBoard(board.get());
 
-        commentRepository.save(comment);
+//        comment.setAccount(account);
+//        comment.setBoard(board);
 
-        return null;
+        return commentRepository.save(comment);
     }
 }

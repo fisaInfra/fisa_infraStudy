@@ -22,22 +22,22 @@ public class CommentController {
 
     /**
      * 댓글 작성
-     * @param commentDTO
+//     * @param commentDTO
      * @return ResponseEntity
      */
-//    @PostMapping(value = "/create")
-//    public ResponseEntity<?> writeComment(@RequestParam CommentDTO commentDTO) {
+    @PostMapping(value = "/create")
+    public ResponseEntity<?> writeComment() {// @RequestParam CommentDTO commentDTO) {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        Account account = (Account) authentication.getPrincipal();
-//        try {
-//            Comment comment = commentService.writeComment(null, null, null);
-//
-//            return ResponseEntity.ok().build();
-//        } catch (Exception e) {
-//            return ResponseEntity
-//                    .internalServerError() // Error 500
-//                    .body(e.getMessage());
-//        }
-//    }
+        try {
+            Comment comment = commentService.writeComment(1L, "onionhaseyo");
+            System.out.println(comment);
 
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity
+                    .internalServerError() // Error 500
+                    .body(e.getMessage());
+        }
+    }
 }
