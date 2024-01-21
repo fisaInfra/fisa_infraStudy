@@ -1,13 +1,10 @@
 package com.fisa.infra.security.service;
 
+import com.fisa.infra.account.domain.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
-
-import com.fisa.infra.account.domain.entity.Account;
-import com.fisa.infra.role.domain.entity.Role;
 
 public class CustomUserDetails implements UserDetails {
 
@@ -20,12 +17,12 @@ public class CustomUserDetails implements UserDetails {
 
 
     public CustomUserDetails(Account account){
+
         this.accountId = String.valueOf(account.getAccountId());
         this.accountName = account.getName();
         this.loginId = account.getLoginId();
         this.pwd= account.getPwd();
         this.isDeleted = account.getIsDeleted();
-
 
     }
 
