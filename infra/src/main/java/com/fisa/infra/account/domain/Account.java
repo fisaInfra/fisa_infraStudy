@@ -15,17 +15,11 @@ import org.hibernate.annotations.SQLRestriction;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
-//@AllArgsConstructor(access = AccessLevel.PRIVATE)
-
 @DynamicInsert
 @DynamicUpdate
 @SQLRestriction("IS_DELETED =false")
-
 @Getter
 @Builder
-
-
 @Table(name = "accounts") // 데이터베이스내 예약어가 겹치지 않게 하기 위해 복수 형태로 작성합니다.
 @Entity
 public class Account extends BaseEntity {
@@ -44,18 +38,12 @@ public class Account extends BaseEntity {
 	@Column(name = "account_id")
 	private Long accountId;
 
-<<<<<<< HEAD:infra/src/main/java/com/fisa/infra/account/domain/entity/Account.java
 
 	@Column(nullable = false, unique = true)
 	private String loginId;
 
 	@Column(nullable = false)
 	private String pwd;
-=======
-	private String loginId;
-	private String password;
->>>>>>> 55882ed3d287d8e763829d5c9345754a4d592a87:infra/src/main/java/com/fisa/infra/account/domain/Account.java
-
 	//이름
 	private String name;
 

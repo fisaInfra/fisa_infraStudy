@@ -1,6 +1,7 @@
 package com.fisa.infra.config;
 
 
+import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.security.filter.CustomAuthenticationFilter;
 import com.fisa.infra.security.provider.CustomAuthenticationProvider;
 import com.fisa.infra.security.service.CustomUserDetailsService;
@@ -28,7 +29,6 @@ public class SecurityConfig {
 
 
     private final CustomUserDetailsService customUserDetailsService;
-
 
     //TODO: 시큐리티 기본 설정 끝, EntryPoint 사용 예정 -> Security Exception Handling 작업
 
@@ -92,7 +92,7 @@ public class SecurityConfig {
     }
 
     private AuthenticationProvider customAuthenticationProvider() {
-        return new CustomAuthenticationProvider(customUserDetailsService);
+        return new CustomAuthenticationProvider(customUserDetailsService, bCryptPasswordEncoder());
     }
 
 
