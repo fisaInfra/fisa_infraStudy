@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container text-center">
+                <form class="needs-validation col-sm-6" action="#" th:action="@{/login}" method="post">
+                    <div class="form-group">
+                        <label for="managerId">회원 ID</label>
+                        <input type="text" id="managerId" name="managerId">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">비밀번호</label>
+                        <input type="password" id="password" name="password">
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me" checked>
+                        <label class="form-check-label" for="rememberMe" aria-describedby="rememberMeHelp">로그인 유지</label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">로그인</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</body>
+</html>
+

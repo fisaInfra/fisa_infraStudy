@@ -23,8 +23,7 @@
 
 ## 프로젝트 구조
 ### 📌 ERD
-![infra (1)](https://github.com/MJLee39/fisa_infraStudy/assets/115640392/edda2221-df27-402e-93e1-ecc93228e2c0)
-
+![infra (2)](https://github.com/fisaInfra/fisa_infraStudy/assets/115640392/4774a184-1a33-4c61-95b7-b2c24d7cfd01)
 
 ### ⚙️ 개발 환경
 ![image](https://github.com/MJLee39/fisa_infraStudy/assets/81970382/80ed99b4-f0b1-47dc-aa85-5c2e13a99c99)
