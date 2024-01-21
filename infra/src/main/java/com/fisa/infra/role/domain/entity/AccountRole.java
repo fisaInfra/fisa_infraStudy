@@ -1,7 +1,7 @@
 package com.fisa.infra.role.domain.entity;
 
 
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +14,6 @@ public class AccountRole {
     @EmbeddedId
     private Pk pk;
 
-
     @MapsId("accountId")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
@@ -25,7 +24,6 @@ public class AccountRole {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private Role role;
-
 
     @Embeddable
     @EqualsAndHashCode
