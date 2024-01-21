@@ -44,7 +44,6 @@ public class Account extends BaseEntity {
 
 	@Column(nullable = false)
 	private String pwd;
-
 	//이름
 	private String name;
 
