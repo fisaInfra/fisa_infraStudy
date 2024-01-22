@@ -19,16 +19,23 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardService {
 	
 	 private final BoardRepository boardRepository;
-	 
+	 private final AccountRepository accountRepository;
+
 	 /**
 	  * 게시글 작성
 	  * @param boardDTO
 	  * @return 저장된 글
 	  */
-//	 public Board writeBoard(BoardDTO boardDTO) throws RuntimeException {
-//		 Account account = BoardRepository.findBoardByLoginId(boardDTO.getLoginId())
-//	                .orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
+	 public Board writeBoard(BoardDTO boardDTO) throws RuntimeException {
+		 Account account = accountRepository.findAccountByLoginId(boardDTO.getLoginId())
+	                .orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
 
+	     Board board = Board.builder()
+	    		 .account(account)
+	    		 .content(boardDTO.getContent())
+	    		 .title(boardDTO.getTitle())
+	    		 .build();
 	     
-//	 }
+	     return boardRepository.save(board);
+	 }
 }
