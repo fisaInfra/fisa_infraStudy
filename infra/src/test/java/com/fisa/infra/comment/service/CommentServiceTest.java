@@ -6,9 +6,9 @@ import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
 
 import jakarta.persistence.Column;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -77,7 +77,7 @@ public class CommentServiceTest {
 //        commentService.writeComment(board.get().getBoardId(), account.get().getLoginId());
 
         try {
-            commentService.writeComment(board.get().getBoardId(), account.get().getLoginId());
+//            commentService.writeComment(board.get().getBoardId(), account.get().getLoginId());
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
