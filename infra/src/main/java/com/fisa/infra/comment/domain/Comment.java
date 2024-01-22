@@ -2,6 +2,7 @@ package com.fisa.infra.comment.domain;
 
 import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.board.domain.Board;
+import com.fisa.infra.comment.dto.CommentDTO;
 import com.fisa.infra.common.domain.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -67,9 +68,13 @@ public class Comment extends BaseEntity {
 	}
 
 	//===생성 메서드 ===//
-
 	@Builder
-	public Comment(String content) {
-		this.content = content;
+	public static Comment saveComment(CommentDTO commentDTO) {
+		Comment comment = new Comment();
+		comment.content = commentDTO.getContent();
+		comment.isDeleted = false;
+		comment.setCreatedTime(commentDTO.getCreatedAt());
+		comment.setModifiedTime(commentDTO.getUpdatedAt());
+		return comment;
 	}
 }
