@@ -15,6 +15,10 @@
     <description>infra</description>
     <properties>
         <java.version>17</java.version>
+        <!--build package 작업에 test 작업을 skip하려 할 때 사용-->
+        <maven.test.skip>true</maven.test.skip>
+        <queryDsl.version>5.0.0</queryDsl.version>
+
     </properties>
     <dependencies>
         <dependency>
@@ -36,9 +40,11 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
+            <version>8.2.0</version>
             <scope>runtime</scope>
         </dependency>
 
@@ -82,6 +88,7 @@
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
             <version>3.1.2.RELEASE</version>
         </dependency>
+<<<<<<< HEAD
         
 		<dependency>
 		    <groupId>org.springdoc</groupId>
@@ -89,7 +96,26 @@
 		    <version>2.0.2</version>
 		</dependency>
 		
+=======
+
+        <!--QUERYDSL-->
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-apt</artifactId>
+            <version>${querydsl.version}</version>
+            <scope>provided</scope>
+            <classifier>jakarta</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+            <version>${querydsl.version}</version>
+            <classifier>jakarta</classifier>
+        </dependency>
+
+>>>>>>> a58090915abafbaf9d5b211ed2255409967480bb
     </dependencies>
+
 
     <build>
         <plugins>
@@ -105,7 +131,9 @@
                     </excludes>
                 </configuration>
             </plugin>
+
         </plugins>
+
     </build>
 
 </project>
