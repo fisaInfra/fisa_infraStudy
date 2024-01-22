@@ -4,7 +4,6 @@ import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
-
 import jakarta.persistence.Column;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
