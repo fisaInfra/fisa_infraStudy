@@ -22,10 +22,8 @@ public class Picture {
 	//사진아이디
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-<<<<<<< HEAD:infra/src/main/java/com/fisa/infra/domain/entity/Picture.java
-=======
+
 	@Column(name = "picture_id")
->>>>>>> a58090915abafbaf9d5b211ed2255409967480bb:infra/src/main/java/com/fisa/infra/picture/domain/Picture.java
 	private Long pictureId;
 	
 	//게시글
