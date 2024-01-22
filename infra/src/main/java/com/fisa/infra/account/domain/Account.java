@@ -1,8 +1,13 @@
 package com.fisa.infra.account.domain;
 
+import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.common.domain.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLRestriction;
@@ -64,6 +69,10 @@ public class Account extends BaseEntity {
 
 	//직군
 	private String job;
+	
+	//사용자가 작성한 BoardList
+	@OneToMany(mappedBy = "accountId")
+	private List<Board> board = new ArrayList<Board>();
 
 	@Column(columnDefinition = "boolean default false")
 	private boolean isDeleted;
