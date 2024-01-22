@@ -27,7 +27,7 @@ public class Picture {
 	
 	//게시글
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="board")
+	@JoinColumn(name="board_id")
 	private Board board;
 
 	//사진파일주소

@@ -30,12 +30,12 @@ public class Comment extends BaseEntity {
 	
 	//게시글
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="board")
+	@JoinColumn(name="board_id")
 	private Board board;
 	
 	//회원
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="account")
+	@JoinColumn(name="account_id")
 	private Account account;
 
 	//댓글

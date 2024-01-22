@@ -9,13 +9,9 @@ import org.hibernate.annotations.DynamicUpdate;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
-
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
-//@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @DynamicUpdate
 @DynamicInsert
-
 @Builder
 @Entity
 @Table(name = "boards")
@@ -39,7 +35,7 @@ public class Board extends BaseEntity {
 	
 	//회원 객체
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="account")
+	@JoinColumn(name="account_id")
 	private Account account;
 
 	//내용
