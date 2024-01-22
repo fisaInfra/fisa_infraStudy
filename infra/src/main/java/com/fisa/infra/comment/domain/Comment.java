@@ -1,8 +1,6 @@
 package com.fisa.infra.comment.domain;
 
-import java.util.List;
-
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.common.domain.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -10,12 +8,16 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@Builder
+
 @DynamicInsert
 @DynamicUpdate
+
 @Entity
 @Table(name = "comments")
 public class Comment extends BaseEntity {
@@ -23,33 +25,51 @@ public class Comment extends BaseEntity {
 	//댓글아이디
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "comment_id")
 	private Long commentId;
 	
-	//연관관계 확인 부탁드려요. 뭐가 맞을까요?
-	//게시글아이디
-//	@OneToMany(fetch=FetchType.LAZY)
-//	@JoinColumn(name="board_id")
-//	private List<Board> boardId;
-	
-	//게시글아이디
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "board_id", nullable = false)
-	private Board boardId;
-	
-	//회원아이디
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="account_id")
-	private List<Account> accountId;
+	//게시글
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="board_id")
+	private Board board;
+
+	//회원
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="account")
+	private Account account;
+
+	//댓글
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "parent_id")
+	private Comment parent;
+
+	//대댓글
+	@OneToMany(mappedBy = "parent", orphanRemoval = true)
+	private List<Comment> children = new ArrayList<>();
 
 	//내용
 	private String content;
-	
-	//그릅
-	private int groupIndex;
-	
-	//계층
-	private int hierarchyIndex;
-	
-	//순서
-	private int seqIndex;
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	public void setComment(Comment parent) {
+		if (this.parent != null) { // 기존 댓글이 존재하면
+			this.parent.getChildren().remove(this); // 관계를 끊는다.
+		}
+		this.parent = parent;
+		parent.getChildren().add(this);
+	}
+
+	//===생성 메서드 ===//
+
+	@Builder
+	public Comment(String content) {
+		this.content = content;
+	}
 }

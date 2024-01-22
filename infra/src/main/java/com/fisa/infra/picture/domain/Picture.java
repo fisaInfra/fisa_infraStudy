@@ -1,7 +1,7 @@
 package com.fisa.infra.picture.domain;
 
-import java.util.List;
-
+//import는 안쓸때마다 정리해주는 것이 좋음.
+import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.board.domain.Board;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,31 +14,29 @@ import org.hibernate.annotations.DynamicUpdate;
 @Builder
 @DynamicInsert
 @DynamicUpdate
+
 @Entity
 @Table(name = "pictures")
 public class Picture {
 
 	//사진아이디
 	@Id
-	@Column(name = "picture_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "picture_id")
 	private Long pictureId;
 	
-	//연관관계 확인 부탁드려요. 뭐가 맞을까요?
-	//게시글아이디
-//	@OneToMany(fetch=FetchType.LAZY)
-//	@JoinColumn(name="board_id")
-//	private List<Board> boardId;
-	
-	//게시글아이디
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "board_id")
-	private Board boardId;
+	//게시글
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="board_id")
+	private Board board;
 
 	//사진파일주소
 	private String pictureFileUrl;
 	
 	//사진주소
 	private String pictureUrl;
-	
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
 }

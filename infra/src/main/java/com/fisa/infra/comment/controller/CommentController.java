@@ -1,6 +1,6 @@
 package com.fisa.infra.comment.controller;
 
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.comment.domain.Comment;
 import com.fisa.infra.comment.domain.CommentDTO;
 import com.fisa.infra.comment.service.CommentService;
@@ -25,19 +25,19 @@ public class CommentController {
      * @param commentDTO
      * @return ResponseEntity
      */
-    @PostMapping(value = "/create")
-    public ResponseEntity<?> writeComment(@RequestParam CommentDTO commentDTO) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Account account = (Account) authentication.getPrincipal();
-        try {
-            Comment comment = commentService.writeComment(null, null, null);
-
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity
-                    .internalServerError() // Error 500
-                    .body(e.getMessage());
-        }
-    }
+//    @PostMapping(value = "/create")
+//    public ResponseEntity<?> writeComment(@RequestParam CommentDTO commentDTO) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        Account account = (Account) authentication.getPrincipal();
+//        try {
+//            Comment comment = commentService.writeComment(null, null, null);
+//
+//            return ResponseEntity.ok().build();
+//        } catch (Exception e) {
+//            return ResponseEntity
+//                    .internalServerError() // Error 500
+//                    .body(e.getMessage());
+//        }
+//    }
 
 }
