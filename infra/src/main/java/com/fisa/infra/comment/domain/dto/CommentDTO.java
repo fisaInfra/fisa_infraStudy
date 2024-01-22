@@ -1,4 +1,4 @@
-package com.fisa.infra.comment.domain;
+package com.fisa.infra.comment.domain.dto;
 
 import jakarta.persistence.Id;
 import lombok.*;

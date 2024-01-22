@@ -35,7 +35,7 @@ public class Comment extends BaseEntity {
 
 	//회원
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="account")
+	@JoinColumn(name="account_id")
 	private Account account;
 
 	//댓글
@@ -58,6 +58,8 @@ public class Comment extends BaseEntity {
 		this.board = board;
 	}
 
+	public void setParent(Comment parent) { this.parent = parent; }
+
 	public void setComment(Comment parent) {
 		if (this.parent != null) { // 기존 댓글이 존재하면
 			this.parent.getChildren().remove(this); // 관계를 끊는다.
@@ -69,7 +71,9 @@ public class Comment extends BaseEntity {
 	//===생성 메서드 ===//
 
 	@Builder
-	public Comment(String content) {
+	public Comment(Board board, Account account, String content) {
+		this.board = board;
+		this.account = account;
 		this.content = content;
 	}
 }

@@ -14,13 +14,9 @@ import org.hibernate.annotations.DynamicUpdate;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
-
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
-//@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @DynamicUpdate
 @DynamicInsert
-
 @Builder
 @Entity
 @Table(name = "boards")
