@@ -7,4 +7,8 @@ import org.springframework.data.repository.Repository;
 
 public interface BoardRepository extends JpaRepository<Board,Long> {
 
+	static Object findBoardByLoginId(String loginId) {
+		return null;
+	}
+
 }
