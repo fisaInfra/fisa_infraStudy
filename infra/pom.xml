@@ -88,15 +88,14 @@
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
             <version>3.1.2.RELEASE</version>
         </dependency>
-<<<<<<< HEAD
+
         
 		<dependency>
 		    <groupId>org.springdoc</groupId>
 		    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 		    <version>2.0.2</version>
 		</dependency>
-		
-=======
+
 
         <!--QUERYDSL-->
         <dependency>
@@ -113,7 +112,6 @@
             <classifier>jakarta</classifier>
         </dependency>
 
->>>>>>> a58090915abafbaf9d5b211ed2255409967480bb
     </dependencies>
 
 

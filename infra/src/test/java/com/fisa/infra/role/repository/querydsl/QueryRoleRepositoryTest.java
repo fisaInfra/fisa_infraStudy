@@ -18,7 +18,6 @@ import jakarta.transaction.Transactional;
 
 @SpringBootTest
 @Transactional
-
 class QueryRoleRepositoryTest {
 
 	@Autowired
