@@ -1,5 +1,6 @@
-package com.fisa.infra.comment.domain;
+package com.fisa.infra.comment.dto;
 
+import com.fisa.infra.comment.domain.Comment;
 import jakarta.persistence.Id;
 import lombok.*;
 
@@ -13,15 +14,17 @@ import java.time.LocalDateTime;
 
 @Builder
 public class CommentDTO {
-    //댓글아이디
-    @Id
-    private String commentId;
-
     //게시글아이디
-    private String boardId;
+    private Long boardId;
 
     //회원아이디
-    private String accountId;
+    private String loginId;
+
+    // 대댓글 여부
+    private boolean isParent; // true : 댓글, false : 대댓글
+
+    // 부모 댓글 id
+    private Long parentId;
 
     //내용
     private String content;

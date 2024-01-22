@@ -2,17 +2,16 @@ package com.fisa.infra.comment.controller;
 
 import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.comment.domain.Comment;
-import com.fisa.infra.comment.domain.CommentDTO;
+import com.fisa.infra.comment.dto.CommentDTO;
 import com.fisa.infra.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/comment")
@@ -22,16 +21,17 @@ public class CommentController {
 
     /**
      * 댓글 작성
-//     * @param commentDTO
+     * @param commentDTO
      * @return ResponseEntity
      */
     @PostMapping(value = "/create")
-    public ResponseEntity<?> writeComment() {// @RequestParam CommentDTO commentDTO) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        Account account = (Account) authentication.getPrincipal();
+    public ResponseEntity<?> writeComment(@RequestBody CommentDTO commentDTO) {
+        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        //Account account = (Account) authentication.getPrincipal();
+        ////account.getLoginId();
+
         try {
-            Comment comment = commentService.writeComment(1L, "onionhaseyo");
-            System.out.println(comment);
+            Comment comment = commentService.writeComment(commentDTO);
 
             return ResponseEntity.ok().build();
         } catch (Exception e) {
