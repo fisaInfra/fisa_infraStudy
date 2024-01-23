@@ -69,14 +69,14 @@ public class CommentServiceTest {
         boardRepository.save(board);
     }
 
-    @Test
-    public void commentSave() {
-        Optional<Account> account = accountRepository.findById(1L);
-        Optional<Board> board = boardRepository.findById(1L);
-        try {
-//            commentService.writeComment(board.get().getBoardId(), account.get().getLoginId());
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        }
-    }
+//    @Test
+//    public void commentSave() {
+//        Optional<Account> account = accountRepository.findById(1L);
+//        Optional<Board> board = boardRepository.findById(1L);
+//        try {
+////            commentService.writeComment(board.get().getBoardId(), account.get().getLoginId());
+//        } catch (RuntimeException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
