@@ -10,6 +10,7 @@ import com.fisa.infra.comment.repository.CommentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,7 @@ public class CommentService {
      * @param commentDTO
      * @return 저장된 글
      */
+    @Cacheable(value = "comment", key = "#commentDTO", cacheManager = "contentCacheManager")
     public Comment writeComment(CommentDTO commentDTO) throws RuntimeException {
 //        Optional<Account> account = accountRepository.findAccountByLoginId(commentDTO.getLoginId());
 //        Optional<Board> board = boardRepository.findById(commentDTO.getBoardId());
