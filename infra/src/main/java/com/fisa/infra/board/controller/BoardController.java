@@ -1,20 +1,12 @@
 package com.fisa.infra.board.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fisa.infra.account.domain.Account;
-import com.fisa.infra.board.domain.Board;
-import com.fisa.infra.board.domain.dto.BoardDTO;
+
 import com.fisa.infra.board.service.BoardService;
-import com.fisa.infra.comment.controller.CommentController;
-import com.fisa.infra.comment.service.CommentService;
+
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
