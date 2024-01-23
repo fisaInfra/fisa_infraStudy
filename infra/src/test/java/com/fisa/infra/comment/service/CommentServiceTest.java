@@ -73,8 +73,6 @@ public class CommentServiceTest {
     public void commentSave() {
         Optional<Account> account = accountRepository.findById(1L);
         Optional<Board> board = boardRepository.findById(1L);
-//        commentService.writeComment(board.get().getBoardId(), account.get().getLoginId());
-
         try {
 //            commentService.writeComment(board.get().getBoardId(), account.get().getLoginId());
         } catch (RuntimeException e) {
