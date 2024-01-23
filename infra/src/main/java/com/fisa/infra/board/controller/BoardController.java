@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.fisa.infra.board.service.BoardService;
-
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +23,29 @@ public class BoardController {
 	 * @return ResponseEntity
 	 */
 	
+
+	@PostMapping(value = "/createBoard")
+	public ResponseEntity<?> writeBoard(@RequestBody BoardDTO boardDTO){
+		 try {
+	            // 게시글 작성자 정보 가져오기 (예시: 현재 인증된 사용자)
+//	            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//	            Account account = (Account) authentication.getPrincipal();
+//	            String loginId = account.getLoginId(); // 현재 사용자의 로그인 아이디 또는 식별자
+
+	            // 게시글 작성 서비스 호출
+	            Board board = boardService.writeBoard(boardDTO);
+
+	            // 성공적인 응답
+	            return ResponseEntity.ok(board);
+	        } catch (Exception e) {
+	            // 에러 응답
+	            log.error("Error while writing board", e);
+	            return ResponseEntity
+	                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                    .body("An error occurred while processing the request.");
+	        }
+	}
+
 //	@PostMapping(value = "/createBoard")
 //	public ResponseEntity<?> writeBoard(@RequestBody BoardDTO boardDTO){
 //		 try {
@@ -46,4 +67,5 @@ public class BoardController {
 //	                    .body("An error occurred while processing the request.");
 //	        }
 //	}
+
 }
