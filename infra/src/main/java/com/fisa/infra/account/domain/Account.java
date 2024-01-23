@@ -74,9 +74,6 @@ public class Account extends BaseEntity {
 	@OneToMany(mappedBy = "accountId")
 	private List<Board> board = new ArrayList<Board>();
 
-	@Column(columnDefinition = "boolean default false")
-	private boolean isDeleted;
-
 
 }
 
