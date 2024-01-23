@@ -66,11 +66,11 @@ public class Board extends BaseEntity {
 	private boolean isDeleted;
 	
 	//Board의 commentList
-	@OneToMany(mappedBy = "boardId")
+	@OneToMany(mappedBy = "board_id")
 	private List<Comment> commentList = new ArrayList<Comment>();
 	
 	//Board의 pictureList
-	@OneToMany(mappedBy = "boardId")
+	@OneToMany(mappedBy = "board_id")
 	private List<Picture> pictureList = new ArrayList<Picture>();
 
 	//팀  - 선수

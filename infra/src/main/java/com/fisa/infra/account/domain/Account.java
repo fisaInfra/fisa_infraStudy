@@ -71,7 +71,7 @@ public class Account extends BaseEntity {
 	private String job;
 	
 	//사용자가 작성한 BoardList
-	@OneToMany(mappedBy = "accountId")
+	@OneToMany(mappedBy = "account_id")
 	private List<Board> board = new ArrayList<Board>();
 
 	@Column(columnDefinition = "boolean default false")
