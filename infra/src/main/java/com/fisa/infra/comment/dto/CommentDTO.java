@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,5 +38,27 @@ public class CommentDTO {
 
     //삭제여부
     private boolean deleteYN;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CommentDTO that = (CommentDTO) o;
+
+        return isParent == that.isParent &&
+                deleteYN == that.deleteYN &&
+                Objects.equals(boardId, that.boardId) &&
+                Objects.equals(loginId, that.loginId) &&
+                Objects.equals(parentId, that.parentId) &&
+                Objects.equals(content, that.content) &&
+                Objects.equals(createdAt, that.createdAt) &&
+                Objects.equals(updatedAt, that.updatedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(boardId, loginId, isParent, parentId, content, createdAt, updatedAt, deleteYN);
+    }
 
 }

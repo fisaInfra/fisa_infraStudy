@@ -59,6 +59,9 @@ public class CommentService {
             comment.setParent(parent);
         }
 
-        return commentRepository.save(comment);
+        Comment savedComment = commentRepository.save(comment);
+        log.info("New data added to cache. Comment ID: {}", savedComment.getCommentId());
+
+        return savedComment;
     }
 }
