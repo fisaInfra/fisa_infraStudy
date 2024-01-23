@@ -5,6 +5,7 @@ import com.fisa.infra.comment.domain.Comment;
 import com.fisa.infra.comment.dto.CommentDTO;
 import com.fisa.infra.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/comment")
@@ -24,6 +26,7 @@ public class CommentController {
      * 댓글 작성
      * @param commentDTO
      * @return ResponseEntity
+     * http://localhost:8080/swagger-ui/index.html -> 스웨거
      */
     @PostMapping(value = "/create")
     public ResponseEntity<?> writeComment(@RequestBody CommentDTO commentDTO) {

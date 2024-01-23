@@ -1,6 +1,7 @@
 package com.fisa.infra.config;
 
 
+import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.security.filter.CustomAuthenticationFilter;
 import com.fisa.infra.security.provider.CustomAuthenticationProvider;
 import com.fisa.infra.security.service.CustomUserDetailsService;
@@ -29,7 +30,6 @@ public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
 
-
     //TODO: 시큐리티 기본 설정 끝, EntryPoint 사용 예정 -> Security Exception Handling 작업
 
     @Bean
@@ -55,6 +55,21 @@ public class SecurityConfig {
             httpSecurityFormLoginConfigurer.usernameParameter("loginId");
         });
 
+        // 세션 유지를 위한 기능 사용
+        http.rememberMe(rememberMecConfig -> {
+            rememberMecConfig.rememberMeParameter("remember");
+            rememberMecConfig.alwaysRemember(false);//체크박스 사용 없이도 늘 활성화 시키기
+            rememberMecConfig.userDetailsService(customUserDetailsService);
+        });
+
+        http.logout(logout -> {logout.logoutUrl("/account/logout");
+            logout.logoutSuccessUrl("/");
+            logout.invalidateHttpSession(true); // 로그아웃 후 JSESSIONID 이름의 쿠키값 삭제
+            logout.deleteCookies("JSESSIONID", "remember-me");
+        });
+
+
+
         // 스프링 시큐리티가 지원하는 세션을 사용하겠다는 의미 사용 안 하려면 STATELESS 사용
         http.sessionManagement(sessionManagementConfigurer -> sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
 
@@ -77,7 +92,7 @@ public class SecurityConfig {
     }
 
     private AuthenticationProvider customAuthenticationProvider() {
-        return new CustomAuthenticationProvider(customUserDetailsService);
+        return new CustomAuthenticationProvider(customUserDetailsService, bCryptPasswordEncoder());
     }
 
 

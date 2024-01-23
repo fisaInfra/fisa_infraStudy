@@ -9,10 +9,12 @@ import com.fisa.infra.comment.dto.CommentDTO;
 import com.fisa.infra.comment.repository.CommentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
-
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -27,25 +29,24 @@ public class CommentService {
      * @param commentDTO
      * @return 저장된 글
      */
-    public Comment writeComment(CommentDTO commentDTO) throws RuntimeException{
-        Optional<Account> account = accountRepository.findById(1L);
-        Optional<Board> board = boardRepository.findById(1L);
+    public Comment writeComment(CommentDTO commentDTO) throws RuntimeException {
+//        Optional<Account> account = accountRepository.findAccountByLoginId(commentDTO.getLoginId());
+//        Optional<Board> board = boardRepository.findById(commentDTO.getBoardId());
 
-//        if (op.isEmpty()){ // 벌써 예외처리하려고???
-//            throw new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다.");
-//        }
+        Account account = accountRepository.findAccountByLoginId(commentDTO.getLoginId())
+                .orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
+
+        Board board = boardRepository.findById(commentDTO.getBoardId())
+                .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
+
 
         Comment comment = Comment.saveComment(commentDTO);
-        comment.setAccount(account.get());
-        comment.setBoard(board.get());
 
-        //대댓글
-        if(commentDTO.getParentId() != null) {
-            Optional<Comment> parent = commentRepository.findById(commentDTO.getParentId());
-            comment.setComment(parent.get());
+        if (!commentDTO.isParent() && commentDTO.getParentId() != null) {
+            Comment parent = commentRepository.findById(commentDTO.getParentId()).orElseThrow(() -> new RuntimeException("부모 댓글을 찾을 수 없습니다."));
+            comment.setParent(parent);
         }
-        //댓글
-        commentRepository.save(comment);
-        return null;
+
+        return commentRepository.save(comment);
     }
 }

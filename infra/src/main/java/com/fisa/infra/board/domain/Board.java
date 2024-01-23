@@ -1,7 +1,12 @@
 package com.fisa.infra.board.domain;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import com.fisa.infra.comment.domain.Comment;
 import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.common.domain.entity.BaseEntity;
+import com.fisa.infra.picture.domain.Picture;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
@@ -9,13 +14,9 @@ import org.hibernate.annotations.DynamicUpdate;
 
 @RequiredArgsConstructor
 @AllArgsConstructor
-
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
-//@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @DynamicUpdate
 @DynamicInsert
-
 @Builder
 @Entity
 @Table(name = "boards")
@@ -39,7 +40,7 @@ public class Board extends BaseEntity {
 	
 	//회원 객체
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="account")
+	@JoinColumn(name="account_id")
 	private Account account;
 
 	//내용
@@ -47,6 +48,30 @@ public class Board extends BaseEntity {
 
 	//제목
 	private String title;
+	
+	//등록일자
+	@Column(name = "upload_at")
+	private Date uploadAt;
+	
+	//생성날짜
+	@Column(name = "created_at")
+	private Date createdAt;
+	
+	//수정날짜
+	@Column(name = "updated_at")
+	private Date updatedAt;
+	
+	//삭제여부
+	@Column(name = "is_deleted")
+	private boolean isDeleted;
+	
+	//Board의 commentList
+	@OneToMany(mappedBy = "board")
+	private List<Comment> commentList = new ArrayList<Comment>();
+	
+	//Board의 pictureList
+	@OneToMany(mappedBy = "board")
+	private List<Picture> pictureList = new ArrayList<Picture>();
 
 	//팀  - 선수
 	//회원 - 댓글

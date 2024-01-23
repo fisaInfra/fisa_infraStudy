@@ -31,12 +31,12 @@ public class Comment extends BaseEntity {
 	
 	//게시글
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="board")
+	@JoinColumn(name="board_id")
 	private Board board;
-	
+
 	//회원
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="account")
+	@JoinColumn(name="account_id")
 	private Account account;
 
 	//댓글
@@ -58,6 +58,8 @@ public class Comment extends BaseEntity {
 	public void setBoard(Board board) {
 		this.board = board;
 	}
+
+	public void setParent(Comment parent) { this.parent = parent; }
 
 	public void setComment(Comment parent) {
 		if (this.parent != null) { // 기존 댓글이 존재하면
