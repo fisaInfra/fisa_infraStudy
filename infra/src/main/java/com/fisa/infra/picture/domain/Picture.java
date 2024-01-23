@@ -22,6 +22,7 @@ public class Picture {
 	//사진아이디
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	@Column(name = "picture_id")
 	private Long pictureId;
 	
