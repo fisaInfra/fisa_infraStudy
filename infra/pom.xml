@@ -114,7 +114,6 @@
             <classifier>jakarta</classifier>
         </dependency>
 
-
         <!-- h2 -->
         <dependency>
             <groupId>com.h2database</groupId>
@@ -129,8 +128,6 @@
 
 
     </dependencies>
-
-
     <build>
         <plugins>
             <plugin>

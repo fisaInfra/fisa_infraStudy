@@ -1,6 +1,7 @@
 package com.fisa.infra.comment.dto;
 
 import lombok.*;
+import lombok.extern.java.Log;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Builder
 public class CommentDTO {
-    //게시글아이디
+
     private Long boardId;
 
     private Long accountId;
