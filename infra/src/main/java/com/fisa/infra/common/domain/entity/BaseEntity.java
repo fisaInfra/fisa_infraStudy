@@ -24,7 +24,6 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
-@Setter
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 
