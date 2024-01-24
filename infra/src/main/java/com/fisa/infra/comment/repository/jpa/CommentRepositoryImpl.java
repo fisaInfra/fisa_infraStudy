@@ -1,8 +1,7 @@
-package com.fisa.infra.comment.repository;
+package com.fisa.infra.comment.repository.jpa;
 
 import com.fisa.infra.comment.domain.Comment;
-import com.fisa.infra.comment.domain.QComment;
-import com.querydsl.jpa.impl.JPAQuery;
+import com.fisa.infra.comment.repository.jpa.CommentRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;

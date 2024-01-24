@@ -1,4 +1,4 @@
-package com.fisa.infra.comment.repository;
+package com.fisa.infra.comment.repository.basic;
 
 
 import com.fisa.infra.comment.domain.Comment;

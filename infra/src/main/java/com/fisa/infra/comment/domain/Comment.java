@@ -25,21 +25,21 @@ import java.util.List;
 @Entity
 @Table(name = "comments")
 public class Comment extends BaseEntity {
-	
+
 	//댓글아이디
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "comment_id")
 	private Long commentId;
-	
+
 	//게시글
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="board_id")
+	@JoinColumn(name="board")
 	private Board board;
 
 	//회원
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="account_id")
+	@JoinColumn(name="account")
 	private Account account;
 
 	//댓글
@@ -76,15 +76,15 @@ public class Comment extends BaseEntity {
 	}
 
 	//===생성 메서드 ===//
+
 	@Builder
-	public static Comment saveComment(CommentDTO commentDTO) {
-		Comment comment = new Comment();
-		comment.content = commentDTO.getContent();
-		comment.isDeleted = false;
-		return comment;
+	public Comment(Board board, Account account, String content) {
+		this.board = board;
+		this.account = account;
+		this.content = content;
 	}
 
-	public void updateContent(){
+	public void updateContent() {
 		this.content = "해당 댓글은 삭제되었습니다";
 		this.isDeleted = true;
 	}
