@@ -12,10 +12,8 @@ import java.time.LocalDateTime;
 
 @Builder
 public class CommentDTO {
-    //게시글아이디
-    private Long boardId;
 
-    private Long accountId;
+    private Long boardId;
 
     private String loginId;
 
