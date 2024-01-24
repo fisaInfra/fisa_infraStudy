@@ -88,13 +88,13 @@ public class Account extends BaseEntity {
 				.build();
 	}
 	
-	public static Account createAccountTest(String loginId) {
-		return Account.builder()
-				.loginId(loginId).pwd("asdf").name("fsd").belong("asdfasdf")
-				.gender(true).imageUrl("asdfasdf").stack("sff").portfolio("sdfdf")
-				.job("asdf").isDeleted(false)
-				.build();
-	}
+//	public static Account createAccountTest(String loginId) {
+//		return Account.builder()
+//				.loginId(loginId).pwd("asdf").name("fsd").belong("asdfasdf")
+//				.gender(true).imageUrl("asdfasdf").stack("sff").portfolio("sdfdf")
+//				.job("asdf").isDeleted(false)
+//				.build();
+//	}
 	
 	public Account deletedAccount(String loginId) {
 		this.loginId = "deleted" + loginId;

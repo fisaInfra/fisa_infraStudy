@@ -31,11 +31,11 @@ public class AccountController {
 	//localhost:3333/infra/account/create
 	
 	// accounts?? account?
-	@PostMapping(value = "/createtest")
-	public ResponseEntity<AccountDTO> accountCreate(String loginId){
-		
-		return ResponseEntity.ok(accountService.accountCreateTest(loginId));
-	}
+//	@PostMapping(value = "/createtest")
+//	public ResponseEntity<AccountDTO> accountCreate(String loginId){
+//		
+//		return ResponseEntity.ok(accountService.accountCreateTest(loginId));
+//	}
 	
 	//@sqldelete 바꿔서 지우는거 
 	@DeleteMapping(value = "/delete1")
