@@ -32,9 +32,11 @@ public class Picture {
 	private Board board;
 
 	//사진파일주소
+	//파일 저장 경로
 	private String pictureFileUrl;
 	
 	//사진주소
+	//웹에서 접근 가능한 URL
 	private String pictureUrl;
 
 	public void setBoard(Board board) {

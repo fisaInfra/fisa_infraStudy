@@ -1,6 +1,7 @@
 package com.fisa.infra.board.domain.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.fisa.infra.account.domain.Account;
 
@@ -19,26 +20,22 @@ import lombok.ToString;
 @ToString
 @Builder
 public class BoardDTO {
-	
-	//회원 아이디
-	private String loginId;
-	
-	//내용
-	private String content;
 
-	//제목
+
+	// account
+	private String loginId;
+
+
+	// board
 	private String title;
-	
-	//등록일자
+	private String content;
 	private Date uploadAt;
-	
-	//생성날짜
 	private Date createdAt;
-	
-	//수정날짜
 	private Date updatedAt;
-	
-	//삭제여부
 	private boolean isDeleted;
-		
+
+	// picture
+	private List<String> pictureUrl;
+
+
 }
