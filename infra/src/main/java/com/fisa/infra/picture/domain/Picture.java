@@ -22,12 +22,13 @@ public class Picture {
 	//사진아이디
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	@Column(name = "picture_id")
 	private Long pictureId;
 	
 	//게시글
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="board")
+	@JoinColumn(name="board_id")
 	private Board board;
 
 	//사진파일주소
