@@ -6,14 +6,15 @@ import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
 import com.fisa.infra.comment.domain.Comment;
 import com.fisa.infra.comment.dto.CommentDTO;
-import com.fisa.infra.comment.repository.CommentRepository;
+import com.fisa.infra.comment.repository.jpa.CommentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+
 @Slf4j
 @Service
 @Transactional
@@ -29,6 +30,7 @@ public class CommentService {
      * @param commentDTO
      * @return 저장된 글
      */
+
     public Comment writeComment(CommentDTO commentDTO) throws RuntimeException {
 //        Optional<Account> account = accountRepository.findAccountByLoginId(commentDTO.getLoginId());
 //        Optional<Board> board = boardRepository.findById(commentDTO.getBoardId());
@@ -40,13 +42,30 @@ public class CommentService {
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
 
 
-        Comment comment = Comment.saveComment(commentDTO);
+
+        Comment comment = Comment.saveComment(commentDTO, account, board);
 
         if (!commentDTO.isParent() && commentDTO.getParentId() != null) {
-            Comment parent = commentRepository.findById(commentDTO.getParentId()).orElseThrow(() -> new RuntimeException("부모 댓글을 찾을 수 없습니다."));
+            Comment parent = commentRepository.findById(commentDTO.getParentId()).orElse(null);
+                    // orElseThrow(() -> new RuntimeException("부모 댓글을 찾을 수 없습니다."));
             comment.setParent(parent);
         }
 
         return commentRepository.save(comment);
+    }
+
+    /**
+     * 댓글 조회
+     * @param boardId
+     * @return
+     */
+    public List<Comment> readComment(Long boardId) throws RuntimeException {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
+
+        List<Comment> commentList = commentRepository.findCommentByBoardId(boardId);
+
+
+        return null;
     }
 }

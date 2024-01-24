@@ -2,6 +2,7 @@ package com.fisa.infra.comment.domain;
 
 import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.board.domain.Board;
+import com.fisa.infra.board.repository.jpa.BoardRepository;
 import com.fisa.infra.comment.dto.CommentDTO;
 import com.fisa.infra.common.domain.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -51,17 +52,17 @@ public class Comment extends BaseEntity {
 	//내용
 	private String content;
 
-	public void setAccount(Account account) {
+	public void saveAccount(Account account) {
 		this.account = account;
 	}
 
-	public void setBoard(Board board) {
+	public void saveBoard(Board board) {
 		this.board = board;
 	}
 
 	public void setParent(Comment parent) { this.parent = parent; }
 
-	public void setComment(Comment parent) {
+	public void saveComment(Comment parent) {
 		if (this.parent != null) { // 기존 댓글이 존재하면
 			this.parent.getChildren().remove(this); // 관계를 끊는다.
 		}
@@ -71,12 +72,19 @@ public class Comment extends BaseEntity {
 
 	//===생성 메서드 ===//
 	@Builder
-	public static Comment saveComment(CommentDTO commentDTO) {
+	public static Comment saveComment(CommentDTO commentDTO, Account account, Board board) {
 		Comment comment = new Comment();
 		comment.content = commentDTO.getContent();
 		comment.isDeleted = false;
 		comment.setCreatedTime(commentDTO.getCreatedAt());
 		comment.setModifiedTime(commentDTO.getUpdatedAt());
 		return comment;
+	}
+
+	@Builder
+	public Comment(Board board, Account account, String content) {
+		this.board = board;
+		this.account = account;
+		this.content = content;
 	}
 }
