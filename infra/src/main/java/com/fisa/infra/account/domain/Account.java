@@ -1,11 +1,22 @@
 package com.fisa.infra.account.domain;
 
-import com.fisa.infra.common.domain.entity.BaseEntity;
-import jakarta.persistence.*;
-import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
+
+import com.fisa.infra.common.domain.entity.BaseEntity;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 
 /*
@@ -22,6 +33,7 @@ import org.hibernate.annotations.SQLRestriction;
 @Builder
 @Table(name = "accounts") // 데이터베이스내 예약어가 겹치지 않게 하기 위해 복수 형태로 작성합니다.
 @Entity
+@SQLDelete(sql = "UPDATE account set is_deleted = true WHERE login_id = ?")
 public class Account extends BaseEntity {
 
 
@@ -67,6 +79,28 @@ public class Account extends BaseEntity {
 
 	@Column(columnDefinition = "boolean default false")
 	private boolean isDeleted;
+	
+	public static Account createAccount(String loginId, String pwd, String name, String belong, boolean gender, String imageUrl, String stack, String portfolio, String job, boolean isDeleted) {
+		return Account.builder()
+				.loginId(loginId).pwd(pwd).name(name).belong(belong)
+				.gender(gender).imageUrl(imageUrl).stack(stack).portfolio(portfolio)
+				.job(job).isDeleted(isDeleted)
+				.build();
+	}
+	
+	public static Account createAccountTest(String loginId) {
+		return Account.builder()
+				.loginId(loginId).pwd("asdf").name("fsd").belong("asdfasdf")
+				.gender(true).imageUrl("asdfasdf").stack("sff").portfolio("sdfdf")
+				.job("asdf").isDeleted(false)
+				.build();
+	}
+	
+	public Account deletedAccount(String loginId) {
+		this.loginId = "deleted" + loginId;
+		setIsDeleted(true);
+		return this;
+	}
 
 
 }
