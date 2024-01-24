@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -43,17 +44,23 @@ public class BoardService {
 	    		 .title(boardDTO.getTitle())
 	    		 .build();
 
+		 /*
+		 * 게시글에 들어갈 사진도 저장해야 하니깐 로직 추가해주새요
+		 * */
+
 	     return boardRepository.save(board);
 	 }
 
 	public List<BoardDTO> getAllBoard() {
 		List<Board> boardAll = boardRepository.findAll();
+		List<BoardDTO> collect = boardAll.stream().map(b -> mapper.map(b, BoardDTO.class)).collect(Collectors.toList());
+		log.info("{} ", boardAll.size());
 
 		if(boardAll.isEmpty()){
 			return Collections.emptyList();
 		}
 
-		return Arrays.asList(mapper.map(boardAll, BoardDTO.class));
+		return collect;
 	}
 
     public BoardDTO getBoardById(Long id) {
@@ -62,4 +69,6 @@ public class BoardService {
 		 return board.map(b -> mapper.map(b, BoardDTO.class))
 				.orElse(null);
     }
+
+
 }
