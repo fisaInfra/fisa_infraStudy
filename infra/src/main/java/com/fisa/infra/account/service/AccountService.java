@@ -34,19 +34,19 @@ public class AccountService {
 	}
 	
 	//테스트
-	public AccountDTO accountCreateTest(String loginId) {
-		
-//		accountRepository.findAccountByLoginId(loginId).orElseThrow();
-		
-		Account account = Account.createAccountTest(loginId);
-		
-		accountRepository.save(account);
-		
-		return AccountDTO.builder().accountId(account.getAccountId())
-				.loginId(account.getLoginId()).pwd("1234")
-				.build();
-		
-	}
+//	public AccountDTO accountCreateTest(String loginId) {
+//
+////		accountRepository.findAccountByLoginId(loginId).orElseThrow();
+//
+//		Account account = Account.createAccountTest(loginId);
+//
+//		accountRepository.save(account);
+//
+//		return AccountDTO.builder().accountId(account.getAccountId())
+//				.loginId(account.getLoginId()).pwd("1234")
+//				.build();
+//
+//	}
 
 	
 	//sql 써보는거

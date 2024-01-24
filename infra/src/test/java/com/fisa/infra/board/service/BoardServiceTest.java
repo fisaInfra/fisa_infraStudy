@@ -36,7 +36,7 @@ class BoardServiceTest {
     BoardService boardService;
 
     @BeforeEach
-    @Rollback(value = false)
+    //@Rollback(value = false)
     public void boardSave() {
 
         Account account = Account.builder()
