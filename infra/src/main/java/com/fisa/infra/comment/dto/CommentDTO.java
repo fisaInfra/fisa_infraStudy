@@ -17,6 +17,9 @@ public class CommentDTO {
 
     private Long accountId;
 
+    // 댓글 조회 시 필요한 프로필 이미지
+    private String imageUrl;
+
     private String loginId;
 
     // 대댓글 여부
