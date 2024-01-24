@@ -12,7 +12,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -43,11 +45,19 @@ public class BoardService {
 	 }
 
 	public List<BoardDTO> getAllBoard() {
-		List<Board> BoardAll = boardRepository.findAll();
+		List<Board> boardAll = boardRepository.findAll();
 
-//		if(boardRepository == null){
-//		}
+		if(boardAll.isEmpty()){
+			return Collections.emptyList();
+		}
 
-		return Arrays.asList(mapper.map(BoardAll, BoardDTO.class));
+		return Arrays.asList(mapper.map(boardAll, BoardDTO.class));
 	}
+
+    public BoardDTO getBoardById(Long id) {
+		 Optional<Board> board = boardRepository.findById(id);
+
+		 return board.map(b -> mapper.map(b, BoardDTO.class))
+				.orElse(null);
+    }
 }

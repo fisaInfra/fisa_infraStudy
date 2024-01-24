@@ -66,4 +66,23 @@ public class BoardController {
 		}
 	}
 
+
+	@GetMapping(value = "/boards/{id}")
+	public ResponseEntity<BoardDTO> getBoardById(@PathVariable Long id) {
+		try {
+			BoardDTO board = boardService.getBoardById(id);
+
+			if (board != null) {
+				return ResponseEntity.ok(board);
+			} else {
+				// 게시글이 없을 경우 NOT_FOUND 상태 코드 반환
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			}
+		} catch (Exception e) {
+			// 에러 응답
+			log.error("Error while get board by ID", e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+
 }

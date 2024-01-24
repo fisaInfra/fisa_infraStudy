@@ -1,5 +1,7 @@
 package com.fisa.infra.board.service;
 
+import com.fisa.infra.account.domain.Account;
+import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +13,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,14 +25,35 @@ class BoardServiceTest {
     BoardRepository boardRepository;
 
     @Autowired
+    AccountRepository accountRepository;
+
+    @Autowired
     BoardService boardService;
 
     @BeforeEach
-    @Rollback(value = false)
+    @Rollback(value = true)
     public void boardSave() {
+
+        Account account = Account.builder()
+                .accountId(1L)
+                /* 이 부분은 스프링 시큐리티 컨텍스트 홀더에서 가져올 수 있을까요? */
+                .loginId("onionhaseyo")
+                .pwd("nonghyupeunhang")
+                .name("김어진")
+                .belong("우리FISA")
+                .gender(true)
+                .imageUrl("사진URL입니다.-> AWS에 올라간 사진도 전부 String입니다.")
+                .stack("난 스택이 싫어")
+                .portfolio("깃허브url입니다.")
+                .job("백수")
+                .build();
+
+        accountRepository.save(account);
+
         Board board = Board.builder()
                 .title("제목입니다")
                 .content("내용입니다")
+                .account(account)
                 .build();
 
         boardRepository.save(board);
@@ -47,7 +71,20 @@ class BoardServiceTest {
     public void getAllBoard() {
 
         List<Board> all = boardRepository.findAll();
-        assertThat(all.size()).isEqualTo(3);
+        assertThat(all.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void getBoardById(){
+        Optional<Board> optionalBoard = boardRepository.findById(1L);
+
+        assertThat(optionalBoard).isPresent(); // Board가 존재하는지 확인
+
+        Board board = optionalBoard.get();
+        // Account 엔티티가 연결되어 있는 경우 loginId 검증
+        if (board.getAccount() != null) {
+            assertThat(board.getAccount().getLoginId()).isEqualTo("onionhaseyo");
+        }
     }
 
 
