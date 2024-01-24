@@ -1,16 +1,21 @@
 package com.fisa.infra.board.service;
 
-import org.springframework.stereotype.Service;
-
 import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.domain.dto.BoardDTO;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
-
+import com.fisa.infra.board.repository.querydsl.QueryBoardRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -20,6 +25,8 @@ public class BoardService {
 	
 	 private final BoardRepository boardRepository;
 	 private final AccountRepository accountRepository;
+	 private final QueryBoardRepository queryBoardRepository;
+	 private ModelMapper mapper = new ModelMapper();
 
 	 /**
 	  * 게시글 작성
@@ -35,7 +42,24 @@ public class BoardService {
 	    		 .content(boardDTO.getContent())
 	    		 .title(boardDTO.getTitle())
 	    		 .build();
-	     
+
 	     return boardRepository.save(board);
 	 }
+
+	public List<BoardDTO> getAllBoard() {
+		List<Board> boardAll = boardRepository.findAll();
+
+		if(boardAll.isEmpty()){
+			return Collections.emptyList();
+		}
+
+		return Arrays.asList(mapper.map(boardAll, BoardDTO.class));
+	}
+
+    public BoardDTO getBoardById(Long id) {
+		 Optional<BoardDTO> board = queryBoardRepository.queryFindBoardById(id);
+
+		 return board.map(b -> mapper.map(b, BoardDTO.class))
+				.orElse(null);
+    }
 }

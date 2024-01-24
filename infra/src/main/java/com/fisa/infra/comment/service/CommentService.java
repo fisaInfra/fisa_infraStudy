@@ -25,6 +25,16 @@ public class CommentService {
     private final AccountRepository accountRepository;
     private final BoardRepository boardRepository;
     /**
+     * 댓글 규칙
+     * 1. 부모 - 자식 댓글이 존재할 경우
+     *    부모 삭제 -> "해당 댓글은 삭제 되었습니다.
+     *    자식 삭제 -> 바로 삭제
+     *  부모는 자식이 없을 경우 삭제 처리
+     *
+     * 2. 부모 - 자식 댓글이 없을 경우
+     *     바로 삭제
+     */
+    /**
      * 댓글 작성
      * @param commentDTO
      * @return 저장된 글
@@ -50,7 +60,33 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
+
     /**
+     * 댓글 삭제
+     * */
+    @Transactional
+    public void deleteComment(Long commentId) {
+
+        Comment comment = commentRepository.findByParent(commentId).orElseThrow(() -> new RuntimeException("해당 댓글은 존재하지 않습니다."));
+
+        //부모 - 자식 댓글이 없을 경우 -> 자식 댓글
+        if(comment.getChildren().isEmpty()){
+
+            //자식 댓글 삭제
+            commentRepository.deleteByComment(commentId);
+            //부모 댓글이 삭제 처리 됐으면 자식 댓글 삭제 후, 부모 댓글도 삭제
+            if(comment.getParent() != null){
+                if(comment.isDeleted()){
+                    commentRepository.deleteByComment(comment.getParent().getCommentId());
+                }
+            }
+        } else { //부모 - 자식 댓글이 존재할 경우 - >부모 댓글
+            comment.updateContent();
+        }
+    }
+
+
+    /*
      * 댓글 조회
      * @param boardId
      * @return commentDTOList

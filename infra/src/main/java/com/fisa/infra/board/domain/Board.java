@@ -22,16 +22,6 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table(name = "boards")
 public class Board extends BaseEntity {
 
-	/*
-	* jpa는 객체 개념으로 설계를 하기 때문에 데이터베이스의 FK와 다르다.
-	* 테이블은 엔티티고 테이블 내부의 FK는 객체로 들어가서 사용된다.
-	*
-	* 현재 단방향으로 맵핑 했기 때문에 Board에서 account는 조회가 되나 account에서 Board는 조회가 되지 않음.
-	* 그러면 account에서 Board로 조회하려면? 양방향 맵핑으로 변경하면 된다.
-	* 양뱡향과 단방향에서 뭐가 좋냐는 질문에는 양방향으로 하면 객체 관리가 어렵기 하지만 조회가 편하다는 장점이 있음
-	* 결론은 비즈니스 로직과 상황에 맞게 사용하면 됨.
-	* */
-
 	//게시글아이디
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

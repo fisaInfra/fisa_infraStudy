@@ -10,7 +10,20 @@ import java.util.List;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
+import com.fisa.infra.common.domain.entity.BaseEntity;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 
 /*
@@ -27,17 +40,9 @@ import org.hibernate.annotations.SQLRestriction;
 @Builder
 @Table(name = "accounts") // 데이터베이스내 예약어가 겹치지 않게 하기 위해 복수 형태로 작성합니다.
 @Entity
+@SQLDelete(sql = "UPDATE account set is_deleted = true WHERE login_id = ?")
 public class Account extends BaseEntity {
 
-
-	/*
-	* pk 값은 String 타입으로 선언하게 되면 검색 시 성능 저하의 이슈가 있을 수 있어요! 그래서 간단하게 다들 숫자 타입을 사용합니다.
-	*
-	* pk 생성 시 @GeneratedValue를 사용해서 선택해주셔야 하는데 이때는 데이터베이스 종류에 따라 달라요!
-	*
-	* --김어진
-	* 면접에서 Long vs int pk를 질문하는 곳도 있으니 시간날 때 정리 ㄱㄱ
-	* */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "account_id")
@@ -48,6 +53,7 @@ public class Account extends BaseEntity {
 
 	@Column(nullable = false)
 	private String pwd;
+
 	//이름
 	private String name;
 
@@ -68,14 +74,34 @@ public class Account extends BaseEntity {
 
 	//직군
 	private String job;
-	
-	//사용자가 작성한 BoardList
 
 	@OneToMany(mappedBy = "account")
 	private List<Board> board = new ArrayList<Board>();
 
 	@Column(columnDefinition = "boolean default false")
 	private boolean isDeleted;
+	
+	public static Account createAccount(String loginId, String pwd, String name, String belong, boolean gender, String imageUrl, String stack, String portfolio, String job, boolean isDeleted) {
+		return Account.builder()
+				.loginId(loginId).pwd(pwd).name(name).belong(belong)
+				.gender(gender).imageUrl(imageUrl).stack(stack).portfolio(portfolio)
+				.job(job).isDeleted(isDeleted)
+				.build();
+	}
+	
+//	public static Account createAccountTest(String loginId) {
+//		return Account.builder()
+//				.loginId(loginId).pwd("asdf").name("fsd").belong("asdfasdf")
+//				.gender(true).imageUrl("asdfasdf").stack("sff").portfolio("sdfdf")
+//				.job("asdf").isDeleted(false)
+//				.build();
+//	}
+	
+	public Account deletedAccount(String loginId) {
+		this.loginId = "deleted" + loginId;
+		setIsDeleted(true);
+		return this;
+	}
 
 }
 
