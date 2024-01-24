@@ -1,4 +1,4 @@
-package com.fisa.infra.board.service;
+package com.fisa.infra.board.repository;
 
 
 import com.fisa.infra.account.domain.Account;
