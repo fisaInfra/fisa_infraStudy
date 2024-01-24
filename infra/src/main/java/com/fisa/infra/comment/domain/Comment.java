@@ -2,14 +2,18 @@ package com.fisa.infra.comment.domain;
 
 import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.board.domain.Board;
+import com.fisa.infra.comment.dto.CommentDTO;
 import com.fisa.infra.common.domain.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SQLDelete;
 
 import java.util.ArrayList;
 import java.util.List;
+
+@SQLDelete(sql = "UPDATE comment SET is")
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -21,21 +25,21 @@ import java.util.List;
 @Entity
 @Table(name = "comments")
 public class Comment extends BaseEntity {
-	
+
 	//댓글아이디
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "comment_id")
 	private Long commentId;
-	
+
 	//게시글
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="board_id")
+	@JoinColumn(name="board")
 	private Board board;
-	
+
 	//회원
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="account_id")
+	@JoinColumn(name="account")
 	private Account account;
 
 	//댓글
@@ -49,6 +53,9 @@ public class Comment extends BaseEntity {
 
 	//내용
 	private String content;
+
+	@Column(columnDefinition = "boolean default false")
+	private boolean isDeleted;
 
 	public void setAccount(Account account) {
 		this.account = account;
@@ -75,5 +82,10 @@ public class Comment extends BaseEntity {
 		this.board = board;
 		this.account = account;
 		this.content = content;
+	}
+
+	public void updateContent() {
+		this.content = "해당 댓글은 삭제되었습니다";
+		this.isDeleted = true;
 	}
 }

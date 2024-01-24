@@ -1,8 +1,7 @@
 package com.fisa.infra.comment.dto;
 
-import com.fisa.infra.comment.domain.Comment;
-import jakarta.persistence.Id;
 import lombok.*;
+import lombok.extern.java.Log;
 
 import java.time.LocalDateTime;
 
@@ -14,10 +13,14 @@ import java.time.LocalDateTime;
 
 @Builder
 public class CommentDTO {
-    //게시글아이디
+
     private Long boardId;
 
-    //회원아이디
+    private Long accountId;
+
+    // 댓글 조회 시 필요한 프로필 이미지
+    private String imageUrl;
+
     private String loginId;
 
     // 대댓글 여부
@@ -37,5 +40,4 @@ public class CommentDTO {
 
     //삭제여부
     private boolean deleteYN;
-
 }
