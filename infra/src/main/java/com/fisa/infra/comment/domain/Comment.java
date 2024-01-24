@@ -81,8 +81,6 @@ public class Comment extends BaseEntity {
 		Comment comment = new Comment();
 		comment.content = commentDTO.getContent();
 		comment.isDeleted = false;
-		comment.setCreatedTime(commentDTO.getCreatedAt());
-		comment.setModifiedTime(commentDTO.getUpdatedAt());
 		return comment;
 	}
 
