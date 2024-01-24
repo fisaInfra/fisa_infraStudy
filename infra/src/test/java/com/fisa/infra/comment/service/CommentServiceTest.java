@@ -34,6 +34,9 @@ public class CommentServiceTest {
     @Autowired
     CommentRepository commentRepository;
 
+
+    //이거 말고 junit 5 + Mockito 사용하셔서 서비스 테스트 해주세요
+
     //@BeforeEach
     @Rollback(value = false) //이걸 하면 데이터가 롤백이 된다.
     public void accountSave() {
