@@ -5,6 +5,7 @@ import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.domain.dto.BoardDTO;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
+import com.fisa.infra.board.repository.querydsl.QueryBoardRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ public class BoardService {
 	
 	 private final BoardRepository boardRepository;
 	 private final AccountRepository accountRepository;
+	 private final QueryBoardRepository queryBoardRepository;
 	 private ModelMapper mapper = new ModelMapper();
 
 	 /**
@@ -55,7 +57,7 @@ public class BoardService {
 	}
 
     public BoardDTO getBoardById(Long id) {
-		 Optional<Board> board = boardRepository.findById(id);
+		 Optional<BoardDTO> board = queryBoardRepository.queryFindBoardById(id);
 
 		 return board.map(b -> mapper.map(b, BoardDTO.class))
 				.orElse(null);

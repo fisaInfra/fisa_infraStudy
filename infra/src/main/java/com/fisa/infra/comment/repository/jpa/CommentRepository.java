@@ -12,10 +12,8 @@ import java.util.List;
  * 이는 문제가될 수 있기 때문에 메서드를 명시했을 때만 사용이 가능한 Repository 를 상속 받아 사용합니다.
  * 즉, 다른 말로 이곳에 인터페이스 메서드를 명시한 인터페이스를 또 하나 더 작성해서 상속 받아야한다는 말입니다.
  * */
-public interface CommentRepository extends JpaRepository<Comment,Long> {
+public interface CommentRepository extends JpaRepository<Comment,Long>, CommentRepositoryCustom {
     Comment save(Comment comment);
-
-//    Comment findById(Long id);
 
     @Query("select c from Comment c where c.board.boardId = ?1 order by c.createdTime")
     List<Comment> findCommentByBoardId(Long boardId);

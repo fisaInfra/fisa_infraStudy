@@ -28,8 +28,6 @@ public class BoardController {
 	 * @param boardDTO
 	 * @return ResponseEntity
 	 */
-	
-
 	@PostMapping(value = "/createBoard")
 	public ResponseEntity<?> writeBoard(@RequestBody BoardDTO boardDTO){
 		 try {

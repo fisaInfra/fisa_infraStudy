@@ -3,7 +3,9 @@ package com.fisa.infra.board.service;
 import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
+import com.fisa.infra.board.domain.dto.BoardDTO;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
+import com.fisa.infra.board.repository.querydsl.QueryBoardRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,17 +27,19 @@ class BoardServiceTest {
     BoardRepository boardRepository;
 
     @Autowired
+    QueryBoardRepository queryBoardRepository;
+
+    @Autowired
     AccountRepository accountRepository;
 
     @Autowired
     BoardService boardService;
 
     @BeforeEach
-    @Rollback(value = true)
+    @Rollback(value = false)
     public void boardSave() {
 
         Account account = Account.builder()
-                .accountId(1L)
                 /* 이 부분은 스프링 시큐리티 컨텍스트 홀더에서 가져올 수 있을까요? */
                 .loginId("onionhaseyo")
                 .pwd("nonghyupeunhang")
@@ -76,14 +80,14 @@ class BoardServiceTest {
 
     @Test
     public void getBoardById(){
-        Optional<Board> optionalBoard = boardRepository.findById(1L);
+        Optional<BoardDTO> optionalBoard = queryBoardRepository.queryFindBoardById(1L);
 
         assertThat(optionalBoard).isPresent(); // Board가 존재하는지 확인
 
-        Board board = optionalBoard.get();
+        BoardDTO board = optionalBoard.get();
         // Account 엔티티가 연결되어 있는 경우 loginId 검증
-        if (board.getAccount() != null) {
-            assertThat(board.getAccount().getLoginId()).isEqualTo("onionhaseyo");
+        if (board.getLoginId() != null) {
+            assertThat(board.getLoginId()).isEqualTo("onionhaseyo");
         }
     }
 
