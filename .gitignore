@@ -1,4 +1,2 @@
 /.metadata/
-/target
-*.class
-*.class
+/infra/target
