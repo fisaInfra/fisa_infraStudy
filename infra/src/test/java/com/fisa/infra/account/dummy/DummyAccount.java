@@ -1,6 +1,6 @@
 package com.fisa.infra.account.dummy;
 
-import com.fisa.infra.account.domain.Account;
+import com.fisa.infra.account.domain.entity.Account;
 import com.fisa.infra.board.domain.Board;
 
 import java.util.List;

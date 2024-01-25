@@ -1,6 +1,6 @@
 package com.fisa.infra.security.service;
 
-import com.fisa.infra.account.domain.Account;
+import com.fisa.infra.account.domain.entity.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

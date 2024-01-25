@@ -3,9 +3,6 @@ package com.fisa.infra.board.domain.dto;
 import java.sql.Date;
 import java.util.List;
 
-import com.fisa.infra.account.domain.Account;
-
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

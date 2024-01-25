@@ -2,7 +2,7 @@ package com.fisa.infra.security.service;
 
 import java.util.Optional;
 
-import com.fisa.infra.account.domain.Account;
+import com.fisa.infra.account.domain.entity.Account;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fisa.infra.account.domain.Account;
+import com.fisa.infra.account.domain.entity.Account;
 import com.fisa.infra.account.domain.dto.AccountDTO;
 import com.fisa.infra.account.service.AccountService;
 

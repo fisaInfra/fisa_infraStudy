@@ -1,7 +1,6 @@
 package com.fisa.infra.picture.domain;
 
 //import는 안쓸때마다 정리해주는 것이 좋음.
-import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.board.domain.Board;
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,6 +1,6 @@
 package com.fisa.infra.comment.service;
 
-import com.fisa.infra.account.domain.Account;
+import com.fisa.infra.account.domain.entity.Account;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.repository.jpa.BoardRepository;

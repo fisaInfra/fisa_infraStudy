@@ -1,8 +1,7 @@
 package com.fisa.infra.comment.domain;
 
-import com.fisa.infra.account.domain.Account;
+import com.fisa.infra.account.domain.entity.Account;
 import com.fisa.infra.board.domain.Board;
-import com.fisa.infra.comment.dto.CommentDTO;
 import com.fisa.infra.common.domain.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
