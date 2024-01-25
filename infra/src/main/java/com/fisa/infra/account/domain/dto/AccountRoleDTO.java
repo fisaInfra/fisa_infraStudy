@@ -7,9 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class AccountRoleDTO {
 
 	private Long accountId;

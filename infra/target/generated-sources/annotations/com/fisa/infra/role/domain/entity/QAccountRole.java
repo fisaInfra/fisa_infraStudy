@@ -22,7 +22,7 @@ public class QAccountRole extends EntityPathBase<AccountRole> {
 
     public static final QAccountRole accountRole = new QAccountRole("accountRole");
 
-    public final com.fisa.infra.account.domain.QAccount account;
+    public final com.fisa.infra.account.domain.entity.QAccount account;
 
     public final QAccountRole_Pk pk;
 
@@ -46,7 +46,7 @@ public class QAccountRole extends EntityPathBase<AccountRole> {
 
     public QAccountRole(Class<? extends AccountRole> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.account = inits.isInitialized("account") ? new com.fisa.infra.account.domain.QAccount(forProperty("account")) : null;
+        this.account = inits.isInitialized("account") ? new com.fisa.infra.account.domain.entity.QAccount(forProperty("account")) : null;
         this.pk = inits.isInitialized("pk") ? new QAccountRole_Pk(forProperty("pk")) : null;
         this.role = inits.isInitialized("role") ? new QRole(forProperty("role")) : null;
     }

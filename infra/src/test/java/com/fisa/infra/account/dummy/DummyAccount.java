@@ -21,6 +21,8 @@ public class DummyAccount {
 			.board(null)
 			.build();
 	}
+
+
 	public static Account dummy(Board board){
 		return Account.builder()
 			.loginId("testId")

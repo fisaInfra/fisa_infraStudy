@@ -5,7 +5,7 @@ package com.fisa.infra.board.repository.querydsl;
     QBoard.board는 Board 엔티티에 대한 alias로 사용되어, board.boardId 등으로 필드에 접근할 수 있음
  */
 
-import com.fisa.infra.account.domain.QAccount;
+import com.fisa.infra.account.domain.entity.QAccount;
 import com.fisa.infra.board.domain.QBoard;
 import com.fisa.infra.board.domain.dto.BoardDTO;
 import com.querydsl.core.types.Projections;
@@ -13,7 +13,6 @@ import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.extern.slf4j.XSlf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

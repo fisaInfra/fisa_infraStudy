@@ -32,6 +32,7 @@ public class QueryAccountRoleRoleRepositoryImpl implements QueryAccountRoleRepos
 				accountRole.account.pwd,
 				accountRole.role.name.as("roleName")
 				))
+			.from(accountRole)
 			.where(accountRole.account.loginId.eq(loginId)).fetchOne());
 	}
 }

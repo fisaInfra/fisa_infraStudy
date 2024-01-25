@@ -24,7 +24,7 @@ public class QComment extends EntityPathBase<Comment> {
 
     public final com.fisa.infra.common.domain.entity.QBaseEntity _super = new com.fisa.infra.common.domain.entity.QBaseEntity(this);
 
-    public final com.fisa.infra.account.domain.QAccount account;
+    public final com.fisa.infra.account.domain.entity.QAccount account;
 
     public final com.fisa.infra.board.domain.QBoard board;
 
@@ -37,8 +37,7 @@ public class QComment extends EntityPathBase<Comment> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdTime = _super.createdTime;
 
-    //inherited
-    public final BooleanPath isDeleted = _super.isDeleted;
+    public final BooleanPath isDeleted = createBoolean("isDeleted");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedTime = _super.modifiedTime;
@@ -63,7 +62,7 @@ public class QComment extends EntityPathBase<Comment> {
 
     public QComment(Class<? extends Comment> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.account = inits.isInitialized("account") ? new com.fisa.infra.account.domain.QAccount(forProperty("account")) : null;
+        this.account = inits.isInitialized("account") ? new com.fisa.infra.account.domain.entity.QAccount(forProperty("account")) : null;
         this.board = inits.isInitialized("board") ? new com.fisa.infra.board.domain.QBoard(forProperty("board"), inits.get("board")) : null;
         this.parent = inits.isInitialized("parent") ? new QComment(forProperty("parent"), inits.get("parent")) : null;
     }
