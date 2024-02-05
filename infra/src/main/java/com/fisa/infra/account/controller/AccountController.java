@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.dto.AccountDTO;
+import com.fisa.infra.account.service.AccountService;
+
+import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/accounts")
@@ -25,15 +31,6 @@ public class AccountController {
 		return ResponseEntity.ok(accountService.accountCreate(accountDTO));
 	}
 
-	//localhost:3333/infra/account/create
-	
-	// accounts?? account?
-//	@PostMapping(value = "/createtest")
-//	public ResponseEntity<AccountDTO> accountCreate(String loginId){
-//		
-//		return ResponseEntity.ok(accountService.accountCreateTest(loginId));
-//	}
-	
 	//@sqldelete 바꿔서 지우는거 
 	@DeleteMapping(value = "/delete1")
 	public ResponseEntity deleteAccount1(String loginId) {

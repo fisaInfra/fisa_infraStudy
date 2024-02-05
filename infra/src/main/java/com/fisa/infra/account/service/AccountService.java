@@ -1,12 +1,10 @@
 package com.fisa.infra.account.service;
 
-<<<<<<< Updated upstream
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fisa.infra.account.domain.Account;
-=======
->>>>>>> Stashed changes
+import com.fisa.infra.account.domain.entity.Account;
 import com.fisa.infra.account.domain.dto.AccountDTO;
 import com.fisa.infra.account.domain.entity.Account;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
@@ -39,25 +37,22 @@ public class AccountService {
 		
 	}
 	
-<<<<<<< Updated upstream
 	//테스트
-	public AccountDTO accountCreateTest(String loginId) {
-		
-//		accountRepository.findAccountByLoginId(loginId).orElseThrow();
-		
-		Account account = Account.createAccountTest(loginId);
-		
-		accountRepository.save(account);
-		
-		return AccountDTO.builder().accountId(account.getAccountId())
-				.loginId(account.getLoginId()).pwd("1234")
-				.build();
-		
-	}
+//	public AccountDTO accountCreateTest(String loginId) {
+//
+////		accountRepository.findAccountByLoginId(loginId).orElseThrow();
+//
+//		Account account = Account.createAccountTest(loginId);
+//
+//		accountRepository.save(account);
+//
+//		return AccountDTO.builder().accountId(account.getAccountId())
+//				.loginId(account.getLoginId()).pwd("1234")
+//				.build();
+//
+//	}
 
 	
-=======
->>>>>>> Stashed changes
 	//sql 써보는거
 	public void accountDelete1(String loginId) {
 		accountRepository.deleteAccountByLoginId(loginId);

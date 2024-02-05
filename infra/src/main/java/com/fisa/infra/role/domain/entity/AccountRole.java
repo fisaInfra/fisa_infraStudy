@@ -1,7 +1,7 @@
 package com.fisa.infra.role.domain.entity;
 
 
-import com.fisa.infra.account.domain.Account;
+import com.fisa.infra.account.domain.entity.Account;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,6 +9,9 @@ import java.io.Serializable;
 
 @Table(name = "accounts_roles")
 @Entity
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class AccountRole {
 
     @EmbeddedId
