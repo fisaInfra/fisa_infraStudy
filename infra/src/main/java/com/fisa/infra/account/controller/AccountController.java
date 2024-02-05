@@ -1,5 +1,8 @@
 package com.fisa.infra.account.controller;
 
+import com.fisa.infra.account.domain.dto.AccountDTO;
+import com.fisa.infra.account.service.AccountService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +26,9 @@ public class AccountController {
 	AccountService accountService;
 	
 	@PostMapping(value = "/create") //_role table  -- bullchallenger - customer 참
-	public ResponseEntity<?> accountCreate(Account account){ //dto로 보내야한다! , ResponseEntity<?> 인이유?? accountDTO가 아니니까
+	public ResponseEntity<?> accountCreate(AccountDTO accountDTO){
 		
-		return ResponseEntity.ok(accountService.accountCreate(account));
+		return ResponseEntity.ok(accountService.accountCreate(accountDTO));
 	}
 
 	//@sqldelete 바꿔서 지우는거 

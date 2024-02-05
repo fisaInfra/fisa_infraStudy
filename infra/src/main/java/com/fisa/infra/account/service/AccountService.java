@@ -3,33 +3,37 @@ package com.fisa.infra.account.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.account.domain.entity.Account;
 import com.fisa.infra.account.domain.dto.AccountDTO;
+import com.fisa.infra.account.domain.entity.Account;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
-
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class AccountService {
 
-	// 이거도 하나더 만들고 이걸 implements로 사용??
 	@Autowired
 	private AccountRepository accountRepository;
-	
-	public AccountDTO accountCreate(Account account) {
+
+	public Account accountCreate(AccountDTO accountdto) {
 		
-		accountRepository.findAccountByLoginId(account.getLoginId()).orElseThrow();
-		
-		accountRepository.save(account);
-		
-		return AccountDTO.builder().accountId(account.getAccountId())
-				.loginId(account.getLoginId()).pwd(account.getPwd()).name(account.getName()).belong(account.getBelong())
-				.gender(account.isGender()).imageUrl(account.getImageUrl()).stack(account.getStack()).portfolio(account.getPortfolio())
-				.job(account.getJob()).isDeleted(account.isDeleted())
+		accountRepository.findAccountByLoginId(accountdto.getLoginId()).orElseThrow();
+
+		Account account = Account.builder().accountId(accountdto.getAccountId())
+				.loginId(accountdto.getLoginId()).pwd(accountdto.getPwd()).name(accountdto.getName()).belong(accountdto.getBelong())
+				.gender(accountdto.isGender()).imageUrl(accountdto.getImageUrl()).stack(accountdto.getStack()).portfolio(accountdto.getPortfolio())
+				.job(accountdto.getJob()).isDeleted(accountdto.isDeleted())
 				.build();
+
+		return accountRepository.save(account);
+		
+
 		
 	}
 	
