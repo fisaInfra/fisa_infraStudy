@@ -42,6 +42,7 @@ public class FileStore {
         return profileDtoList;
     }
 
+    //원본 파일의 이름을 변경해서 저장
     private String createStoreFileName(String originalFilename) {
         // 서버에 저장하는 파일 명
         String uuid = UUID.randomUUID().toString();
