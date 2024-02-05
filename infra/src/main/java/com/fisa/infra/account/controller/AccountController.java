@@ -36,5 +36,4 @@ public class AccountController {
 	public ResponseEntity<AccountDTO> deleteAccount2(String loginId){
 		return ResponseEntity.ok(accountService.accountDelete2(loginId));
 	}
-	
 }
