@@ -1,5 +1,8 @@
 package com.fisa.infra.account.controller;
 
+import com.fisa.infra.account.domain.dto.AccountDTO;
+import com.fisa.infra.account.service.AccountService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,12 +10,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fisa.infra.account.domain.Account;
-import com.fisa.infra.account.domain.dto.AccountDTO;
-import com.fisa.infra.account.service.AccountService;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
@@ -23,9 +20,9 @@ public class AccountController {
 	AccountService accountService;
 	
 	@PostMapping(value = "/create") //_role table  -- bullchallenger - customer 참
-	public ResponseEntity<?> accountCreate(Account account){ //dto로 보내야한다! , ResponseEntity<?> 인이유?? accountDTO가 아니니까
+	public ResponseEntity<?> accountCreate(AccountDTO accountDTO){
 		
-		return ResponseEntity.ok(accountService.accountCreate(account));
+		return ResponseEntity.ok(accountService.accountCreate(accountDTO));
 	}
 
 	//localhost:3333/infra/account/create
