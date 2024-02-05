@@ -10,4 +10,6 @@ public interface CommonPictureRepository {
 
     Picture findById(Long id);
 
+    void save(Picture picture);
+
 }

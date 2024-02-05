@@ -44,11 +44,6 @@ public class QueryBoardRepositoryImpl implements QueryBoardRepository {
                 .leftJoin(account)
                 .on(board.account.accountId.eq(account.accountId))
                 .where(board.boardId.eq(id));
-
-        // JPQL 쿼리를 문자열로 얻어와서 로깅
-        log.info("JPQL Query: {}", jpaQuery.toString());
-
         return Optional.ofNullable(jpaQuery.fetchOne());
-
     }
 }

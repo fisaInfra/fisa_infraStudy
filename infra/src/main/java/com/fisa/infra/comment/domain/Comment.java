@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SQLDelete(sql = "UPDATE comment SET is")
-
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
@@ -57,26 +56,31 @@ public class Comment extends BaseEntity {
 	@Column(columnDefinition = "boolean default false")
 	private boolean isDeleted;
 
-	public void setAccount(Account account) {
+	public void addAccount(Account account) {
 		this.account = account;
 	}
 
-	public void setBoard(Board board) {
+	public void addBoard(Board board) {
+		//게시글에 기존에 있던 댓글이 있던 경우
+		if (this.board != null) {
+			//기존 게시글에서 연관 관계를 삭제함
+			this.board.getCommentList().remove(this);
+		}
 		this.board = board;
+		board.getCommentList().add(this);
 	}
 
-	public void setParent(Comment parent) { this.parent = parent; }
-
-	public void setComment(Comment parent) {
-		if (this.parent != null) { // 기존 댓글이 존재하면
-			this.parent.getChildren().remove(this); // 관계를 끊는다.
+	public void addtComment(Comment parent) {
+		//대댓글이 이미 댓글이 등록된 경우
+		if (this.parent != null) {
+			//기존 댓글에서 연관 관계를 삭제함
+			this.parent.getChildren().remove(this);
 		}
 		this.parent = parent;
 		parent.getChildren().add(this);
 	}
 
 	//===생성 메서드 ===//
-
 	@Builder
 	public Comment(Board board, Account account, String content) {
 		this.board = board;

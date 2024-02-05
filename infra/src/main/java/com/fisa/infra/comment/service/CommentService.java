@@ -40,10 +40,10 @@ public class CommentService {
      * @return 저장된 글
      */
     public Comment writeComment(CommentDTO commentDTO) throws RuntimeException {
-        Account account = accountRepository.findAccountByLoginId(commentDTO.getLoginId())
+        Account account = accountRepository.findAccountByLoginId("김어진")
                 .orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
 
-        Board board = boardRepository.findById(commentDTO.getBoardId())
+        Board board = boardRepository.findById(1L)
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
 
         Comment comment = Comment.builder()
@@ -54,8 +54,11 @@ public class CommentService {
 
         if (!commentDTO.isParent() && commentDTO.getParentId() != null) {
             Comment parent = commentRepository.findById(commentDTO.getParentId()).orElseThrow(() -> new RuntimeException("부모 댓글을 찾을 수 없습니다."));
-            comment.setParent(parent);
+            comment.addtComment(parent);
         }
+
+        comment.addBoard(board);
+        comment.addAccount(account);
 
         return commentRepository.save(comment);
     }

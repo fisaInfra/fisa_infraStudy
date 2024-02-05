@@ -20,7 +20,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     private final CustomUserDetailsService customUserDetailsService;
     private final PasswordEncoder encoder;
 
-
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 

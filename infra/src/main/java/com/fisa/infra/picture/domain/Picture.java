@@ -39,7 +39,20 @@ public class Picture {
 	//웹에서 접근 가능한 URL
 	private String pictureUrl;
 
-	public void setBoard(Board board) {
+	public void addBoard(Board board) {
+		//게시글에 기존에 있던 댓글이 있던 경우
+		if (this.board != null) {
+			//기존 게시글에서 연관 관계를 삭제함
+			this.board.getPictureList().remove(this);
+		}
 		this.board = board;
+		board.getPictureList().add(this);
+	}
+
+	public static Picture savePicture(String pictureFileUrl, String pictureUrl){
+		Picture picture = new Picture();
+		picture.pictureFileUrl = pictureFileUrl;
+		picture.pictureUrl = pictureUrl;
+		return picture;
 	}
 }

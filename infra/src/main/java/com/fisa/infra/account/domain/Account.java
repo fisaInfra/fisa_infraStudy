@@ -75,6 +75,7 @@ public class Account extends BaseEntity {
 	//직군
 	private String job;
 
+	@Builder.Default
 	@OneToMany(mappedBy = "account")
 	private List<Board> board = new ArrayList<Board>();
 
@@ -96,7 +97,6 @@ public class Account extends BaseEntity {
 //				.job("asdf").isDeleted(false)
 //				.build();
 //	}
-	
 	public Account deletedAccount(String loginId) {
 		this.loginId = "deleted" + loginId;
 		setIsDeleted(true);

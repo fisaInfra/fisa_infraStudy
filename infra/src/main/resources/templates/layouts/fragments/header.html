@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lagn="ko" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="header">
-    <head>
-        <meta charset="UTF-8"/>
-        <title>Gardener's Club Admin</title>
-        <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
-    </head>
+    <div class="w3-main" style="margin-left:300px"> </div>
+    <header id="portfolio">
+        <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+        <div class="w3-container">
+            <h1><b>Portfolio</b></h1>
+            <div class="w3-section w3-bottombar w3-padding-16">
+                <button class="w3-button w3-black">
+                    <a th:href="@{http://localhost:8080/api/board/boardAll}" style="text-decoration:none">전체 게시글 </a>
+                </button>
+                <button class="w3-button w3-black">
+                    <a th:href="@{http://localhost:8080/api/board/create}" style="text-decoration:none">게시글 작성 </a>
+                </button>
+            </div>
+        </div>
+    </header>
 </div>
-<body>
-</body>
+
 </html>

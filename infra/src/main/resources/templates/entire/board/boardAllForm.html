@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>전체 게시판</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="w3-main" style="margin-left:300px"> </div>
+    <br>
+    <table id="boardTable">
+        <tr th:each="board : ${boardList}">
+            <div class="col">
+                <div class="card">
+                    <!-- <img img th:src="@{${board}}" class="card-img-top" alt="..."-->
+                    <div class="card-body">
+                        <td th:text="${board.title}"></td>
+                        <td th:text="${board.content}">content</td>
+                    </div>
+                </div>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
