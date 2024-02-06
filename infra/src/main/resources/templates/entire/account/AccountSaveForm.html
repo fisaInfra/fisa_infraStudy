@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 가입</title>
+</head>
+<body>
+    <div layout:fragment="content">
+    <div class="w3-main" style="margin-left:300px">
+        <!--form 태그-->
+        <form class="board" th:action="@{/api/account/create}" th:object="${accountDTO}" method="post" enctype="multipart/form-data">
+            <div th:style="${'height: 100%; width: 100%; object-fit: cover'}">
+                <div class="container-title">
+                    <label for="loginId">아이디 </label> <br>
+                    <input type="text" id="loginId" th:field="*{loginId}" class="form-control">
+                </div>
+                <div class="container-content">
+                    <label for="pwd">비밀 번호</label> <br>
+                    <input type="text" id="pwd" th:field="*{pwd}" class="form-control">
+                </div>
+
+                <div class="container-content">
+                    <label for="name">성함</label> <br>
+                    <input type="text" id="name" th:field="*{name}" class="form-control">
+                </div>
+
+                <div class="container-content">
+                    <label for="belong">소속</label> <br>
+                    <input type="text" id="belong" th:field="*{belong}" class="form-control">
+                </div>
+
+                <div class="container-content">
+                    <label for="gender">성별</label> <br>
+                    <input type="text" id="gender" th:field="*{gender}" class="form-control">
+                </div>
+
+                <div class="container-content">
+                    <label for="stack">기술</label> <br>
+                    <input type="text" id="stack" th:field="*{stack}" class="form-control">
+                </div>
+
+                <div class="container-content">
+                    <label for="portfolio">포트폴리오 주소</label> <br>
+                    <input type="text" id="portfolio" th:field="*{portfolio}" class="form-control">
+                </div>
+
+                <div class="container-content">
+                    <label for="job">직군</label> <br>
+                    <input type="text" id="job" th:field="*{job}" class="form-control">
+                </div>
+
+                <button class="btn-save" type="submit">저장 하기</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</body>
+</html>

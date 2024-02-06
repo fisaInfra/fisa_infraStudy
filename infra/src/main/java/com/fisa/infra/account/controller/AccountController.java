@@ -17,20 +17,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class AccountController {
 
-	// 로그인 폼과 관련해서는 security 쪽으로 빼둘게요!
-
  	private final AccountService accountService;
 
 	@GetMapping("/account/create")
-	public String createForm() {
-		return "entire/account/login";
+	public String createForm(Model model) {
+		model.addAttribute("accountDTO", new AccountDTO());
+		return "entire/account/AccountSaveForm";
 	}
 
-
-	@PostMapping(value = "/account/create") //_role table  -- bullchallenger - customer 참
-	public ResponseEntity<?> accountCreate(AccountDTO accountDTO){
-		
-		return ResponseEntity.ok(accountService.accountCreate(accountDTO));
+	@PostMapping(value = "/account/create")
+	public String accountCreate(AccountDTO accountDTO){
+		accountService.accountCreate(accountDTO);
+		return "redirect:/account/login";
 	}
 
 	//@sqldelete 바꿔서 지우는거 

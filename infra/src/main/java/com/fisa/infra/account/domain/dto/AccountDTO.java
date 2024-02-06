@@ -26,6 +26,10 @@ public class AccountDTO {
 	private String loginId;
 
 	private String pwd;
+
+	//회원사진주소
+	private String imageUrl;
+
 	//이름
 	private String name;
 
@@ -34,9 +38,6 @@ public class AccountDTO {
 
 	//성별
 	private boolean gender;
-
-	//회원사진주소
-	private String imageUrl;
 
 	//스택
 	private String stack;
