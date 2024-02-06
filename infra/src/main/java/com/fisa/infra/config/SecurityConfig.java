@@ -1,11 +1,9 @@
 package com.fisa.infra.config;
 
 
-import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.security.filter.CustomAuthenticationFilter;
 import com.fisa.infra.security.provider.CustomAuthenticationProvider;
 import com.fisa.infra.security.service.CustomUserDetailsService;
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +17,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity

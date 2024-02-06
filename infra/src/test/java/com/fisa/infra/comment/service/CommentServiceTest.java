@@ -1,12 +1,11 @@
 package com.fisa.infra.comment.service;
 
 import com.fisa.infra.account.domain.Account;
-
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
 import com.fisa.infra.comment.domain.Comment;
-import com.fisa.infra.comment.dto.CommentDTO;
+import com.fisa.infra.comment.domain.dto.CommentDTO;
 import com.fisa.infra.comment.repository.jpa.CommentRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

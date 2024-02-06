@@ -1,4 +1,4 @@
-package com.fisa.infra.comment.dto;
+package com.fisa.infra.comment.domain.dto;
 
 import lombok.*;
 import lombok.extern.java.Log;

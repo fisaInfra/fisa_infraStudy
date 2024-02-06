@@ -6,9 +6,7 @@ import com.fisa.infra.board.domain.Board;
 import java.util.List;
 
 public class DummyAccount {
-
-
-	public static Account dummy(Board board){
+	public static Account dummy(){
 		return Account.builder()
 			.loginId("testId")
 			.pwd("test")
@@ -19,7 +17,7 @@ public class DummyAccount {
 			.stack("dd")
 			.portfolio("dd")
 			.job("?")
-			.board(List.of(board))
+			.board(null)
 			.build();
 	}
 }

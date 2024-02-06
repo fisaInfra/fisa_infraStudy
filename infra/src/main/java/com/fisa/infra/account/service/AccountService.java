@@ -15,8 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountService {
 
-	@Autowired
-	private AccountRepository accountRepository;
+	private final AccountRepository accountRepository;
 
 	public Account accountCreate(AccountDTO accountdto) {
 		
@@ -28,7 +27,21 @@ public class AccountService {
 				.build();
 		return accountRepository.save(account);
 	}
-	
+
+//	public AccountDTO accountCreate(Account account) {
+//
+//		accountRepository.findAccountByLoginId(account.getLoginId()).orElseThrow();
+//
+//		accountRepository.save(account);
+//
+//		return AccountDTO.builder().accountId(account.getAccountId())
+//				.loginId(account.getLoginId()).pwd(account.getPwd()).name(account.getName()).belong(account.getBelong())
+//				.gender(account.isGender()).imageUrl(account.getImageUrl()).stack(account.getStack()).portfolio(account.getPortfolio())
+//				.job(account.getJob()).isDeleted(account.isDeleted())
+//				.build();
+//
+//	}
+
 	//sql 써보는거
 	public void accountDelete1(String loginId) {
 		accountRepository.deleteAccountByLoginId(loginId);

@@ -42,6 +42,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
             throw new BadCredentialsException("회원 아이디와 비밀번호를 다시 확인해주세요. 빈값은 넣을 수 없습니다.");
         }
+
         return UsernamePasswordAuthenticationToken.unauthenticated(loginId, pwd);
     }
     /*
@@ -69,6 +70,5 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
 
         response.sendRedirect("/login");
-
     }
 }

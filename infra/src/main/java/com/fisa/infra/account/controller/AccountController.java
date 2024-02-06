@@ -2,7 +2,6 @@ package com.fisa.infra.account.controller;
 
 import com.fisa.infra.account.domain.dto.AccountDTO;
 import com.fisa.infra.account.service.AccountService;
-import com.fisa.infra.board.domain.dto.BoardDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.fisa.infra.comment.controller;
 
 import com.fisa.infra.comment.domain.Comment;
-import com.fisa.infra.comment.dto.CommentDTO;
+import com.fisa.infra.comment.domain.dto.CommentDTO;
 import com.fisa.infra.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

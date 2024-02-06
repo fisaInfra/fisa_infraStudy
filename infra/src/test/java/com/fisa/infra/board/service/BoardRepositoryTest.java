@@ -2,7 +2,6 @@ package com.fisa.infra.board.service;
 
 import com.fisa.infra.account.domain.Account;
 
-import com.fisa.infra.account.dummy.DummyAccount;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.domain.dto.BoardDTO;
 import com.fisa.infra.board.repository.querydsl.QueryBoardRepository;
@@ -17,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 @Transactional
 public class BoardRepositoryTest {
@@ -45,7 +45,6 @@ public class BoardRepositoryTest {
                 .account(account)
                 .build();
 
-        account = DummyAccount.dummy(board1);
     }
 
     @DisplayName("게시글 id로 사용자 login id 가져오기")
@@ -67,5 +66,6 @@ public class BoardRepositoryTest {
         if (board.getLoginId() != null) {
             assertThat(board.getLoginId()).isEqualTo("testId");
         }
+
     }
 }

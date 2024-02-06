@@ -47,6 +47,7 @@ public class BoardService {
 				.title(boardDTO.getTitle())
 				.build();
 
+		//부모와 연관 관계
 		board.addAccount(account);
 		Board save = boardRepository.save(board);
 
@@ -59,15 +60,12 @@ public class BoardService {
 		return save;
 	}
 
-	public List<BoardDTO> getAllBoard () {
+	public List<BoardDTO> getAllBoard() {
 		List<Board> boardAll = boardRepository.findAll();
 		List<BoardDTO> collect = boardAll.stream().map(b -> mapper.map(b, BoardDTO.class)).collect(Collectors.toList());
-		log.info("{} ", boardAll.size());
-
-		if (boardAll.isEmpty()) {
+		if(boardAll.isEmpty()){
 			return Collections.emptyList();
 		}
-
 		return collect;
 	}
 
@@ -75,4 +73,5 @@ public class BoardService {
 		Optional<BoardDTO> board = queryBoardRepository.queryFindBoardById(id);
 		return board.map(b -> mapper.map(b, BoardDTO.class)).orElse(null);
 	}
+
 }

@@ -55,7 +55,6 @@ public class Comment extends BaseEntity {
 	@Column(columnDefinition = "boolean default false")
 	private boolean isDeleted;
 
-
 	public void addAccount(Account account) {
 		this.account = account;
 	}

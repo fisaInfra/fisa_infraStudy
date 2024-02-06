@@ -1,12 +1,11 @@
 package com.fisa.infra.comment.service;
 
 import com.fisa.infra.account.domain.Account;
-
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
 import com.fisa.infra.comment.domain.Comment;
-import com.fisa.infra.comment.dto.CommentDTO;
+import com.fisa.infra.comment.domain.dto.CommentDTO;
 import com.fisa.infra.comment.repository.jpa.CommentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -57,6 +56,7 @@ public class CommentService {
             Comment parent = commentRepository.findById(commentDTO.getParentId()).orElseThrow(() -> new RuntimeException("부모 댓글을 찾을 수 없습니다."));
             comment.addtComment(parent);
         }
+
         comment.addBoard(board);
         comment.addAccount(account);
         return commentRepository.save(comment);

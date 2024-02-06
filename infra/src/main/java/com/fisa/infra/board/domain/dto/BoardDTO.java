@@ -34,5 +34,4 @@ public class BoardDTO {
 	private List<String> pictureUrl;
 
 	private List<MultipartFile> uploadFile;
-
 }

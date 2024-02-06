@@ -28,7 +28,7 @@ public class CustomUserDetails implements UserDetails {
 
 	}
 
-    private Collection<SimpleGrantedAuthority> toGrantedAuthority(List<RoleNameDTO> roleNameDTOList){
+    private Collection<SimpleGrantedAuthority> toGrantedAuthority(List<RoleNameDTO> roleNameDTOList) {
         Collection<SimpleGrantedAuthority> collections = new ArrayList<>();
 
         for (RoleNameDTO dto : roleNameDTOList) {
