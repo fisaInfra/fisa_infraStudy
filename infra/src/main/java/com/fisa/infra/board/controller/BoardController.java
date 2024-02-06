@@ -34,9 +34,9 @@ public class BoardController {
 	@PostMapping(value = "/board/create")
 	public String writeBoard(@ModelAttribute("boardDTO") BoardDTO boardDTO) throws IOException {
 		// 게시글 작성자 정보 가져오기 (예시: 현재 인증된 사용자)
-	     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	     Account account = (Account) authentication.getPrincipal();
-	     String loginId = account.getLoginId();
+//	     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//	     Account account = (Account) authentication.getPrincipal();
+//	     String loginId = account.getLoginId();
 
 //	    // 게시글 작성 서비스 호출
 		boardService.writeBoard("김어진", boardDTO);
