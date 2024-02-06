@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class AccountController {
 
+	// 로그인 폼과 관련해서는 security 쪽으로 빼둘게요!
+
  	private final AccountService accountService;
 
 	@GetMapping("/account/create")
@@ -24,10 +26,6 @@ public class AccountController {
 		return "entire/account/login";
 	}
 
-	@GetMapping(value = "/account/login")
-	public void login() {
-
-	}
 
 	@PostMapping(value = "/account/create") //_role table  -- bullchallenger - customer 참
 	public ResponseEntity<?> accountCreate(AccountDTO accountDTO){

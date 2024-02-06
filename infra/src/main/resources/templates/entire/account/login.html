@@ -1,17 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <body>
+
+    <div th:include="layouts/fragments/header :: header"></div>
     <div layout:fragment="content"> </div>
         <div class="w3-main" style="margin-left:300px">
         <div class="container text-center">
-                <form class="needs-validation col-sm-6" th:action="@{/api/account/login}" method="post">
+                <form class="needs-validation col-sm-6" th:action="@{/account/login}" method="post">
                     <div class="form-group">
                         <label for="managerId">회원 ID</label>
                         <input type="text" id="managerId" name="loginId">
