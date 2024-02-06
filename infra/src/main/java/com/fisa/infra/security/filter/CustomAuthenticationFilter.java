@@ -44,8 +44,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         }
 
         return UsernamePasswordAuthenticationToken.unauthenticated(loginId, pwd);
-
-
     }
     /*
      * @author hwiju yeom
@@ -62,7 +60,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     }
 
-
     /*
      * @author hwiju yeom
      *
@@ -72,9 +69,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
 
-        response.sendRedirect("/account/login");
-
+        response.sendRedirect("/login");
     }
-
-
 }

@@ -1,11 +1,9 @@
 package com.fisa.infra.config;
 
 
-import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.security.filter.CustomAuthenticationFilter;
 import com.fisa.infra.security.provider.CustomAuthenticationProvider;
 import com.fisa.infra.security.service.CustomUserDetailsService;
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +17,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -50,7 +46,7 @@ public class SecurityConfig {
 
         //우리가 만들어 사용할 form login 설정
         http.formLogin(httpSecurityFormLoginConfigurer -> {
-            httpSecurityFormLoginConfigurer.loginPage("/account/login");
+            httpSecurityFormLoginConfigurer.loginPage("/api/account/login");
             httpSecurityFormLoginConfigurer.passwordParameter("pwd");
             httpSecurityFormLoginConfigurer.usernameParameter("loginId");
         });
@@ -68,16 +64,10 @@ public class SecurityConfig {
             logout.deleteCookies("JSESSIONID", "remember-me");
         });
 
-
-
         // 스프링 시큐리티가 지원하는 세션을 사용하겠다는 의미 사용 안 하려면 STATELESS 사용
         http.sessionManagement(sessionManagementConfigurer -> sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
-
         http.addFilterAt(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
-
         return http.build();
-
     }
 
     @Bean

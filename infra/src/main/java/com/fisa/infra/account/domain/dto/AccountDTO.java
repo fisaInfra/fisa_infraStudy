@@ -1,6 +1,6 @@
 package com.fisa.infra.account.domain.dto;
 
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
 
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.fisa.infra.board.service;
 
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.domain.dto.BoardDTO;
@@ -88,7 +88,6 @@ class BoardServiceTest {
         if (board.getLoginId() != null) {
             assertThat(board.getLoginId()).isEqualTo("onionhaseyo");
         }
+
     }
-
-
 }

@@ -1,7 +1,7 @@
 package com.fisa.infra.role.domain.entity;
 
 
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
 import jakarta.persistence.*;
 import lombok.*;
 

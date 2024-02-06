@@ -1,9 +1,11 @@
 package com.fisa.infra.account.repository.jpa;
 
+import com.fisa.infra.account.domain.Account;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.assertj.core.api.Assertions;
 
 import java.util.Optional;
-
-import org.assertj.core.api.Assertions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,11 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import com.fisa.infra.account.domain.entity.Account;
 import com.fisa.infra.account.dummy.DummyAccount;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -35,6 +33,7 @@ class AccountRepositoryTest {
 	@BeforeEach
 	void setUp() {
 
+
 		account = DummyAccount.dummy();
 
 	}
@@ -52,6 +51,5 @@ class AccountRepositoryTest {
 
 		//then
 		Assertions.assertThat(op.get()).isNotNull();
-
 	}
 }

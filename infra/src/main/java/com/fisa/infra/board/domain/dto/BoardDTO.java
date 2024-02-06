@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +19,8 @@ import lombok.ToString;
 @Builder
 public class BoardDTO {
 
-
 	// account
 	private String loginId;
-
 
 	// board
 	private String title;
@@ -34,5 +33,5 @@ public class BoardDTO {
 	// picture
 	private List<String> pictureUrl;
 
-
+	private List<MultipartFile> uploadFile;
 }

@@ -1,6 +1,6 @@
 package com.fisa.infra.role.dummy;
 
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.role.domain.entity.AccountRole;
 import com.fisa.infra.role.domain.entity.Role;
 

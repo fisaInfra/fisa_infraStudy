@@ -4,21 +4,12 @@ spring:
       matching-strategy: ant_path_matcher
 
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/fisa?useSSL=false&allowPublicKeyRetrieval=true
-    username: "root"
-    password: "root"
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/~/testDB
+    username: sa
+    password:
 
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
-
-    properties:
-      hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.MySQL8Dialect
-
-
-  servlet:
-    session:
+      ddl-auto: none

@@ -2,30 +2,34 @@ package com.fisa.infra.account.controller;
 
 import com.fisa.infra.account.domain.dto.AccountDTO;
 import com.fisa.infra.account.service.AccountService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.fisa.infra.account.domain.entity.Account;
-import com.fisa.infra.account.domain.dto.AccountDTO;
-import com.fisa.infra.account.service.AccountService;
-
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@RestController
-@RequestMapping("/api/accounts")
+@RequiredArgsConstructor
+@Controller
+@RequestMapping("/api")
 public class AccountController {
-	
-	@Autowired
-	AccountService accountService;
-	
-	@PostMapping(value = "/create") //_role table  -- bullchallenger - customer 참
+
+ 	private final AccountService accountService;
+
+	@GetMapping("/account/create")
+	public String createForm() {
+		return "entire/account/login";
+	}
+
+	@GetMapping(value = "/account/login")
+	public void login() {
+
+	}
+
+	@PostMapping(value = "/account/create") //_role table  -- bullchallenger - customer 참
 	public ResponseEntity<?> accountCreate(AccountDTO accountDTO){
 		
 		return ResponseEntity.ok(accountService.accountCreate(accountDTO));
@@ -43,5 +47,4 @@ public class AccountController {
 	public ResponseEntity<AccountDTO> deleteAccount2(String loginId){
 		return ResponseEntity.ok(accountService.accountDelete2(loginId));
 	}
-	
 }

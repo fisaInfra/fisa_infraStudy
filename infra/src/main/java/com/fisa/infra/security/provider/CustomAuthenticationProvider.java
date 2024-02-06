@@ -1,7 +1,5 @@
 package com.fisa.infra.security.provider;
 
-import java.util.Optional;
-
 import com.fisa.infra.security.service.CustomUserDetails;
 import com.fisa.infra.security.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +17,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     private final CustomUserDetailsService customUserDetailsService;
     private final PasswordEncoder encoder;
-
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

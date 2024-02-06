@@ -1,3 +1,8 @@
 /.metadata/
 /infra/target
+<<<<<<< HEAD
 /infra/.idea
+
+=======
+/infra/.idea
+>>>>>>> 293044d337203fe86f3d6b44cb9a8e761d00fd91

@@ -8,10 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.fisa.infra.role.domain.entity.Role;
-import com.fisa.infra.role.repository.querydsl.inter.QueryRoleRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -24,7 +24,7 @@ class QueryRoleRepositoryTest {
 	EntityManager entityManager;
 
 	@Autowired
-	QueryRoleRepository roleRepository;
+	RoleRepository roleRepository;
 
 
 	private Role user;
