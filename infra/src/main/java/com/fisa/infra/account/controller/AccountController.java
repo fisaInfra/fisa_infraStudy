@@ -10,6 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.dto.AccountDTO;
+import com.fisa.infra.account.service.AccountService;
+
+import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/accounts")

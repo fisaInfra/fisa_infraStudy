@@ -1,6 +1,14 @@
 package com.fisa.infra.account.service;
 
+
 import com.fisa.infra.account.domain.Account;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fisa.infra.account.domain.Account;
+import com.fisa.infra.account.domain.entity.Account;
+
 import com.fisa.infra.account.domain.dto.AccountDTO;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import jakarta.transaction.Transactional;
@@ -27,6 +35,9 @@ public class AccountService {
 				.build();
 
 		return accountRepository.save(account);
+		
+	}
+
 		
 	}
 
