@@ -1,6 +1,7 @@
 package com.fisa.infra.comment.service;
 
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
+
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
@@ -43,7 +44,7 @@ public class CommentService {
         Account account = accountRepository.findAccountByLoginId(commentDTO.getLoginId())
                 .orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
 
-        Board board = boardRepository.findById(commentDTO.getBoardId())
+        Board board = boardRepository.findById(1L)
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
 
         Comment comment = Comment.builder()
@@ -54,12 +55,12 @@ public class CommentService {
 
         if (!commentDTO.isParent() && commentDTO.getParentId() != null) {
             Comment parent = commentRepository.findById(commentDTO.getParentId()).orElseThrow(() -> new RuntimeException("부모 댓글을 찾을 수 없습니다."));
-            comment.setParent(parent);
+            comment.addtComment(parent);
         }
-
+        comment.addBoard(board);
+        comment.addAccount(account);
         return commentRepository.save(comment);
     }
-
 
     /**
      * 댓글 삭제
@@ -84,7 +85,6 @@ public class CommentService {
             comment.updateContent();
         }
     }
-
 
     /*
      * 댓글 조회
@@ -125,7 +125,6 @@ public class CommentService {
                             .build()
             );
         }
-
         return commentDTOList;
     }
 }

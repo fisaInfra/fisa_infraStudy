@@ -1,40 +1,39 @@
 package com.fisa.infra.comment.controller;
 
+import com.fisa.infra.comment.domain.Comment;
 import com.fisa.infra.comment.dto.CommentDTO;
 import com.fisa.infra.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Slf4j
-@RestController
+@Controller
 @RequiredArgsConstructor
-@RequestMapping("/comment")
+@RequestMapping("/api")
 public class CommentController {
 
     private final CommentService commentService;
 
-    /**
-     * 댓글 작성
-     * @param commentDTO
-     * http://localhost:8080/swagger-ui/index.html -> 스웨거
-     */
-    @PostMapping(value = "/create")
-    public ResponseEntity<?> writeComment(@RequestBody CommentDTO commentDTO) {
+    @GetMapping("/comment/create")
+    public String createForm(Model model) {
+        model.addAttribute("commentSaveForm", new CommentDTO());
+        return "entire/comment/commentSaveForm";
+    }
+
+    @PostMapping(value = "/comment/create")
+    public String writeComment(@ModelAttribute("commentDTO") CommentDTO commentDTO) {
+
+        //사용자 로그인 정보 가지고 오기
         //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         //Account account = (Account) authentication.getPrincipal();
-
-        try {
-            commentService.writeComment(commentDTO);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity
-                    .internalServerError() // Error 500
-                    .body(e.getMessage());
-        }
+        Comment comment = commentService.writeComment(commentDTO);
+        return "redirect:/comment/" + comment.getCommentId();
     }
 
     /**

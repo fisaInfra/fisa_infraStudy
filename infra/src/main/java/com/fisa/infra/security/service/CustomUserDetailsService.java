@@ -1,12 +1,9 @@
 package com.fisa.infra.security.service;
 
-import static com.fisa.infra.account.domain.entity.QAccount.*;
-
 import java.util.List;
 import java.util.Optional;
 
-import com.fisa.infra.account.domain.dto.AccountRoleDTO;
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,12 +12,12 @@ import org.springframework.stereotype.Service;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.role.domain.dto.RoleNameDTO;
 import com.fisa.infra.role.repository.querydsl.inter.QueryAccountRoleRepository;
-
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
+
     private final QueryAccountRoleRepository queryAccountRoleRepository;
     private final AccountRepository accountRepository;
 

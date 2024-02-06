@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import com.fisa.infra.comment.domain.Comment;
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.common.domain.entity.BaseEntity;
 import com.fisa.infra.picture.domain.Picture;
 import jakarta.persistence.*;
@@ -54,16 +54,19 @@ public class Board extends BaseEntity {
 	//삭제여부
 	@Column(name = "is_deleted")
 	private boolean isDeleted;
-	
+
+	private Long viewCount = 0L;
+
+	@Builder.Default
 	@OneToMany(mappedBy = "board")
-	private List<Comment> commentList = new ArrayList<Comment>();
+	private List<Comment> commentList = new ArrayList<>();
 	
 	//Board의 pictureList
+	@Builder.Default
 	@OneToMany(mappedBy = "board")
-	private List<Picture> pictureList = new ArrayList<Picture>();
+	private List<Picture> pictureList = new ArrayList<>();
 
-
-	public void setAccount(Account account) {
+	public void addAccount(Account account) {
 		this.account = account;
 	}
 }

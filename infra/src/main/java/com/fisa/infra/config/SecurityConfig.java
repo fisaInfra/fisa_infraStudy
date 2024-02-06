@@ -50,7 +50,7 @@ public class SecurityConfig {
 
         //우리가 만들어 사용할 form login 설정
         http.formLogin(httpSecurityFormLoginConfigurer -> {
-            httpSecurityFormLoginConfigurer.loginPage("/account/login");
+            httpSecurityFormLoginConfigurer.loginPage("/api/account/login");
             httpSecurityFormLoginConfigurer.passwordParameter("pwd");
             httpSecurityFormLoginConfigurer.usernameParameter("loginId");
         });
@@ -68,16 +68,10 @@ public class SecurityConfig {
             logout.deleteCookies("JSESSIONID", "remember-me");
         });
 
-
-
         // 스프링 시큐리티가 지원하는 세션을 사용하겠다는 의미 사용 안 하려면 STATELESS 사용
         http.sessionManagement(sessionManagementConfigurer -> sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
-
         http.addFilterAt(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
-
         return http.build();
-
     }
 
     @Bean

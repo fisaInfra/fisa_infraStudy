@@ -24,7 +24,7 @@ public class QBoard extends EntityPathBase<Board> {
 
     public final com.fisa.infra.common.domain.entity.QBaseEntity _super = new com.fisa.infra.common.domain.entity.QBaseEntity(this);
 
-    public final com.fisa.infra.account.domain.entity.QAccount account;
+    public final com.fisa.infra.account.domain.QAccount account;
 
     public final NumberPath<Long> boardId = createNumber("boardId", Long.class);
 
@@ -50,6 +50,8 @@ public class QBoard extends EntityPathBase<Board> {
 
     public final DatePath<java.sql.Date> uploadAt = createDate("uploadAt", java.sql.Date.class);
 
+    public final NumberPath<Long> viewCount = createNumber("viewCount", Long.class);
+
     public QBoard(String variable) {
         this(Board.class, forVariable(variable), INITS);
     }
@@ -68,7 +70,7 @@ public class QBoard extends EntityPathBase<Board> {
 
     public QBoard(Class<? extends Board> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.account = inits.isInitialized("account") ? new com.fisa.infra.account.domain.entity.QAccount(forProperty("account")) : null;
+        this.account = inits.isInitialized("account") ? new com.fisa.infra.account.domain.QAccount(forProperty("account")) : null;
     }
 
 }

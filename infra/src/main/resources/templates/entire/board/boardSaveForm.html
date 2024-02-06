@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 작성</title>
+</head>
+<body>
+    <div layout:fragment="content"></div>
+        <div class="w3-main" style="margin-left:300px">
+        <!--form 태그-->
+        <form class="board" th:action="@{/api/board/create}" th:object="${boardDTO}" method="post" enctype="multipart/form-data">
+            <div th:style="${'height: 100%; width: 100%; object-fit: cover'}">
+                <div class="container-title">
+                    <label for="title">제목</label> <br>
+                    <input type="text" id="title" th:field="*{title}" class="form-control">
+                </div>
+                <div class="container-img">
+                    <label>파일 업로드<input type="file" th:field="*{uploadFile}" multiple="multiple" name="imageFiles"></label>
+                </div>
+                <div class="container-content">
+                    <label for="content">내용</label> <br>
+                    <input type="text" id="content" th:field="*{content}" class="form-control">
+                </div>
+                <button class="btn-save" type="submit">저장 하기</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

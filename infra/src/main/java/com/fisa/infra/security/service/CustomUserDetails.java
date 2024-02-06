@@ -1,6 +1,6 @@
 package com.fisa.infra.security.service;
 
-import com.fisa.infra.account.domain.entity.Account;
+import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.role.domain.dto.RoleNameDTO;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -18,8 +18,6 @@ public class CustomUserDetails implements UserDetails {
     private final String pwd;
     private boolean isDeleted;
     private Collection<SimpleGrantedAuthority> authorities;
-
-
 
 	public CustomUserDetails(Account account, List<RoleNameDTO> roleNameDTO) {
 		this.accountId = account.getAccountId();
@@ -42,10 +40,6 @@ public class CustomUserDetails implements UserDetails {
         return collections;
     }
 
-	public Long getAccountId(){
-        return this.accountId;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.authorities;
@@ -60,7 +54,6 @@ public class CustomUserDetails implements UserDetails {
     public String getUsername() {
         return this.loginId;
     }
-
 
     @Override
     public boolean isAccountNonExpired() {

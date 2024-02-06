@@ -32,16 +32,11 @@ public abstract class BaseEntity {
     @Column(updatable = false, columnDefinition = "datetime default CURRENT_TIMESTAMP NOT NULL COMMENT '생성일자'")
     private LocalDateTime createdTime;
 
-
-
     @LastModifiedDate
     @Column(columnDefinition = "datetime default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL COMMENT '수정일자'")
     private LocalDateTime modifiedTime;
 
-
     @Setter
     @Column(columnDefinition = "bit default false NOT NULL COMMENT '이용가능여부'")
     public Boolean isDeleted;
-
-
 }
