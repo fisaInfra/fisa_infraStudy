@@ -124,7 +124,7 @@
                             <goal>process</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>target/generated-sources/annotations/q-type</outputDirectory>
+                            <outputDirectory>target/generated-sources/annotation</outputDirectory>
                             <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
                         </configuration>
                     </execution>

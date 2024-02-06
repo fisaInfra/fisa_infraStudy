@@ -1,5 +1,6 @@
 package com.fisa.infra.account.domain;
 
+import com.fisa.infra.account.domain.dto.AccountDTO;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
@@ -50,9 +51,9 @@ public class Account extends BaseEntity {
 	@Column(name = "account_id")
 	private Long accountId;
 
-
 	@Column(nullable = false, unique = true)
 	private String loginId;
+	//id
 
 	@Column(nullable = false)
 	private String pwd;
@@ -87,14 +88,17 @@ public class Account extends BaseEntity {
 				.job(job).isDeleted(isDeleted)
 				.build();
 	}
-	
-//	public static Account createAccountTest(String loginId) {
-//		return Account.builder()
-//				.loginId(loginId).pwd("asdf").name("fsd").belong("asdfasdf")
-//				.gender(true).imageUrl("asdfasdf").stack("sff").portfolio("sdfdf")
-//				.job("asdf").isDeleted(false)
-//				.build();
-//	}
+
+	public void updateAccount(AccountDTO accountDTO) {
+		this.name = accountDTO.getLoginId();
+		this.pwd = accountDTO.getPwd();
+		this.name = accountDTO.getName();
+		this.belong = accountDTO.getBelong();
+		this.imageUrl = accountDTO.getImageUrl();
+		this.stack = accountDTO.getStack();
+		this.portfolio = accountDTO.getPortfolio();
+		this.job = accountDTO.getJob();
+	}
 	
 	public Account deletedAccount(String loginId) {
 		this.loginId = "deleted" + loginId;
