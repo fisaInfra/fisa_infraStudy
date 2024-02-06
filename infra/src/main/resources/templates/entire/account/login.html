@@ -1,13 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
 <head>
     <meta charset="UTF-8"/>
 </head>
 <body>
-
-    <div th:include="layouts/fragments/header :: header"></div>
-    <div layout:fragment="content"> </div>
+    <div layout:fragment="content">
         <div class="w3-main" style="margin-left:300px">
         <div class="container text-center">
                 <form class="needs-validation col-sm-6" th:action="@{/account/login}" method="post">
@@ -27,6 +26,7 @@
                         <button type="submit">로그인</button>
                     </div>
                 </form>
+        </div>
         </div>
     </div>
 </body>

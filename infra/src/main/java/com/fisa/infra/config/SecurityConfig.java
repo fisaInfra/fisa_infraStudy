@@ -31,7 +31,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-
         //security 관련 api url 일단 권한 다 열어둠
         http.authorizeHttpRequests(auth -> {
             auth.anyRequest().permitAll();
@@ -46,7 +45,7 @@ public class SecurityConfig {
 
         //우리가 만들어 사용할 form login 설정
         http.formLogin(httpSecurityFormLoginConfigurer -> {
-            httpSecurityFormLoginConfigurer.loginPage("/api/account/login");
+            httpSecurityFormLoginConfigurer.loginPage("/account/login");
             httpSecurityFormLoginConfigurer.passwordParameter("pwd");
             httpSecurityFormLoginConfigurer.usernameParameter("loginId");
         });
