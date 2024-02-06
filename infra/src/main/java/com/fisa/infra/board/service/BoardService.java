@@ -38,7 +38,7 @@ public class BoardService {
 
 	@Transactional
 	public Board writeBoard (String loginId, BoardDTO boardDTO) throws RuntimeException, IOException {
-		Account account = accountRepository.findAccountByLoginId("김어진")
+		Account account = accountRepository.findAccountByLoginId("s")
 				.orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
 
 		Board board = Board.builder()
