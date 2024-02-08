@@ -90,4 +90,16 @@ class BoardServiceTest {
         }
 
     }
+
+	@Test
+	void writeBoard() {
+	}
+
+	@Test
+	void testGetAllBoard() {
+	}
+
+	@Test
+	void testGetBoardById() {
+	}
 }
