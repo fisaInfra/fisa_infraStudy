@@ -4,17 +4,21 @@ spring:
       matching-strategy: ant_path_matcher
 
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/testDB
-    username: sa
-    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: user01
+    #url: jdbc:mysql://127.0.0.1:8777/fisa?useSSL=false&allowPublicKeyRetrieval=true
+    #url: jdbc:mysql://127.0.0.1:3306/fisa?useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://127.0.0.1:8777/infrastudy?useSSL=false&allowPublicKeyRetrieval=true
+    username: user01
 
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: none
 
-  servlet:
-    multipart:
-       max-file-size: 10MB
-       max-request-size: 10MB
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+

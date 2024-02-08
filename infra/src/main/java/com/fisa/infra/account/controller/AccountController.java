@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.security.auth.login.AccountException;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
@@ -26,7 +28,7 @@ public class AccountController {
 	}
 
 	@PostMapping(value = "/account/create")
-	public String accountCreate(AccountDTO accountDTO){
+	public String accountCreate(AccountDTO accountDTO) throws AccountException {
 		accountService.accountCreate(accountDTO);
 		return "redirect:/account/login";
 	}

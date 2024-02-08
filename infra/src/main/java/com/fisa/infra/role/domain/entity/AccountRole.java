@@ -43,4 +43,15 @@ public class AccountRole {
         private Long roleId;
 
     }
+
+    public static AccountRole createAccountRole(Account account, Role role){
+        return AccountRole.builder()
+                .pk(Pk.builder()
+                        .roleId(role.getRoleId())
+                        .accountId(account.getAccountId())
+                        .build())
+                .account(account)
+                .role(role)
+                .build();
+    }
 }
