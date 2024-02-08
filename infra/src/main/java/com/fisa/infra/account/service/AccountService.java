@@ -3,6 +3,7 @@ package com.fisa.infra.account.service;
 import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.account.domain.dto.AccountDTO;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
+import com.fisa.infra.account.repository.querydsl.QueryAccountRepository;
 import com.fisa.infra.common.exception.ErrorCode;
 import com.fisa.infra.role.domain.entity.Role;
 import com.fisa.infra.role.domain.entity.AccountRole;
@@ -10,6 +11,7 @@ import com.fisa.infra.role.repository.jpa.AccountRoleRepository;
 import com.fisa.infra.role.repository.querydsl.RoleRepositoryImpl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.security.auth.login.AccountException;
@@ -24,6 +26,9 @@ public class AccountService {
 	private final AccountRepository accountRepository;
 	private final RoleRepositoryImpl roleRepository;
 	private final AccountRoleRepository accountRoleRepository;
+	private final QueryAccountRepository queryAccountRepository;
+
+	private ModelMapper mapper = new ModelMapper();
 
 	public Account accountCreate(AccountDTO accountdto) throws AccountException {
 		
@@ -57,6 +62,13 @@ public class AccountService {
 
 		return account;
 
+	}
+
+	public AccountDTO getAccountByLoginId (String id){
+
+		Optional<AccountDTO> account = queryAccountRepository.queryFindAccountByLoginId(id);
+
+		return account.map(b -> mapper.map(b, AccountDTO.class)).orElse(null);
 	}
 
 	//sql 써보는거
