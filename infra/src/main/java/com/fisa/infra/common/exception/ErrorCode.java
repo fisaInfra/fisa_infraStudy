@@ -44,6 +44,7 @@ public enum ErrorCode {
 
     ;
 
+    public static final String NOT_FOUND_ROLE = "not fount role";
     private int status;
     private String message;
 
