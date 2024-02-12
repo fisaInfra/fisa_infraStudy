@@ -9,6 +9,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,10 +79,11 @@ public class Comment extends BaseEntity {
 	//===생성 메서드 ===//
 
 	@Builder
-	public Comment(Board board, Account account, String content) {
+	public Comment(Board board, Account account, String content, Comment parent) {
 		this.board = board;
 		this.account = account;
 		this.content = content;
+		this.parent = parent;
 	}
 
 	public void updateContent() {

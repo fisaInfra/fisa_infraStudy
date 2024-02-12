@@ -5,8 +5,10 @@ import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
 import com.fisa.infra.comment.domain.Comment;
+import com.fisa.infra.comment.domain.QComment;
 import com.fisa.infra.comment.dto.CommentDTO;
 import com.fisa.infra.comment.repository.jpa.CommentRepository;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,8 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final AccountRepository accountRepository;
     private final BoardRepository boardRepository;
+    private final JPAQueryFactory queryFactory;
+
     /**
      * 댓글 규칙
      * 1. 부모 - 자식 댓글이 존재할 경우
@@ -46,16 +50,32 @@ public class CommentService {
         Board board = boardRepository.findById(commentDTO.getBoardId())
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
 
+        /* QueryDSL 적용*/
+        QComment qComment = QComment.comment;
+        Comment parent = queryFactory
+                .select(qComment)
+                .from(qComment)
+                .where(qComment.commentId.eq(commentDTO.getParentId()))
+                .fetchOne();
+
         Comment comment = Comment.builder()
                 .board(board)
                 .account(account)
                 .content(commentDTO.getContent())
+                .parent(parent)
                 .build();
 
-        if (!commentDTO.isParent() && commentDTO.getParentId() != null) {
-            Comment parent = commentRepository.findById(commentDTO.getParentId()).orElseThrow(() -> new RuntimeException("부모 댓글을 찾을 수 없습니다."));
-            comment.setParent(parent);
-        }
+        /* 기존 코드 */
+//        Comment comment = Comment.builder()
+//                .board(board)
+//                .account(account)
+//                .content(commentDTO.getContent())
+//                .build();
+//
+//        if (!commentDTO.isParent() && commentDTO.getParentId() != null) {
+//            Comment parent = commentRepository.findById(commentDTO.getParentId()).orElseThrow(() -> new RuntimeException("부모 댓글을 찾을 수 없습니다."));
+//            comment.setParent(parent);
+//        }
 
         return commentRepository.save(comment);
     }
@@ -92,9 +112,17 @@ public class CommentService {
      * @return commentDTOList
      */
     public List<CommentDTO> readComment(Long boardId) throws RuntimeException {
+        QComment qComment = QComment.comment;
 
-        List<Comment> commentList = commentRepository.findCommentByBoardId(boardId);
-        log.info("comment list : {}", commentList);
+        /* QueryDSL 적용 */
+        List<Comment> commentList = queryFactory
+                .selectFrom(qComment)
+                .where(qComment.board.boardId.eq(boardId))
+                .fetch();
+
+        /* 기존 코드 */
+//        List<Comment> commentList = commentRepository.findCommentByBoardId(boardId);
+//        log.info("comment list : {}", commentList);
 
         List<CommentDTO> commentDTOList = new ArrayList<>();
         for (Comment comment : commentList) {
@@ -121,7 +149,7 @@ public class CommentService {
                             .content(comment.getContent())
                             .createdAt(comment.getCreatedTime())
                             .updatedAt(comment.getModifiedTime())
-                            .deleteYN(comment.getIsDeleted())
+                            .deleteYN(comment.isDeleted())
                             .build()
             );
         }
