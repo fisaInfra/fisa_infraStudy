@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -51,19 +52,43 @@ public class CommentService {
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
 
         /* QueryDSL 적용*/
-        QComment qComment = QComment.comment;
-        Comment parent = queryFactory
-                .select(qComment)
-                .from(qComment)
-                .where(qComment.commentId.eq(commentDTO.getParentId()))
-                .fetchOne();
+        Comment parent = null;
+        Comment comment = null;
+        log.info("commentDTO.isParent(): {}", commentDTO.isParent());
 
-        Comment comment = Comment.builder()
-                .board(board)
-                .account(account)
-                .content(commentDTO.getContent())
-                .parent(parent)
-                .build();
+        log.info("commentDTO.getParentId(): {}", commentDTO.getParentId());
+
+
+        if(commentDTO.getParentId() != null) {
+            QComment qComment = QComment.comment;
+
+            parent = queryFactory
+                    .select(qComment)
+                    .from(qComment)
+                    .where(qComment.commentId.eq(commentDTO.getParentId())
+                            .and(qComment.parent.isNull())) // parent가 null인 경우에만 가져온다
+                    .fetchOne();
+
+            comment = Comment.builder()
+                    .board(board)
+                    .account(account)
+                    .content(commentDTO.getContent())
+                    .parent(parent)
+                    .build();
+        } else {
+            comment = Comment.builder()
+                    .board(board)
+                    .account(account)
+                    .content(commentDTO.getContent())
+                    .build();
+        }
+
+//        Comment comment = Comment.builder()
+//                .board(board)
+//                .account(account)
+//                .content(commentDTO.getContent())
+//                .parent(parent)
+//                .build();
 
         /* 기존 코드 */
 //        Comment comment = Comment.builder()
@@ -113,12 +138,25 @@ public class CommentService {
      */
     public List<CommentDTO> readComment(Long boardId) throws RuntimeException {
         QComment qComment = QComment.comment;
+        QComment qParent = new QComment("parent"); // 부모 댓글을 위한 별칭 설정
 
         /* QueryDSL 적용 */
         List<Comment> commentList = queryFactory
                 .selectFrom(qComment)
+                .leftJoin(qComment.parent, qParent)
+                .on(qParent.commentId.eq(qComment.parent.commentId))
                 .where(qComment.board.boardId.eq(boardId))
+                .orderBy(qParent.commentId.asc(), qComment.commentId.asc())
                 .fetch();
+//        List<Comment> commentList = queryFactory
+//                .selectFrom(qComment)
+//                .where(qComment.board.boardId.eq(boardId))
+//                .orderBy(qComment.parent.commentId.asc(), qComment.commentId.asc())
+//                .fetch();
+
+        // 계층 구조 정렬
+        commentList.sort(Comparator.comparingInt(Comment::getLevel).thenComparing(Comment::getCommentId));
+
 
         /* 기존 코드 */
 //        List<Comment> commentList = commentRepository.findCommentByBoardId(boardId);
@@ -140,6 +178,7 @@ public class CommentService {
 
             commentDTOList.add(
                     CommentDTO.builder()
+                            .commentId(comment.getCommentId())
                             .boardId(comment.getBoard().getBoardId())
                             .accountId(comment.getAccount().getAccountId())
                             .imageUrl(comment.getAccount().getImageUrl())
