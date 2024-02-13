@@ -5,8 +5,10 @@ import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
 import com.fisa.infra.comment.domain.Comment;
+import com.fisa.infra.comment.domain.QComment;
 import com.fisa.infra.comment.domain.dto.CommentDTO;
 import com.fisa.infra.comment.repository.jpa.CommentRepository;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,8 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final AccountRepository accountRepository;
     private final BoardRepository boardRepository;
+    private final JPAQueryFactory queryFactory;
+
     /**
      * 댓글 규칙
      * 1. 부모 - 자식 댓글이 존재할 경우
@@ -46,19 +50,38 @@ public class CommentService {
         Board board = boardRepository.findById(1L)
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
 
-        Comment comment = Comment.builder()
-                .board(board)
-                .account(account)
-                .content(commentDTO.getContent())
-                .build();
+        /* QueryDSL 적용*/
+        Comment parent = null;
+        Comment comment = null;
+        log.info("commentDTO.isParent(): {}", commentDTO.isParent());
 
-        if (!commentDTO.isParent() && commentDTO.getParentId() != null) {
-            Comment parent = commentRepository.findById(commentDTO.getParentId()).orElseThrow(() -> new RuntimeException("부모 댓글을 찾을 수 없습니다."));
-            comment.addtComment(parent);
+        log.info("commentDTO.getParentId(): {}", commentDTO.getParentId());
+
+
+        if(commentDTO.getParentId() != null) {
+            QComment qComment = QComment.comment;
+
+            parent = queryFactory
+                    .select(qComment)
+                    .from(qComment)
+                    .where(qComment.commentId.eq(commentDTO.getParentId())
+                            .and(qComment.parent.isNull())) // parent가 null인 경우에만 가져온다
+                    .fetchOne();
+
+            comment = Comment.builder()
+                    .board(board)
+                    .account(account)
+                    .content(commentDTO.getContent())
+                    .parent(parent)
+                    .build();
+        } else {
+            comment = Comment.builder()
+                    .board(board)
+                    .account(account)
+                    .content(commentDTO.getContent())
+                    .build();
         }
 
-        comment.addBoard(board);
-        comment.addAccount(account);
         return commentRepository.save(comment);
     }
 

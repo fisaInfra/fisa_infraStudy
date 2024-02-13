@@ -49,6 +49,9 @@ public class Comment extends BaseEntity {
 	@OneToMany(mappedBy = "parent", orphanRemoval = true)
 	private List<Comment> children = new ArrayList<>();
 
+	@Column(name = "level")
+	private Integer level;
+
 	//내용
 	private String content;
 
@@ -79,12 +82,21 @@ public class Comment extends BaseEntity {
 		parent.getChildren().add(this);
 	}
 
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
 	//===생성 메서드 ===//
 	@Builder
-	public Comment(Board board, Account account, String content) {
+	public Comment(Board board, Account account, String content, Comment parent) {
 		this.board = board;
 		this.account = account;
 		this.content = content;
+
+		if(parent != null) {
+			this.parent = parent;
+			this.level = 1;
+		} else this.level = 0;
 	}
 
 	public void updateContent() {
