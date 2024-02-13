@@ -39,6 +39,8 @@ public class QComment extends EntityPathBase<Comment> {
 
     public final BooleanPath isDeleted = createBoolean("isDeleted");
 
+    public final NumberPath<Integer> level = createNumber("level", Integer.class);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedTime = _super.modifiedTime;
 

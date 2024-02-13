@@ -12,6 +12,7 @@ import com.fisa.infra.role.repository.querydsl.RoleRepositoryImpl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.security.auth.login.AccountException;
@@ -29,6 +30,8 @@ public class AccountService {
 	private final QueryAccountRepository queryAccountRepository;
 
 	private ModelMapper mapper = new ModelMapper();
+	private final PasswordEncoder passwordEncoder;
+
 
 	public Account accountCreate(AccountDTO accountdto) throws AccountException {
 		
@@ -39,7 +42,7 @@ public class AccountService {
 		);
 
 		Account account = Account.builder()
-				.loginId(accountdto.getLoginId()).pwd(accountdto.getPwd()).name(accountdto.getName()).belong(accountdto.getBelong())
+				.loginId(accountdto.getLoginId()).pwd(passwordEncoder.encode(accountdto.getPwd())).name(accountdto.getName()).belong(accountdto.getBelong())
 				.gender(accountdto.isGender()).imageUrl(accountdto.getImageUrl()).stack(accountdto.getStack()).portfolio(accountdto.getPortfolio())
 				.job(accountdto.getJob()).isDeleted(accountdto.isDeleted())
 				.build();
