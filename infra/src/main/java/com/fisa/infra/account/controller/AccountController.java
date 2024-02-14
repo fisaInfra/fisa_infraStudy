@@ -28,7 +28,7 @@ public class AccountController {
 	}
 
 	@PostMapping(value = "/account/create")
-	public String accountCreate(AccountDTO accountDTO) throws AccountException {
+	public String accountCreate(AccountDTO accountDTO) throws AccountException {q
 		accountService.accountCreate(accountDTO);
 		return "redirect:/account/login";
 	}

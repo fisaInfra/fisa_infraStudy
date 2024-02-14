@@ -19,7 +19,7 @@ import lombok.ToString;
 @Builder
 public class AccountDTO {
 	//key
-	@Id
+//	@Id
 	private Long accountId;
 
 	//계정아이디
