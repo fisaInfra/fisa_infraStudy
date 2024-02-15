@@ -33,6 +33,7 @@ public class CommentController {
         //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         //Account account = (Account) authentication.getPrincipal();
         Comment comment = commentService.writeComment(commentDTO);
+
         return "redirect:/comment/" + comment.getCommentId();
     }
 
