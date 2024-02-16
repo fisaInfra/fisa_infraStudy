@@ -1,81 +1,197 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
-<head>
-  <meta charset="UTF-8">
-  <title>commentReadForm.html</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-<div layout:fragment="content">
-  <div class="w3-main" style="margin-left:300px">
-    <div th:replace="header :: header"></div>
-    <div id="commentsContainer" th:fragment="commentList">
-      <table>
-        <thead>
-        <tr>
-          <th>댓글 내용</th>
-          <th>작성자</th>
-          <th>작성일</th>
-          <!-- Add more headers if needed -->
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Thymeleaf에서 서버에서 받아온 댓글 데이터를 반복하여 표시 -->
-        <tr th:each="comment : ${comments}">
-          <td th:text="${comment.content}"></td>
-          <td th:text="${comment.loginId}"></td>
-          <td th:text="${comment.createdAt}"></td>
-          <!-- Add more fields if needed -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="header">
+  <div class="w3-main" style="margin-left:300px"> </div>
+  <header id="portfolio">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      .parent-comment {
+        background-color: #f0f8ff; /* Light Blue */
+      }
+
+      .child-comment {
+        margin-left: 20px;
+        background-color: #ffe4e1; /* Misty Rose */
+      }
+
+      .comment-level- {
+        margin-left: 10px;
+      }
+
+      .comment-level-0 {
+        margin-left: 40px;
+      }
+
+    </style>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="w3-container">
+      <h1><b>Portfolio</b></h1>
+      <div class="w3-section w3-bottombar w3-padding-16">
+        <button class="w3-button w3-black" id="loadComments">댓글 조회</button>
+        <div id="commentsContainer"></div>
+      </div>
+
+      <table id="commentTable">
+        <tr th:each="comment : ${commentList}">
+          <div class="col">
+            <div class="card">
+              <!-- <img img th:src="@{${board}}" class="card-img-top" alt="..."-->
+              <div class="card-body">
+                <td th:text="${comment.commentId}"></td>
+                <td th:text="${comment.content}">content</td>
+              </div>
+            </div>
+          </div>
         </tr>
         </tbody>
       </table>
     </div>
-    <!-- 댓글 조회 버튼 삭제 -->
-  </div>
-</div>
+  </header>
 
-<script th:inline="javascript">
-  $(document).ready(function () {
-      $.ajax({
-        url: "/comment/read",
-        type: "GET",
-        data: {boardId: 1},
-        success: function (data) {
-          console.log(data);
-          var commentsContainer = $("#commentsContainer");
-          commentsContainer.empty();
+  <script th:inline="javascript">
+    $(document).ready(function () {
+      console.log("document");
+      $("#loadComments").click(function () {
+        console.log("loadComments");
+        $.ajax({
+          url: "api/comment/read",
+          type: "GET",
+          data: {boardId: 1},
+          success: function (data) {
+            console.log(data);
+            var commentsContainer = $("#commentsContainer");
+            commentsContainer.empty();
 
-          if (data.length > 0) {
-            var table = $("<table>");
-            table.append("<thead><tr><th>댓글 내용</th><th>작성자</th><th>작성일</th></tr></thead>");
-            var tbody = $("<tbody>");
 
-            $.each(data, function (index, comment) {
-              var row = $("<tr>");
-              row.append("<td>" + comment.content + "</td>");
-              row.append("<td>" + comment.loginId + "</td>");
-              row.append("<td>" + comment.createdAt + "</td>");
+            if (data.length > 0) {
+              var table = $("<table>");
+              table.append("<thead><tr><th>댓글 내용</th><th>작성자</th><th>작성일</th></tr></thead>");
+              var tbody = $("<tbody>");
 
-              // 필요한 경우 추가 필드를 여기에 추가
+              $.each(data, function (index, comment) {
+                var row = $("<tr>");
+                var commentClass = comment.parent ? 'parent-comment' : 'child-comment';
+                row.addClass(commentClass);
 
-              tbody.append(row);
-            });
+                // 스타일 추가
+                row.append("<td class='comment-level-" + comment.level + "'>" + comment.content + "</td>");
+                row.append("<td>" + comment.loginId + "</td>");
+                row.append("<td>" + comment.createdAt + "</td>");
 
-            table.append(tbody);
-            commentsContainer.append(table);
-          } else {
-            commentsContainer.append("<p>No comments available</p>");
+                tbody.append(row);
+              });
+
+              table.append(tbody);
+              commentsContainer.append(table);
+            } else {
+              commentsContainer.append("<p>No comments available</p>");
+            }
+          },
+          error: function (error) {
+            console.error("댓글 로딩 중 에러: " + error.responseText);
           }
-        },
-        error: function (error) {
-          console.error("댓글 로딩 중 에러: " + error.responseText);
-        }
+        });
+      });
     });
-  });
-
-</script>
-
-</body>
+  </script>
+</div>
 </html>
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      layout:decorate="~{layouts/layout}">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>commentReadForm.html</title>-->
+<!--  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div layout:fragment="content">-->
+<!--  <div class="w3-main" style="margin-left:300px">-->
+<!--    <div th:replace="header :: header"></div>-->
+<!--    <div id="commentsContainer" th:fragment="commentList">-->
+<!--      <table>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th>댓글 내용</th>-->
+<!--          <th>작성자</th>-->
+<!--          <th>작성일</th>-->
+<!--          &lt;!&ndash; Add more headers if needed &ndash;&gt;-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        &lt;!&ndash; Thymeleaf에서 서버에서 받아온 댓글 데이터를 반복하여 표시 &ndash;&gt;-->
+<!--        <tr th:each="comment : ${comments}">-->
+<!--          <td th:text="${comment.content}"></td>-->
+<!--          <td th:text="${comment.loginId}"></td>-->
+<!--          <td th:text="${comment.createdAt}"></td>-->
+<!--          &lt;!&ndash; Add more fields if needed &ndash;&gt;-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; 댓글 조회 버튼 삭제 &ndash;&gt;-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<script th:inline="javascript">-->
+<!--  $(document).ready(function () {-->
+<!--      $.ajax({-->
+<!--        url: "/api/comment/read",-->
+<!--        type: "GET",-->
+<!--        data: {boardId: 1},-->
+<!--        success: function (data) {-->
+<!--          console.log(data);-->
+<!--          var commentsContainer = $("#commentsContainer");-->
+<!--          commentsContainer.empty();-->
+
+<!--          if (data.length > 0) {-->
+<!--            var table = $("<table>");-->
+<!--            table.append("<thead><tr><th>댓글 내용</th><th>작성자</th><th>작성일</th></tr></thead>");-->
+<!--            var tbody = $("<tbody>");-->
+
+<!--            $.each(data, function (index, comment) {-->
+<!--              var row = $("<tr>");-->
+<!--              row.append("<td>" + comment.content + "</td>");-->
+<!--              row.append("<td>" + comment.loginId + "</td>");-->
+<!--              row.append("<td>" + comment.createdAt + "</td>");-->
+
+<!--              // 필요한 경우 추가 필드를 여기에 추가-->
+
+<!--              tbody.append(row);-->
+<!--            });-->
+
+<!--            table.append(tbody);-->
+<!--            commentsContainer.append(table);-->
+<!--          } else {-->
+<!--            commentsContainer.append("<p>No comments available</p>");-->
+<!--          }-->
+<!--        },-->
+<!--        error: function (error) {-->
+<!--          console.error("댓글 로딩 중 에러: " + error.responseText);-->
+<!--        }-->
+<!--    });-->
+<!--  });-->
+
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
