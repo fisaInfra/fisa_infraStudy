@@ -58,12 +58,12 @@ public class Board extends BaseEntity {
 	private Long viewCount = 0L;
 
 	@Builder.Default
-	@OneToMany(mappedBy = "board")
+	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
 	private List<Comment> commentList = new ArrayList<>();
 	
 	//Board의 pictureList
 	@Builder.Default
-	@OneToMany(mappedBy = "board")
+	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
 	private List<Picture> pictureList = new ArrayList<>();
 
 	public void addAccount(Account account) {

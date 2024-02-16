@@ -82,4 +82,17 @@ public class BoardService {
 
 		board.updateBoard(boardRequestDTO.getTitle(), boardRequestDTO.getContent());
 	}
+	
+	/* 게시글 삭제
+	 * 게시글에 달린 댓글은 cascade로 entity 딴에서 삭제 처리
+	 */
+	@Transactional
+	public void deleteBoard(Long boardId) {
+	    // 게시글 조회
+	    Board board = boardRepository.findById(boardId)
+	            .orElseThrow(() -> new RuntimeException("해당 게시글은 존재하지 않습니다."));
+
+	    // 게시글 삭제
+	    boardRepository.deleteById(boardId);
+	}
 }
