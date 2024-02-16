@@ -52,9 +52,11 @@
 
     <script th:inline="javascript">
         $(document).ready(function () {
+            console.log("ready");
             $("#loadComments").click(function () {
+                console.log("loadComments");
                 $.ajax({
-                    url: "/comment/read",
+                    url: "api/comment/read",
                     type: "GET",
                     data: {boardId: 1},
                     success: function (data) {

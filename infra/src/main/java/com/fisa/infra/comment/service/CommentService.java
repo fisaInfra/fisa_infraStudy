@@ -44,10 +44,10 @@ public class CommentService {
      * @return 저장된 글
      */
     public Comment writeComment(CommentDTO commentDTO) throws RuntimeException {
-        Account account = accountRepository.findAccountByLoginId(commentDTO.getLoginId())
+        Account account = accountRepository.findAccountByLoginId("id")//commentDTO.getLoginId())
                 .orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
 
-        Board board = boardRepository.findById(1L)
+        Board board = boardRepository.findById(1L)//commentDTO.getBoardId())
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
 
         /* QueryDSL 적용*/
@@ -119,9 +119,16 @@ public class CommentService {
         List<Comment> commentList = commentRepository.findCommentByBoardId(boardId);
         log.info("comment list : {}", commentList);
 
-        List<CommentDTO> commentDTOList = new ArrayList<>();
         for (Comment comment : commentList) {
-            log.info("comment content : {}", comment.getContent());
+
+            log.info("comment content : {}", comment.getCommentId());
+
+        }
+
+        List<CommentDTO> commentDTOList = new ArrayList<>();
+
+        for (Comment comment : commentList) {
+            //log.info("comment content : {}", comment.getContent());
 
             // 댓글일 때
             boolean isParent = true;
@@ -135,6 +142,7 @@ public class CommentService {
 
             commentDTOList.add(
                     CommentDTO.builder()
+                            .commentId(comment.getCommentId())
                             .boardId(comment.getBoard().getBoardId())
                             .accountId(comment.getAccount().getAccountId())
                             .imageUrl(comment.getAccount().getImageUrl())
@@ -144,7 +152,7 @@ public class CommentService {
                             .content(comment.getContent())
                             .createdAt(comment.getCreatedTime())
                             .updatedAt(comment.getModifiedTime())
-                            .deleteYN(comment.getIsDeleted())
+//                            .deleteYN(comment.getIsDeleted())
                             .build()
             );
         }
