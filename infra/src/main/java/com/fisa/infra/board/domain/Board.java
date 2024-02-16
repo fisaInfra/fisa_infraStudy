@@ -69,4 +69,9 @@ public class Board extends BaseEntity {
 	public void addAccount(Account account) {
 		this.account = account;
 	}
+
+	public void updateBoard(String title, String content){
+		this.title = title;
+		this.content = content;
+	}
 }

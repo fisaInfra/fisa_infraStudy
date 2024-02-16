@@ -4,6 +4,7 @@ import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.domain.dto.BoardDTO;
+import com.fisa.infra.board.domain.dto.BoardRequestDTO;
 import com.fisa.infra.board.domain.dto.UploadFile;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
 import com.fisa.infra.board.repository.querydsl.QueryBoardRepository;
@@ -72,6 +73,14 @@ public class BoardService {
 	public BoardDTO getBoardById (Long id){
 		Optional<BoardDTO> board = queryBoardRepository.queryFindBoardById(id);
 		return board.map(b -> mapper.map(b, BoardDTO.class)).orElse(null);
+	}
+
+	@Transactional
+	public void updateBoardById(Long id, BoardRequestDTO boardRequestDTO) {
+		Board board = boardRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("해당 ID에 해당하는 게시글을 찾을 수 없습니다."));
+
+		board.updateBoard(boardRequestDTO.getTitle(), boardRequestDTO.getContent());
 	}
 
 }
