@@ -60,7 +60,7 @@ public class BoardService {
 		}
 		return save;
 	}
-
+	@Transactional(readOnly = true)
 	public List<BoardDTO> getAllBoard() {
 		List<Board> boardAll = boardRepository.findAll();
 		List<BoardDTO> collect = boardAll.stream().map(b -> mapper.map(b, BoardDTO.class)).collect(Collectors.toList());
@@ -69,7 +69,7 @@ public class BoardService {
 		}
 		return collect;
 	}
-
+	@Transactional(readOnly = true)
 	public BoardDTO getBoardById (Long id){
 		Optional<BoardDTO> board = queryBoardRepository.queryFindBoardById(id);
 		return board.map(b -> mapper.map(b, BoardDTO.class)).orElse(null);
@@ -82,5 +82,4 @@ public class BoardService {
 
 		board.updateBoard(boardRequestDTO.getTitle(), boardRequestDTO.getContent());
 	}
-
 }

@@ -16,11 +16,11 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class BoardController {
-	
+
 	private final BoardService boardService;
 
 	@GetMapping("/board/create")
@@ -42,7 +42,7 @@ public class BoardController {
 	}
 
 	@GetMapping(value = "/board/boardAll")
-	public String boardAll(Model model){
+	public String boardAll(Model model) {
 		List<BoardDTO> boardList = boardService.getAllBoard();
 		model.addAttribute("boardList", boardList);
 		return "entire/board/boardAllForm";

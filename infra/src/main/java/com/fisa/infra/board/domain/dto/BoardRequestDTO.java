@@ -19,5 +19,4 @@ public class BoardRequestDTO {
     private String title;
     private String content;
 //    private Date updatedAt;
-
 }
