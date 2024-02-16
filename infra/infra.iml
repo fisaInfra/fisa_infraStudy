@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module version="4">
+<module external.linked.project.id="$MODULE_DIR$/pom.xml" external.system.module.type="SINGLE_MODULE" external.system.module.version="223-2" org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" version="4">
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$" dumb="true">
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/account" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/account/domain" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/board" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/board/domain" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/comment" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/comment/domain" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/common" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/common/domain" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/common/domain/entity" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/picture" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/picture/domain" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/role" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/role/domain" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/q-type/com/fisa/infra/role/domain/entity" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/java" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/Qtype/com" />
       <excludeFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/Qtype/com/fisa" />
       <excludeFolder url="file://$MODULE_DIR$/target/generated-sources/annotations/Qtype/com/fisa/infra" />
