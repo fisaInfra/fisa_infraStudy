@@ -2,6 +2,7 @@ package com.fisa.infra.board.service;
 
 import com.fisa.infra.account.domain.Account;
 
+import com.fisa.infra.account.dummy.DummyAccount;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.domain.dto.BoardDTO;
 import com.fisa.infra.board.repository.querydsl.QueryBoardRepository;
@@ -33,6 +34,7 @@ public class BoardRepositoryTest {
 
     @BeforeEach
     void setup(){
+        account = DummyAccount.dummy();
         board1 = Board.builder()
                 .title("제목입니다")
                 .content("내용입니다")

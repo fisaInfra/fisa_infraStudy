@@ -16,6 +16,7 @@ import lombok.extern.slf4j.XSlf4j;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -35,7 +36,7 @@ public class QueryBoardRepositoryImpl implements QueryBoardRepository {
                 account.loginId,
                 board.title,
                 board.content,
-                board.updatedAt,
+                board.uploadAt,
                 board.createdAt,
                 board.updatedAt,
                 board.isDeleted
@@ -49,4 +50,6 @@ public class QueryBoardRepositoryImpl implements QueryBoardRepository {
         log.info("JPQL Query: {}", jpaQuery.toString());
         return Optional.ofNullable(jpaQuery.fetchOne());
     }
+
+
 }
