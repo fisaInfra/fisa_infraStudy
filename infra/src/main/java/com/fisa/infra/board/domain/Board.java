@@ -66,6 +66,7 @@ public class Board extends BaseEntity {
 	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
 	private List<Picture> pictureList = new ArrayList<>();
 
+
 	public void addAccount(Account account) {
 		this.account = account;
 	}
