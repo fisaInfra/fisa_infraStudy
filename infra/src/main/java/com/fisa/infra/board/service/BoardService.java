@@ -4,6 +4,7 @@ import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.account.repository.jpa.AccountRepository;
 import com.fisa.infra.board.domain.Board;
 import com.fisa.infra.board.domain.dto.BoardDTO;
+import com.fisa.infra.board.domain.dto.BoardRequestDTO;
 import com.fisa.infra.board.domain.dto.UploadFile;
 import com.fisa.infra.board.repository.jpa.BoardRepository;
 import com.fisa.infra.board.repository.querydsl.QueryBoardRepository;
@@ -59,7 +60,7 @@ public class BoardService {
 		}
 		return save;
 	}
-
+	@Transactional(readOnly = true)
 	public List<BoardDTO> getAllBoard() {
 		List<Board> boardAll = boardRepository.findAll();
 		List<BoardDTO> collect = boardAll.stream().map(b -> mapper.map(b, BoardDTO.class)).collect(Collectors.toList());
@@ -68,10 +69,30 @@ public class BoardService {
 		}
 		return collect;
 	}
-
+	@Transactional(readOnly = true)
 	public BoardDTO getBoardById (Long id){
 		Optional<BoardDTO> board = queryBoardRepository.queryFindBoardById(id);
 		return board.map(b -> mapper.map(b, BoardDTO.class)).orElse(null);
 	}
 
+	@Transactional
+	public void updateBoardById(Long id, BoardRequestDTO boardRequestDTO) {
+		Board board = boardRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("해당 ID에 해당하는 게시글을 찾을 수 없습니다."));
+
+		board.updateBoard(boardRequestDTO.getTitle(), boardRequestDTO.getContent());
+	}
+	
+	/* 게시글 삭제
+	 * 게시글에 달린 댓글은 cascade로 entity 딴에서 삭제 처리
+	 */
+	@Transactional
+	public void deleteBoard(Long boardId) {
+	    // 게시글 조회
+	    Board board = boardRepository.findById(boardId)
+	            .orElseThrow(() -> new RuntimeException("해당 게시글은 존재하지 않습니다."));
+
+	    // 게시글 삭제
+	    boardRepository.deleteById(boardId);
+	}
 }

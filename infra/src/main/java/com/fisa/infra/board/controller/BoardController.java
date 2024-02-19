@@ -2,6 +2,7 @@ package com.fisa.infra.board.controller;
 
 import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.board.domain.dto.BoardDTO;
+import com.fisa.infra.board.domain.dto.BoardRequestDTO;
 import com.fisa.infra.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,20 +10,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
 
 @Slf4j
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class BoardController {
-	
+
 	private final BoardService boardService;
 
 	@GetMapping("/board/create")
@@ -44,7 +42,7 @@ public class BoardController {
 	}
 
 	@GetMapping(value = "/board/boardAll")
-	public String boardAll(Model model){
+	public String boardAll(Model model) {
 		List<BoardDTO> boardList = boardService.getAllBoard();
 		model.addAttribute("boardList", boardList);
 		return "entire/board/boardAllForm";
@@ -56,4 +54,10 @@ public class BoardController {
 		//model.addAttribute("board", board);
 		return "entire/board/boardOneForm";
 	}
+
+	@PutMapping(value = "/board/update/{id}")
+	public void updateBoardById(@PathVariable Long id, @RequestBody BoardRequestDTO boardRequestDTO){
+		boardService.updateBoardById(id, boardRequestDTO);
+	}
+
 }

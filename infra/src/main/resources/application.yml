@@ -5,20 +5,18 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: user01
-    #url: jdbc:mysql://127.0.0.1:8777/fisa?useSSL=false&allowPublicKeyRetrieval=true
-    #url: jdbc:mysql://127.0.0.1:3306/fisa?useSSL=false&allowPublicKeyRetrieval=true
-    url: jdbc:mysql://127.0.0.1:8777/infrastudy?useSSL=false&allowPublicKeyRetrieval=true
-    username: user01
-
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/newjeans?useSSL=false&allowPublicKeyRetrieval=true
+    username: root
   jpa:
-    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
     hibernate:
       ddl-auto: none
 
-    properties:
-      hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.MySQL8Dialect
-
+  servlet:
+    multipart:
+       max-file-size: 10MB
+       max-request-size: 10MB
 
