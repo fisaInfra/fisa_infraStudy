@@ -87,12 +87,20 @@ public class BoardService {
 	 * 게시글에 달린 댓글은 cascade로 entity 딴에서 삭제 처리
 	 */
 	@Transactional
-	public void deleteBoard(Long boardId) {
+	public void deleteBoard(Long boardId, String loginId) {
 	    // 게시글 조회
 	    Board board = boardRepository.findById(boardId)
 	            .orElseThrow(() -> new RuntimeException("해당 게시글은 존재하지 않습니다."));
-
-	    // 게시글 삭제
-	    boardRepository.deleteById(boardId);
+	    
+	    // loginId로 account_id 찾기
+        Account account = accountRepository.findAccountByLoginId(loginId)
+                .orElseThrow(() -> new RuntimeException("해당하는 로그인 ID의 계정이 없습니다."));
+        
+        // 게시글의 account_id와 찾은 account_id 비교 후 삭제
+        if (board.getAccount().getAccountId().equals(account.getAccountId())) {
+            boardRepository.deleteById(boardId);
+        } else {
+            throw new RuntimeException("해당 계정으로는 삭제할 수 없는 게시글입니다.");
+        }
 	}
 }
