@@ -5,6 +5,8 @@ import com.fisa.infra.board.repository.basic.CommonBoardRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.Repository;
 
-public interface BoardRepository extends JpaRepository<Board,Long> {
+import java.util.List;
 
+public interface BoardRepository extends JpaRepository<Board,Long> {
+    List<Board> findAll();
 }
