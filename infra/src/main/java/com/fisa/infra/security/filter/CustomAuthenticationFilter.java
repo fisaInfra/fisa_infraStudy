@@ -37,7 +37,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         String loginId = request.getParameter("loginId");
         String pwd = request.getParameter("pwd");
-
+        log.info("authentication login id: {} password : {}", loginId, pwd);
         if (loginId.isBlank() || loginId.isEmpty() || pwd.isEmpty() || pwd.isBlank()){
 
             throw new BadCredentialsException("회원 아이디와 비밀번호를 다시 확인해주세요. 빈값은 넣을 수 없습니다.");
@@ -53,7 +53,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
      * */
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
-
+        log.info("authentication name = {}", authentication.getName());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         response.sendRedirect("/");
