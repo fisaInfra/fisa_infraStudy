@@ -99,9 +99,12 @@ public class AccountService {
 
 	}
 
-	public List<BoardDTO> getAllBoard() throws ClientException {
+	public List<BoardDTO> getAllBoard(String id) throws ClientException {
 
-		List<Board> boardAll = boardRepository.findAll();
+		Account account = accountRepository.findAccountByLoginId(id)
+				.orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
+
+		List<Board> boardAll = boardRepository.findBoardByAccount(account);
 
 		List<BoardDTO> boardDTOAll = Arrays.asList(mapper.map(boardAll, BoardDTO[].class));
 
