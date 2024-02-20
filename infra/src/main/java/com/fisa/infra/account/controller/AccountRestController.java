@@ -37,15 +37,15 @@ public class AccountRestController {
 		return ResponseEntity.ok(accountService.findAccountByLoginId2(id));
 	}
 
-
-
 	// 게시글 찾는거
-	@GetMapping("accounts/findAll")
-	public List<BoardDTO> findAllBoard() throws Exception {
-		return accountService.getAllBoard();
+	@GetMapping("accounts/findAll/{id}")
+	public ResponseEntity<List<BoardDTO>> findAllBoard(@PathVariable String id) throws Exception {
+		List<BoardDTO> boardAll = accountService.getAllBoard(id);
+		return ResponseEntity.ok().body(boardAll);
 	}
 
-	//@sqldelete 바꿔서 지우는거
+
+		//@sqldelete 바꿔서 지우는거
 	@DeleteMapping(value = "/delete1")
 	public ResponseEntity<AccountDTO> deleteAccount1(String loginId) {
 
