@@ -92,6 +92,7 @@ public class Comment extends BaseEntity {
 		this.board = board;
 		this.account = account;
 		this.content = content;
+		this.isDeleted = false;
 
 		if(parent != null) {
 			this.parent = parent;

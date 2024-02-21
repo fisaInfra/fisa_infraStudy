@@ -18,4 +18,6 @@ public interface CommentRepository extends JpaRepository<Comment,Long>, CommentR
     @Query("select c from Comment c where c.board.boardId = ?1 order by c.createdTime")
     List<Comment> findCommentByBoardId(Long boardId);
 
+    @Query("select c from Comment c where c.parent.commentId = ?1 order by c.createdTime")
+    List<Comment> findCommentByParentId(Long parentId);
 }

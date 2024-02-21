@@ -6,6 +6,9 @@ import com.fisa.infra.board.domain.dto.BoardRequestDTO;
 import com.fisa.infra.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,7 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class BoardController {
@@ -60,9 +63,25 @@ public class BoardController {
 		boardService.updateBoardById(id, boardRequestDTO);
 	}
 
+
 	@GetMapping("/board/{id}/pictures")
 	public List<String> getBoardPictures(@PathVariable Long id) {
 		return boardService.getBoardPictures(id);
+	}
+
+
+	@PostMapping(value = "/board/delete/{id}")
+	public ResponseEntity<String> deleteBoardById(@PathVariable Long id) {
+//	     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//	     Account account = (Account) authentication.getPrincipal();
+//	     String loginId = account.getLoginId();
+		 
+		 try {
+			 	boardService.deleteBoard(id, "onionhaseyo");
+	            return ResponseEntity.ok("게시글이 삭제되었습니다.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
 	}
 
 }

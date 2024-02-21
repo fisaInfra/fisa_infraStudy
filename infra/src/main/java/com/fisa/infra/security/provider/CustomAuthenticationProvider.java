@@ -23,6 +23,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         String loginId = authentication.getName();
 
+        log.info("authentication provider: {}", loginId);
+
         CustomUserDetails userDetails = customUserDetailsService.loadUserByUsername(loginId);
 
         String pwd = (String) authentication.getCredentials();
