@@ -3,6 +3,8 @@ package com.fisa.infra.board.domain;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import com.fisa.infra.comment.domain.Comment;
 import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.common.domain.entity.BaseEntity;

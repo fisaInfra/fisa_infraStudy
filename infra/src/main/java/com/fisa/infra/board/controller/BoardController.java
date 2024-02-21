@@ -63,6 +63,13 @@ public class BoardController {
 		boardService.updateBoardById(id, boardRequestDTO);
 	}
 
+
+	@GetMapping("/board/{id}/pictures")
+	public List<String> getBoardPictures(@PathVariable Long id) {
+		return boardService.getBoardPictures(id);
+	}
+
+
 	@PostMapping(value = "/board/delete/{id}")
 	public ResponseEntity<String> deleteBoardById(@PathVariable Long id) {
 //	     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -76,4 +83,5 @@ public class BoardController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
 	}
+
 }
