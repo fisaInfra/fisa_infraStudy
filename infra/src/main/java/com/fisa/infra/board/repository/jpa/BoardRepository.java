@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface BoardRepository extends JpaRepository<Board,Long> {
     List<Board> findAll();
+
     List<Board> findBoardByAccount(Account account);
 
     List<Board> findBoardByAccountLoginId(String loginId);

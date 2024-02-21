@@ -57,7 +57,7 @@ public class Board extends BaseEntity {
 	@Column(name = "is_deleted")
 	private boolean isDeleted;
 
-	private Long viewCount = 0L;
+	private Long viewCount;
 
 	@Builder.Default
 	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)

@@ -50,6 +50,4 @@ public class QueryBoardRepositoryImpl implements QueryBoardRepository {
         log.info("JPQL Query: {}", jpaQuery.toString());
         return Optional.ofNullable(jpaQuery.fetchOne());
     }
-
-
 }
