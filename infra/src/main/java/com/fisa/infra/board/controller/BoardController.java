@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class BoardController {
@@ -58,6 +58,11 @@ public class BoardController {
 	@PutMapping(value = "/board/update/{id}")
 	public void updateBoardById(@PathVariable Long id, @RequestBody BoardRequestDTO boardRequestDTO){
 		boardService.updateBoardById(id, boardRequestDTO);
+	}
+
+	@GetMapping("/board/{id}/pictures")
+	public List<String> getBoardPictures(@PathVariable Long id) {
+		return boardService.getBoardPictures(id);
 	}
 
 }

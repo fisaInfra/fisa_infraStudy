@@ -39,7 +39,7 @@ public class BoardService {
 
 	@Transactional
 	public Board writeBoard (String loginId, BoardDTO boardDTO) throws RuntimeException, IOException {
-		Account account = accountRepository.findAccountByLoginId("s")
+		Account account = accountRepository.findAccountByLoginId("onionhaseyo")
 				.orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
 
 		Board board = Board.builder()
@@ -94,5 +94,17 @@ public class BoardService {
 
 	    // 게시글 삭제
 	    boardRepository.deleteById(boardId);
+	}
+
+	public List<String> getBoardPictures(Long id) {
+		Board board = boardRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("해당 ID에 해당하는 게시글을 찾을 수 없습니다."));
+
+		// 해당 게시글에 첨부된 사진들의 URL 리스트를 추출
+		List<String> pictureUrls = board.getPictureList().stream()
+				.map(Picture::getPictureUrl) // Picture 엔티티에서 사진의 URL을 가져오는 메소드를 호출
+				.collect(Collectors.toList());
+
+		return pictureUrls;
 	}
 }
