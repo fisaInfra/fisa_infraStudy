@@ -3,6 +3,8 @@ package com.fisa.infra.board.domain;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import com.fisa.infra.comment.domain.Comment;
 import com.fisa.infra.account.domain.Account;
 import com.fisa.infra.common.domain.entity.BaseEntity;
@@ -55,7 +57,7 @@ public class Board extends BaseEntity {
 	@Column(name = "is_deleted")
 	private boolean isDeleted;
 
-	private Long viewCount = 0L;
+	private Long viewCount;
 
 	@Builder.Default
 	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
@@ -65,6 +67,7 @@ public class Board extends BaseEntity {
 	@Builder.Default
 	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
 	private List<Picture> pictureList = new ArrayList<>();
+
 
 	public void addAccount(Account account) {
 		this.account = account;

@@ -14,40 +14,50 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
  
 @Slf4j
-@Controller
+//@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class CommentController {
 
     private final CommentService commentService;
 
-    @GetMapping("/comment/create")
-    public String createForm(Model model) {
-        model.addAttribute("commentSaveForm", new CommentDTO());
-        return "entire/comment/commentSaveForm";
-    }
+//    @GetMapping("/comment/create")
+//    public String createForm(Model model) {
+//        model.addAttribute("commentSaveForm", new CommentDTO());
+//        return "entire/comment/commentSaveForm";
+//    }
+//
+//    @PostMapping(value = "/comment/create")
+//    public String writeComment(@ModelAttribute("commentDTO") CommentDTO commentDTO) {
+//
+//        //사용자 로그인 정보 가지고 오기
+//        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        //Account account = (Account) authentication.getPrincipal();
+//        Comment comment = commentService.writeComment(commentDTO);
+//        return "redirect:/comment/" + comment.getCommentId();
+//    }
 
-    @PostMapping(value = "/comment/create")
-    public String writeComment(@ModelAttribute("commentDTO") CommentDTO commentDTO) {
 
         //사용자 로그인 정보 가지고 오기
         //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         //Account account = (Account) authentication.getPrincipal();
-        Comment comment = commentService.writeComment(commentDTO);
+//         Comment comment = commentService.writeComment(commentDTO);
 
-        return "redirect:/comment/" + comment.getCommentId();
-    }
+//         return "redirect:/comment/" + comment.getCommentId();
+//       }
 
 
-    @GetMapping("/comment/read")
-    public String readForm(Model model) {
-        Long boardId = 1L;
-        List<CommentDTO> result = commentService.readComment(boardId);
 
-        log.info("comment controller = {}",result.get(0).toString());
-        model.addAttribute("commentList", result);
-        return "entire/comment/commentReadForm";
-    }
+//    @GetMapping("/comment/read")
+//    public String readForm(Model model) {
+//        Long boardId = 1L;
+//        List<CommentDTO> result = commentService.readComment(boardId);
+//
+//        log.info("comment controller = {}",result.get(0).toString());
+//        model.addAttribute("commentList", result);
+//        return "entire/comment/commentReadForm";
+//    }
 
 
 
@@ -70,22 +80,55 @@ public class CommentController {
 ////        return result;
 //    }
 
-//    /**
-//     * 댓글 조회
-//     * @param boardId
-//     * @return result
-//     * */
-//    @GetMapping(value="/read")
-//    public ResponseEntity<?> readComment(@RequestParam Long boardId) {
-//        try {
-//            List<CommentDTO> result = commentService.readComment(boardId);
-//
-//            return ResponseEntity.ok().body(result);
-//        } catch (Exception e) {
-//            return ResponseEntity
-//                    .internalServerError() // Error 500
-//                    .body(e.getMessage());
-//        }
-//    }
+    @GetMapping(value="comment/delete")
+    public ResponseEntity<?> deleteComment(@RequestParam Long commentId) {
+        try {
+            commentService.deleteComment(commentId);
+
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity
+                    .internalServerError() // Error 500
+                    .body(e.getMessage());
+        }
+    }
+
+    /**
+     * 댓글 작성
+     * @param commentDTO
+     * @return ResponseEntity
+     * http://localhost:8080/swagger-ui/index.html -> 스웨거
+     */
+    @PostMapping(value = "comment/create")
+    public ResponseEntity<?> writeComment(@RequestBody CommentDTO commentDTO) {
+        //Account account = (Account) authentication.getPrincipal();
+
+        try {
+//            Comment comment = commentService.writeComment(commentDTO);
+            commentService.writeComment(commentDTO);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError() // Error 500
+                    .body(e.getMessage());
+        }
+    }
+
+    /**
+     * 댓글 조회
+     * @param boardId
+     * @return result
+     * */
+    @GetMapping(value="comment/read")
+    public ResponseEntity<?> readComment(@RequestParam Long boardId) {
+        try {
+            List<CommentDTO> result = commentService.readComment(boardId);
+
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            return ResponseEntity
+                    .internalServerError() // Error 500
+                    .body(e.getMessage());
+        }
+    }
 
 }

@@ -62,8 +62,14 @@ public class BoardController {
 	public void updateBoardById(@PathVariable Long id, @RequestBody BoardRequestDTO boardRequestDTO){
 		boardService.updateBoardById(id, boardRequestDTO);
 	}
+
+	@GetMapping("/board/{id}/pictures")
+	public List<String> getBoardPictures(@PathVariable Long id) {
+		return boardService.getBoardPictures(id);
+	}
+
 	
-	@PostMapping(value = "/board/delete/{id}")
+	@DeleteMapping(value = "/board/delete/{id}")
 	public ResponseEntity<String> deleteBoardById(@PathVariable Long id) {
 //	     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //	     Account account = (Account) authentication.getPrincipal();

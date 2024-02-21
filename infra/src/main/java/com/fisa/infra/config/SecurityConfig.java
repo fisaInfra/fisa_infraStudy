@@ -4,6 +4,8 @@ package com.fisa.infra.config;
 import com.fisa.infra.security.filter.CustomAuthenticationFilter;
 import com.fisa.infra.security.provider.CustomAuthenticationProvider;
 import com.fisa.infra.security.service.CustomUserDetailsService;
+
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class SecurityConfig {
 
 
@@ -66,6 +68,7 @@ public class SecurityConfig {
         // 스프링 시큐리티가 지원하는 세션을 사용하겠다는 의미 사용 안 하려면 STATELESS 사용
         http.sessionManagement(sessionManagementConfigurer -> sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
         http.addFilterAt(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 
@@ -80,7 +83,8 @@ public class SecurityConfig {
         return customAuthenticationFilter;
     }
 
-    private AuthenticationProvider customAuthenticationProvider() {
+    @Bean
+    public CustomAuthenticationProvider customAuthenticationProvider() {
         return new CustomAuthenticationProvider(customUserDetailsService, bCryptPasswordEncoder());
     }
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div th:fragment="header">
     <div class="w3-main" style="margin-left:300px"> </div>
@@ -11,13 +12,12 @@
                 <button class="w3-button w3-black" >
                     <a th:href="@{/api/board/boardAll}" style="text-decoration:none">전체 게시글 </a>
                 </button>
-                <button class="w3-button w3-black" >
+                <button class="w3-button w3-black">
                     <a th:href="@{/api/board/create}" style="text-decoration:none">게시글 작성 </a>
                 </button>
-                <button class="w3-button w3-black" >
+                <button sec:authorize="isAnonymous()" class="w3-button w3-black" >
                     <a th:href="@{/account/login}" style="text-decoration:none">로그인 </a>
                 </button>
-
                 <button class="w3-button w3-black" >
                     <a th:href="@{/api/account/create}" style="text-decoration:none">회원가입 </a>
                 </button>

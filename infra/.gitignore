@@ -232,3 +232,4 @@ application.yml
 application.properties
 .DS_Store
 target
+*.yml

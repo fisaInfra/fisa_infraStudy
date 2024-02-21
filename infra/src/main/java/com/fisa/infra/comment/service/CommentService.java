@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -44,18 +45,22 @@ public class CommentService {
      * @return 저장된 글
      */
     public Comment writeComment(CommentDTO commentDTO) throws RuntimeException {
-        Account account = accountRepository.findAccountByLoginId("id")//commentDTO.getLoginId())
+        Account account = accountRepository.findAccountByLoginId(commentDTO.getLoginId())//commentDTO.getLoginId())
                 .orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
 
-        Board board = boardRepository.findById(1L)//commentDTO.getBoardId())
+        Board board = boardRepository.findById(commentDTO.getBoardId())//commentDTO.getBoardId())
                 .orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
 
         /* QueryDSL 적용*/
         Comment parent = null;
         Comment comment = null;
         log.info("commentDTO.isParent(): {}", commentDTO.isParent());
-
         log.info("commentDTO.getParentId(): {}", commentDTO.getParentId());
+
+
+        /**
+         * 컬렉션으로 관리가 안됨.
+         * */
 
 
         if(commentDTO.getParentId() != null) {
@@ -82,6 +87,7 @@ public class CommentService {
                     .build();
         }
 
+        log.info("comment {}", comment);
         return commentRepository.save(comment);
     }
 
@@ -117,45 +123,111 @@ public class CommentService {
     public List<CommentDTO> readComment(Long boardId) throws RuntimeException {
 
         List<Comment> commentList = commentRepository.findCommentByBoardId(boardId);
-        log.info("comment list : {}", commentList);
-
-        for (Comment comment : commentList) {
-
-            log.info("comment content : {}", comment.getCommentId());
-
-        }
-
         List<CommentDTO> commentDTOList = new ArrayList<>();
+
+        /*
+        * 댓글 하나씩 돌면서 commentId에 해당하는 parentId가 있는지 확인
+        * */
 
         for (Comment comment : commentList) {
             //log.info("comment content : {}", comment.getContent());
 
-            // 댓글일 때
-            boolean isParent = true;
-            Long parentId = -1L; // 댓글의 parent id는 -1
+            log.info("commentId : {}", comment.getCommentId());
+            log.info("commentId : {}", comment.getParent());
 
-            // 대댓글일 때
-            if(comment.getParent() != null) {
-                isParent = false;
-                parentId = comment.getParent().getCommentId();
+            // 댓글일 때
+            if(comment.getParent() == null) {
+                log.info("getIsDeleted : {}", comment.getIsDeleted());
+
+
+                // 댓글 세팅
+                commentDTOList.add(
+                        CommentDTO.builder()
+                                .commentId(comment.getCommentId())
+                                .boardId(comment.getBoard().getBoardId())
+                                .accountId(comment.getAccount().getAccountId())
+                                .imageUrl(comment.getAccount().getImageUrl())
+                                .loginId(comment.getAccount().getLoginId())
+                                .parentId(-1L)
+                                .content(comment.getContent())
+                                .createdAt(comment.getCreatedTime())
+                                .updatedAt(comment.getModifiedTime())
+                                .isParent(true)
+                                .build()
+                );
+
+                // 대댓글 세팅
+                List<Comment> childCommentList = commentRepository.findCommentByParentId(comment.getCommentId());
+
+//                log.info("childCommentList : {}", childCommentList);
+
+                for(Comment childComment : childCommentList) {
+                    log.info("childCommentList : {}", childComment.getCommentId());
+                    log.info("getIsDeleted : {}", comment.getIsDeleted());
+
+
+                    commentDTOList.add(
+                            CommentDTO.builder()
+                                    .commentId(childComment.getCommentId())
+                                    .boardId(childComment.getBoard().getBoardId())
+                                    .accountId(childComment.getAccount().getAccountId())
+                                    .imageUrl(childComment.getAccount().getImageUrl())
+                                    .loginId(childComment.getAccount().getLoginId())
+                                    .parentId(comment.getCommentId())
+                                    .content(childComment.getContent())
+                                    .createdAt(childComment.getCreatedTime())
+                                    .updatedAt(childComment.getModifiedTime())
+                                    .isParent(false)
+                                    .build()
+                    );
+                }
+
+                if(childCommentList != null) {
+                    /**
+                     * ????
+                     * */
+                }
+
+
+
             }
 
-            commentDTOList.add(
-                    CommentDTO.builder()
-                            .commentId(comment.getCommentId())
-                            .boardId(comment.getBoard().getBoardId())
-                            .accountId(comment.getAccount().getAccountId())
-                            .imageUrl(comment.getAccount().getImageUrl())
-                            .loginId(comment.getAccount().getLoginId())
-                            .isParent(isParent)
-                            .parentId(parentId)
-                            .content(comment.getContent())
-                            .createdAt(comment.getCreatedTime())
-                            .updatedAt(comment.getModifiedTime())
-//                            .deleteYN(comment.getIsDeleted())
-                            .build()
-            );
+
+
+
+
+
+
+
+            // 댓글일 때
+//            boolean isParent = true;
+//            Long parentId = -1L; // 댓글의 parent id는 -1
+//
+//
+//
+//            // 대댓글일 때
+//            if(comment.getParent() != null) {
+//                isParent = false;
+//                parentId = comment.getParent().getCommentId();
+//            }
+
+//            commentDTOList.add(
+//                    CommentDTO.builder()
+//                            .commentId(comment.getCommentId())
+//                            .boardId(comment.getBoard().getBoardId())
+//                            .accountId(comment.getAccount().getAccountId())
+//                            .imageUrl(comment.getAccount().getImageUrl())
+//                            .loginId(comment.getAccount().getLoginId())
+//                            .isParent(isParent)
+//                            .parentId(parentId)
+//                            .content(comment.getContent())
+//                            .createdAt(comment.getCreatedTime())
+//                            .updatedAt(comment.getModifiedTime())
+////                            .deleteYN(comment.getIsDeleted())
+//                            .build()
+//            );
         }
         return commentDTOList;
     }
+
 }

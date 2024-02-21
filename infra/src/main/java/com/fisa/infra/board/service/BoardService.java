@@ -39,13 +39,14 @@ public class BoardService {
 
 	@Transactional
 	public Board writeBoard (String loginId, BoardDTO boardDTO) throws RuntimeException, IOException {
-		Account account = accountRepository.findAccountByLoginId("s")
+		Account account = accountRepository.findAccountByLoginId("onionhaseyo")
 				.orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
 
 		Board board = Board.builder()
 				.account(account)
 				.content(boardDTO.getContent())
 				.title(boardDTO.getTitle())
+				.viewCount(0L)
 				.build();
 
 		//부모와 연관 관계
@@ -60,6 +61,13 @@ public class BoardService {
 		}
 		return save;
 	}
+
+
+	/**
+	 * 전체 게시글 조회 시 로그인 ID가 필요없으면 DTO에서 담을 필요가 없음.
+	 * 새로운 DTO를 생성하던 지 제외하던지 해야함.
+	 * */
+
 	@Transactional(readOnly = true)
 	public List<BoardDTO> getAllBoard() {
 		List<Board> boardAll = boardRepository.findAll();
@@ -88,7 +96,7 @@ public class BoardService {
 	 */
 	@Transactional
 	public void deleteBoard(Long boardId, String loginId) {
-	    // 게시글 조회
+		 // 게시글 조회
 	    Board board = boardRepository.findById(boardId)
 	            .orElseThrow(() -> new RuntimeException("해당 게시글은 존재하지 않습니다."));
 	    
@@ -102,5 +110,17 @@ public class BoardService {
         } else {
             throw new RuntimeException("해당 계정으로는 삭제할 수 없는 게시글입니다.");
         }
+	}
+	public List<String> getBoardPictures(Long id) {
+		Board board = boardRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("해당 ID에 해당하는 게시글을 찾을 수 없습니다."));
+
+		// 해당 게시글에 첨부된 사진들의 URL 리스트를 추출
+		List<String> pictureUrls = board.getPictureList().stream()
+				.map(Picture::getPictureUrl) // Picture 엔티티에서 사진의 URL을 가져오는 메소드를 호출
+				.collect(Collectors.toList());
+
+		return pictureUrls;
+
 	}
 }
