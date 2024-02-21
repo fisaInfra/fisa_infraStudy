@@ -11,7 +11,32 @@
     <div class="w3-main" style="margin-left:300px">
     제목:<span th:text="${board.title}"></span><br>
     내용:<span th:text="${board.content}"></span><br>
+    <a th:href="@{'api/board/delete/' + ${board.id}}" onclick="deleteBoard(event, '${board.id}')" class="btn btn-danger">삭제</a>
     </div>
 </div>
+
+<script>
+	function deleteBoard(event, boardId) {
+		event.preventDefault();
+	    if (confirm('정말로 삭제하시겠습니까?')) {
+	        fetch('/api/board/delete/' + boardId, {
+	            method: 'DELETE',
+	            headers: {
+	                'Content-Type': 'application/json'
+	            }
+	        })
+	        .then(response => {
+	            if (response.ok) {
+	                alert(response.text()); 
+	            } else {
+	                throw new Error('삭제에 실패했습니다.');
+	            }
+	        })
+	        .catch(error => {
+	            console.error('오류 발생:', error); // 네트워크 오류 또는 서버 오류에 대한 처리
+	        });
+	    }
+	}
+</script>
 </body>
 </html>

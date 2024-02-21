@@ -69,11 +69,8 @@ public class BoardController {
 		return boardService.getBoardPictures(id);
 	}
 
-	/**
-	 * 삭제인데 왜 POST로 해??
-	 * **/
-
-	@PostMapping(value = "/board/delete/{id}")
+	
+	@DeleteMapping(value = "/board/delete/{id}")
 	public ResponseEntity<String> deleteBoardById(@PathVariable Long id) {
 //	     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //	     Account account = (Account) authentication.getPrincipal();

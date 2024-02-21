@@ -1,26 +1,23 @@
-
+server:
+  port: 8081
 spring:
   mvc:
     pathmatch:
-      matching-strategy: ant_path_matcher
+      matching-strategy: ANT_PATH_MATCHER
 
   datasource:
-    url: jdbc:h2:tcp://localhost/~/testDB
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: user01
+    url: jdbc:mysql://127.0.0.1:8777/newjeans?useSSL=false&allowPublicKeyRetrieval=true
+    username: user01
   jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
     hibernate:
-      ddl-auto: update
-    show-sql: true
-    database-platform: org.hibernate.dialect.H2Dialect
+      ddl-auto: none
 
   servlet:
     multipart:
        max-file-size: 10MB
        max-request-size: 10MB
-server:
-  port: 8081
