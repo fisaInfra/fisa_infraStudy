@@ -46,6 +46,7 @@ public class BoardService {
 				.account(account)
 				.content(boardDTO.getContent())
 				.title(boardDTO.getTitle())
+				.viewCount(0L)
 				.build();
 
 		//부모와 연관 관계
@@ -60,6 +61,13 @@ public class BoardService {
 		}
 		return save;
 	}
+
+
+	/**
+	 * 전체 게시글 조회 시 로그인 ID가 필요없으면 DTO에서 담을 필요가 없음.
+	 * 새로운 DTO를 생성하던 지 제외하던지 해야함.
+	 * */
+
 	@Transactional(readOnly = true)
 	public List<BoardDTO> getAllBoard() {
 		List<Board> boardAll = boardRepository.findAll();

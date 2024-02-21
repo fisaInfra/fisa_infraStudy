@@ -32,6 +32,12 @@ public class AccountRestController {
 	//mypage
 	@GetMapping(value = "/accounts/findOne2/{id}")
 	public ResponseEntity<AccountDTO> findAccountByLoginId2(@PathVariable String id) {
+		/**
+		 *
+		 * accountService.findAccountByLoginId2(id); 쿼리 1
+		 * ResponseEntity.ok(accountService.findAccountByLoginId2(id)); 쿼리 2
+		 * 불필요한 쿼리 줄이자
+		 * */
 		AccountDTO accountDTO = accountService.findAccountByLoginId2(id);
 		log.info("loginId {}", accountDTO.getLoginId());
 		return ResponseEntity.ok(accountService.findAccountByLoginId2(id));
@@ -44,16 +50,14 @@ public class AccountRestController {
 		return ResponseEntity.ok().body(boardAll);
 	}
 
+	/**
+	 * 삭제 안되네 다시 ㄱㄱ
+	 * */
 
-		//@sqldelete 바꿔서 지우는거
+	//@sqldelete 바꿔서 지우는거
 	@DeleteMapping(value = "/delete1")
 	public ResponseEntity<AccountDTO> deleteAccount1(String loginId) {
-
-
 		accountService.accountDelete1(loginId);
-
-
-
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 

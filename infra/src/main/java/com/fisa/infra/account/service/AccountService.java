@@ -104,10 +104,12 @@ public class AccountService {
 		Account account = accountRepository.findAccountByLoginId(id)
 				.orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
 
+
+		/**
+		 * 조인이 없네.
+		 * */
 		List<Board> boardAll = boardRepository.findBoardByAccount(account);
-
 		List<BoardDTO> boardDTOAll = Arrays.asList(mapper.map(boardAll, BoardDTO[].class));
-
 		return boardDTOAll;
 	}
 

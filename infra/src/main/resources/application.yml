@@ -5,16 +5,18 @@ spring:
       matching-strategy: ant_path_matcher
 
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    password: root
-    url: jdbc:mysql://127.0.0.1:3306/newjeans?useSSL=false&allowPublicKeyRetrieval=true
-    username: root
+    url: jdbc:h2:tcp://localhost/~/testDB
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
   jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    generate-ddl: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
 
   servlet:
     multipart:
