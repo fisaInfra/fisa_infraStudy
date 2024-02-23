@@ -24,6 +24,7 @@ import javax.security.auth.login.AccountException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -53,7 +54,7 @@ public class AccountService {
 		Account account = Account.builder()
 				.loginId(accountdto.getLoginId()).pwd(passwordEncoder.encode(accountdto.getPwd())).name(accountdto.getName()).belong(accountdto.getBelong())
 				.gender(accountdto.isGender()).imageUrl(accountdto.getImageUrl()).stack(accountdto.getStack()).portfolio(accountdto.getPortfolio())
-				.job(accountdto.getJob()).isDeleted(accountdto.isDeleted())
+				.job(accountdto.getJob())
 				.build();
 
 
@@ -99,25 +100,37 @@ public class AccountService {
 
 	}
 
+//	public List<BoardDTO> getAllBoard(String id) throws ClientException {
+//
+//		Account account = accountRepository.findAccountByLoginId(id)
+//				.orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
+//
+//
+//		/**
+//		 * 조인이 없네.
+//		 * */
+//		List<Board> boardAll = boardRepository.findBoardByAccount(account);
+//		List<BoardDTO> boardDTOAll = Arrays.asList(mapper.map(boardAll, BoardDTO[].class));
+//		return boardDTOAll;
+//	}
+
 	public List<BoardDTO> getAllBoard(String id) throws ClientException {
+		Account account= boardRepository.findAccountByLoginIdAndFetchBoards(id).orElseThrow();
 
-		Account account = accountRepository.findAccountByLoginId(id)
-				.orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
+		List<BoardDTO> boardDTOAll = account.getBoards().stream()
+				.map(board -> mapper.map(board, BoardDTO.class))
+				.collect(Collectors.toList());
 
-
-		/**
-		 * 조인이 없네.
-		 * */
-		List<Board> boardAll = boardRepository.findBoardByAccount(account);
-		List<BoardDTO> boardDTOAll = Arrays.asList(mapper.map(boardAll, BoardDTO[].class));
 		return boardDTOAll;
 	}
 
 
-
 	//sql 써보는거
-	public void accountDelete1(String loginId) {
-		accountRepository.deleteAccountByLoginId(loginId);
+	public AccountDTO accountDelete1(String loginId) {
+
+		Account account = accountRepository.deleteAccountByLoginId(loginId).orElseThrow();
+
+		return AccountDTO.fromEntity(account);
 	}
 	
 	//DTO에서 isdeleted 바꿔서 지우는거 

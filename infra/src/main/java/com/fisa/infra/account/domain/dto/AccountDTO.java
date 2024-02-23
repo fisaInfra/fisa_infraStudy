@@ -55,7 +55,7 @@ public class AccountDTO {
 		return AccountDTO.builder().accountId(account.getAccountId())
 				.loginId(account.getLoginId()).pwd(account.getPwd()).name(account.getName()).belong(account.getBelong())
 				.gender(account.isGender()).imageUrl(account.getImageUrl()).stack(account.getStack()).portfolio(account.getPortfolio())
-				.job(account.getJob()).isDeleted(account.isDeleted())
+				.job(account.getJob())
 				.build();
 		
 	}

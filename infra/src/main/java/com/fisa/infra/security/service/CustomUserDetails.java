@@ -23,7 +23,6 @@ public class CustomUserDetails implements UserDetails {
 		this.accountId = account.getAccountId();
 		this.loginId = account.getLoginId();
 		this.pwd = account.getPwd();
-        this.isDeleted = account.isDeleted();
         this.authorities = toGrantedAuthority(roleNameDTO);
 
 	}

@@ -12,5 +12,7 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     Optional<Account> findAccountByLoginId(String loginId);
 
     Optional<Account> deleteAccountByLoginId(String loginId);
+
+    Optional<Object> findAccountByLoginIdAndFetchBoards(String id);
 }
 

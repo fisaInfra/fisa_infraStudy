@@ -7,11 +7,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BoardRepository extends JpaRepository<Board,Long> {
     List<Board> findAll();
 
     List<Board> findBoardByAccount(Account account);
 
-    List<Board> findBoardByAccountLoginId(String loginId);
+    // AccountRepository
+    Optional<Account> findAccountByLoginIdAndFetchBoards(String loginId);
+
+    // BoardRepository
+    List<Board> findBoardsByAccountId(Long accountId);
 }

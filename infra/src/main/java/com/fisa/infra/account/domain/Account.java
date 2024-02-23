@@ -7,10 +7,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.annotations.*;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,7 +35,8 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @Table(name = "accounts") // 데이터베이스내 예약어가 겹치지 않게 하기 위해 복수 형태로 작성합니다.
 @Entity
-@SQLDelete(sql = "UPDATE account set is_deleted = true WHERE login_id = ?")
+@SQLDelete(sql = "UPDATE accounts set is_deleted = true WHERE login_id = ?")
+@Where(clause = "is_deleted = false")
 public class Account extends BaseEntity {
 
 	@Id
@@ -77,20 +75,21 @@ public class Account extends BaseEntity {
 	@OneToMany(mappedBy = "account")
 	private List<Board> board = new ArrayList<Board>();
 
-	@Column(columnDefinition = "boolean default false")
-	private boolean isDeleted;
-	
+	public List<Board> getBoards() {
+		return this.board;
+	}
 	public static Account createAccount(String loginId, String pwd, String name, String belong, boolean gender, String imageUrl, String stack, String portfolio, String job, boolean isDeleted) {
 		return Account.builder()
 				.loginId(loginId).pwd(pwd).name(name).belong(belong)
 				.gender(gender).imageUrl(imageUrl).stack(stack).portfolio(portfolio)
-				.job(job).isDeleted(isDeleted)
+				.job(job)
 				.build();
 	}
 
 	public Account deletedAccount(String loginId) {
 		this.loginId = "deleted" + loginId;
-		setIsDeleted(true);
+		this.isDeleted = true;
+
 		return this;
 	}
 }
