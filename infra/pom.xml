@@ -65,7 +65,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
@@ -167,6 +170,7 @@
                     <dependency>
                         <groupId>com.querydsl</groupId>
                         <artifactId>querydsl-apt</artifactId>
+                        <classifier>jakarta</classifier>
                         <version>${querydsl.version}</version>
                     </dependency>
                 </dependencies>

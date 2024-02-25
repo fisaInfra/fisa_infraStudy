@@ -7,6 +7,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 /*
  * query dsl 관련 설정을 진행하는 클래스입니다.
@@ -17,10 +18,6 @@ import jakarta.persistence.PersistenceContext;
 public class QueryDslConfig {
 	@PersistenceContext
 	private EntityManager entityManager;
-
-	public QueryDslConfig() {
-
-	}
 
 	@Bean
 	public JPAQueryFactory jpaQueryFactory() {
