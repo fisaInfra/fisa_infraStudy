@@ -48,7 +48,7 @@ public class CommentServiceTest {
                 .imageUrl("사진URL입니다.-> AWS에 올라간 사진도 전부 String입니다.")
                 .stack("난 스택이 싫어")
                 .portfolio("깃허브url입니다.")
-                .job("백수")
+                .job("백수") // 슬프다 ~
                 .build();
         accountRepository.save(account);
 
